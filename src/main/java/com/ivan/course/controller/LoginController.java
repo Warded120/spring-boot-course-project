@@ -45,7 +45,7 @@ public class LoginController {
 
         theModel.addAttribute("user", userDto);
 
-        return "user/change-password-page";
+        return "user/change-password-form";
     }
 
     @PostMapping("/change-password")
@@ -54,7 +54,7 @@ public class LoginController {
                                         Model theModel) throws UserNotFoundException {
         if (theBindingResult.hasErrors()) {
             theModel.addAttribute("user", userDto);
-            return "user/change-password-page";
+            return "user/change-password-form";
         }
 
         User changePasswordUser = userService.findByUsername(userDto.getUsername());
@@ -65,7 +65,6 @@ public class LoginController {
 
         changePasswordUser.setPassword(new Keys(bCryptPasswordEncoder.encode(userDto.getPassword())));
 
-        //todo debug me
         userService.save(changePasswordUser);
 
         return "redirect:/change-password/success";

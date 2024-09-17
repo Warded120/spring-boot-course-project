@@ -46,7 +46,7 @@ public class StudentController {
 
         theModel.addAttribute("student", studentDto);
 
-        return "user/update-student-page";
+        return "user/update-student-form";
     }
 
     @PostMapping("/profile/update")
@@ -61,7 +61,7 @@ public class StudentController {
         }*/
         if(thereAreErrorsIn(theBindingResult, List.of("username", "password", "confirmPassword"))) {
             System.out.println("errors exist");
-            return "user/update-student-page";
+            return "user/update-student-form";
         }
         System.out.println("no errors exist");
 
