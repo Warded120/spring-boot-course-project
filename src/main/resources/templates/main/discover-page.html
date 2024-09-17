@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Courses</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+
+    <style>
+        body {
+            background-color: #FFD700; /* Saturated yellow background */
+            color: #000; /* Black text color */
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #000; /* Black navbar background */
+            padding: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .navbar a, .navbar button {
+            color: #FFD700; /* Yellow text/buttons in navbar */
+        }
+        .navbar a:hover, .navbar button:hover {
+            color: #FFC107; /* Lighter yellow on hover */
+        }
+        .course-card {
+            background-color: #000; /* Black background for course cards */
+            color: #FFD700; /* Yellow text for course titles */
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(255, 215, 0, 0.5); /* Glowing effect */
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+        .course-card h4 {
+            margin-bottom: 15px;
+        }
+        .btn-primary {
+            background-color: #FFD700; /* Yellow button background */
+            color: #000; /* Black text on button */
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #FFC107; /* Lighter yellow on hover */
+            color: #000;
+        }
+        .footer {
+            background-color: #000; /* Black footer background */
+            color: #FFD700; /* Yellow text in footer */
+            padding: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            text-align: center;
+        }
+        .logo {
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/discover}">
+            <img th:src="@{/images/G-logo.png}" alt="G-courses" class="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/register}">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Discover Our Courses</h2>
+
+    <div class="row">
+        <div class="col-md-4" th:each="course : ${courses}">
+            <div class="course-card">
+                <h4 th:text="${course.name}">Course Name</h4>
+                <p th:text="${course.description}">Course description goes here.</p>
+                <a th:href="@{/login}" class="btn btn-primary">Sign In to Enroll</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 Language Courses. All Rights Reserved.</p>
+    <p>Contact Us: info@g-courses.com</p>
+</div>
+
+</body>
+</html>

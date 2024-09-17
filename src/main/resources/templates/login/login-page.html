@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Language Courses</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FFD700; /* Saturated yellow background */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #000; /* Black background for the login form */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px 20px rgba(255, 215, 0, 0.5); /* Outer shadow with glowing effect */
+            text-align: center;
+            width: 35%;
+        }
+        .login-container h2 {
+            color: #FFD700; /* Yellow text for heading */
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .form-control {
+            background-color: #333; /* Dark gray for input fields */
+            border: none;
+            color: #FFF; /* White text in input fields */
+            border-radius: 4px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        .btn-primary {
+            background-color: #FFD700; /* Primary yellow for buttons */
+            border: none;
+            color: #000; /* Black text */
+            font-weight: bold;
+            margin-bottom: 10px; /* Spacing between buttons */
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%; /* Full width of the column */
+        }
+        .btn-primary:hover {
+            background-color: #FFC107 !important;
+        }
+        .btn-primary:active {
+            background-color: #FFB300 !important;
+        }
+        .red {
+            background-color: #FF4444;
+        }
+        .green {
+            background-color: #44FF44;
+        }
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            align-items: start;
+        }
+        .link-container a {
+            color: #FFD700; /* Yellow text for links */
+            display: block;
+            margin-bottom: 5px;
+        }
+        .link-container a:hover {
+            color: #FFC107; /* Lighter yellow on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form th:action="@{/authenticateTheUser}" method="post">
+
+        <!-- Place for messages: error, alert etc ... -->
+        <div class="form-group">
+            <div class="col-xs-15">
+                <div>
+                    <!-- Check for login error -->
+                    <div th:if="${param.error}">
+                        <div class="red alert alert-danger col-xs-offset-1 col-xs-10">
+                            Invalid username and/or password.
+                        </div>
+                    </div>
+
+                    <!-- Check for logout -->
+                    <div th:if="${param.logout}">
+                        <div class="green alert alert-success col-xs-offset-1 col-xs-10">
+                            You have been logged out
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+    <!-- Link container for Register and Forgot Password -->
+    <div class="link-container">
+        <a th:href="@{/register}" class="register-link">Don't have an account? Register here</a>
+        <a th:href="@{/forgot-password}" class="forgot-password-link">Forgot password?</a>
+    </div>
+</div>
+
+</body>
+</html>
