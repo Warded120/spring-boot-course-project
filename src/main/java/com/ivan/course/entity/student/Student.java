@@ -1,6 +1,6 @@
 package com.ivan.course.entity.student;
 
-import com.ivan.course.dto.StudentDto;
+import com.ivan.course.dto.usersDto.StudentDto;
 import com.ivan.course.entity.Role;
 import com.ivan.course.entity.user.User;
 import jakarta.persistence.*;

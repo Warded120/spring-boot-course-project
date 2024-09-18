@@ -15,11 +15,11 @@ import java.util.List;
 @Table(name = "teacher_data")
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class TeacherData extends UserData {
 
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Course> courses;
 
     public TeacherData(int id, String firstName, String lastName, LocalDate birthDate) {

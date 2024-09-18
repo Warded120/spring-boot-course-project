@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Table(name = "student_data")
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class StudentData extends UserData {
 

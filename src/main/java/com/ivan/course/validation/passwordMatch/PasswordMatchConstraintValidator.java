@@ -1,6 +1,6 @@
 package com.ivan.course.validation.passwordMatch;
 
-import com.ivan.course.dto.Dto;
+import com.ivan.course.dto.usersDto.Dto;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

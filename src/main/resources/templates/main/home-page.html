@@ -33,18 +33,18 @@
             margin-bottom: 15px;
         }
         .btn-primary {
-            background-color: #FFD700; /* Yellow button background */
-            color: #000; /* Black text on button */
+            background-color: #000; /* Black button background */
+            color: #FFD700; /* Yellow text on button */
             border: none;
-            width: 100%;
+            width: 20%;
             padding: 10px;
-            border-radius: 4px;
+            border-radius: 5px;
             font-weight: bold;
             transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
-            background-color: #FFC107; /* Lighter yellow on hover */
-            color: #000;
+            background-color: #333; /* Darker black on hover */
+            color: #FFD700;
         }
         .footer {
             background-color: #000; /* Black footer background */
@@ -52,7 +52,6 @@
             padding: 20px;
             text-align: center;
         }
-
         .logo {
             width: 50px;
         }
@@ -76,14 +75,22 @@
 
 <!-- Main Content -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Available Courses</h2>
 
-    <div class="row">
-        <div class="col-md-4" th:each="course : ${courses}">
-            <div class="course-card">
-                <h4 th:text="${course.name}">Course Name</h4>
-                <p th:text="${course.description}">Course description goes here.</p>
-                <a th:href="@{/course-detail/{id}(id=${course.id})}" class="btn btn-primary">View Course</a>
+    <!--Student-->
+    <div th:if="${session.student != null}" class="row">
+        <h2 class="card-header mb-4">Available Courses</h2>
+        <div class="card-body" th:each="course : ${courses}">
+            <p th:text="course.name"></p>
+            <!--list of courses-->
+        </div>
+    </div>
+
+    <!--Teacher-->
+    <div th:if="${session.teacher != null}" class="row">
+        <div th:if="${session.teacher.teacherData.courses.size() == 0}" class="text-center">
+            <h3 class="mb-4">It seems like you don't own any courses yet, let's create one!</h3>
+            <div class="d-flex justify-content-center">
+                <a th:href="@{/course/add}" class="btn btn-primary mb-2">Create a New Course</a>
             </div>
         </div>
     </div>

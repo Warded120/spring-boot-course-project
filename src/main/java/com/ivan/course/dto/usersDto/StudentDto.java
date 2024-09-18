@@ -1,7 +1,7 @@
-package com.ivan.course.dto;
+package com.ivan.course.dto.usersDto;
 
 import com.ivan.course.entity.Role;
-import com.ivan.course.entity.teacher.Teacher;
+import com.ivan.course.entity.student.Student;
 import com.ivan.course.validation.age.Age;
 import com.ivan.course.validation.nonexistent.Nonexistent;
 import com.ivan.course.validation.password.Password;
@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @PasswordMatch
-public class TeacherDto implements Dto{
+public class StudentDto implements Dto {
     int id = 0;
 
     @NotBlank(message = "required")
@@ -44,7 +44,7 @@ public class TeacherDto implements Dto{
 
     boolean enabled = true;
 
-    String topRole = "teacher";
+    String topRole = "student";
 
     @NotBlank(message = "required")
     @Size(max = 255, message = "cannot be longer than 255")
@@ -56,23 +56,23 @@ public class TeacherDto implements Dto{
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "required")
-    @Age(min = 18, message = "you must be 18 years or older")
+    @Age
     LocalDate birthDate;
 
-    public TeacherDto(Teacher teacher) {
-        this.id = teacher.getId();
-        this.username = teacher.getUsername();
-        this.password = teacher.getPassword().getPassword();
-        this.confirmPassword = teacher.getPassword().getPassword();
-        this.enabled = teacher.isEnabled();
-        this.topRole = getTopRoleFromRoles(teacher);
-        this.firstName = teacher.getTeacherData().getFirstName();
-        this.lastName = teacher.getTeacherData().getLastName();
-        this.birthDate = teacher.getTeacherData().getBirthDate();
+    public StudentDto(Student student) {
+        this.id = student.getId();
+        this.username = student.getUsername();
+        this.password = student.getPassword().getPassword();
+        this.confirmPassword = student.getPassword().getPassword();
+        this.enabled = student.isEnabled();
+        this.topRole = getTopRoleFromRoles(student);
+        this.firstName = student.getStudentData().getFirstName();
+        this.lastName = student.getStudentData().getLastName();
+        this.birthDate = student.getStudentData().getBirthDate();
     }
 
-    private String getTopRoleFromRoles(Teacher teacher) {
-        List<Role> roles = (List<Role>) teacher.getRoles();
+    private String getTopRoleFromRoles(Student student) {
+        List<Role> roles = (List<Role>) student.getRoles();
 
         for (Role role : roles) {
             if (role.getName().equals("ROLE_ADMIN")) {
@@ -86,6 +86,6 @@ public class TeacherDto implements Dto{
             }
         }
 
-        return "teacher";
+        return "student";
     }
 }

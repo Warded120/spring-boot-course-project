@@ -1,7 +1,7 @@
 package com.ivan.course.controller;
 
-import com.ivan.course.dto.StudentDto;
-import com.ivan.course.dto.TeacherDto;
+import com.ivan.course.dto.usersDto.StudentDto;
+import com.ivan.course.dto.usersDto.TeacherDto;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.teacher.Teacher;
 import com.ivan.course.entity.user.User;

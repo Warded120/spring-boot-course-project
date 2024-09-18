@@ -1,6 +1,6 @@
 package com.ivan.course.controller;
 
-import com.ivan.course.dto.TeacherDto;
+import com.ivan.course.dto.usersDto.TeacherDto;
 import com.ivan.course.entity.teacher.Teacher;
 import com.ivan.course.service.teacher.TeacherService;
 import com.ivan.course.service.teacherData.TeacherDataService;
@@ -85,6 +85,14 @@ public class TeacherController {
         theModel.addAttribute("teacher", currentTeacherDto);
 
         return "user/update-confirm-page";
+    }
+
+    @GetMapping("/courses")
+    public String myCourses(Model theModel, HttpSession session) {
+
+        theModel.addAttribute("courses", (Teacher) session.getAttribute("teacher"));
+
+        return "teacher/courses-list-page";
     }
 
     boolean thereAreErrorsIn(BindingResult theBindingResult, List<String> fieldsToIgnore) {

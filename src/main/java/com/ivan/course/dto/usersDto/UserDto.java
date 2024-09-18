@@ -1,4 +1,4 @@
-package com.ivan.course.dto;
+package com.ivan.course.dto.usersDto;
 
 import com.ivan.course.entity.user.User;
 import com.ivan.course.validation.password.Password;
