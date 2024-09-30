@@ -29,20 +29,40 @@
             margin-bottom: 20px;
             padding: 15px;
         }
-        .course-card h4 {
+        .course-card h5 {
             margin-bottom: 15px;
+            text-align: center; /* Center align course title */
+        }
+        .course-card p {
+            margin-bottom: 10px; /* Consistent margin for paragraphs */
         }
         .btn-primary {
             background-color: #000; /* Black button background */
             color: #FFD700; /* Yellow text on button */
             border: none;
-            width: 20%;
+            width: 100%; /* Full width for button */
             padding: 10px;
             border-radius: 5px;
             font-weight: bold;
             transition: background-color 0.3s ease;
+            text-align: center; /* Center text in button */
         }
         .btn-primary:hover {
+            background-color: #333; /* Darker black on hover */
+            color: #FFD700;
+        }
+        .btn-primary-inverted {
+            color: #000; /* Black button background */
+            background-color: #FFD700; /* Yellow text on button */
+            border: none;
+            width: 100%; /* Full width for button */
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            text-align: center; /* Center text in button */
+        }
+        .btn-primary-inverted:hover {
             background-color: #333; /* Darker black on hover */
             color: #FFD700;
         }
@@ -78,22 +98,39 @@
 
     <!--Student-->
     <div th:if="${session.student != null}" class="row">
-        <h2 class="card-header mb-4">Available Courses</h2>
-        <div class="card-body" th:each="course : ${courses}">
-            <p th:text="course.name"></p>
-            <!--list of courses-->
-        </div>
+        <!-- Content for students -->
     </div>
 
     <!--Teacher-->
-    <div th:if="${session.teacher != null}" class="row">
-        <div th:if="${session.teacher.teacherData.courses.size() == 0}" class="text-center">
+    <div th:if="${session.teacher != null && session.teacher.teacherData.courses.size() == 0}" class="row">
+        <div class="text-center">
             <h3 class="mb-4">It seems like you don't own any courses yet, let's create one!</h3>
+            <h3 th:text="${session.teacher.teacherData.courses.size()}"></h3>
             <div class="d-flex justify-content-center">
                 <a th:href="@{/course/add}" class="btn btn-primary mb-2">Create a New Course</a>
             </div>
         </div>
     </div>
+
+    <!-- General -->
+    <div th:if="${courses.size() != 0}" class="container mt-5">
+        <h2 class="card-header mb-4 text-center">Available Courses</h2>
+        <div class="row">
+            <div class="col-md-4" th:each="course : ${courses}">
+                <div class="card course-card mb-4">
+                    <div class="card-body text-center"> <!-- Center align all text in card body -->
+                        <h5 class="card-title" th:text="${course.name}">Course Name</h5>
+                        <p class="card-text" th:text="${course.description}">Course description goes here.</p>
+                        <p class="card-text"><strong>Language:</strong> <span th:text="${course.language}">English</span></p>
+                        <p class="card-text"><strong>Level:</strong> <span th:text="${course.languageLevel}">Beginner</span></p>
+                        <p class="card-text"><strong>Price:</strong> <span th:text="${course.price}">0.00</span></p>
+                        <a th:href="@{/course/{id}(id=${course.id})}" class="btn btn-primary-inverted">View Course</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- Footer -->

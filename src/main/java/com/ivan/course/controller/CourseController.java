@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -71,7 +68,11 @@ public class CourseController {
         course.setTeacher( ((Teacher)theSession.getAttribute("teacher")).getTeacherData() );
         System.out.println(course);
 
-        courseService.save(course);
+        Course savedCourse = courseService.save(course);
+        TeacherData teacherData = savedCourse.getTeacher();
+        Teacher sessionTeacher = (Teacher)theSession.getAttribute("teacher");
+        sessionTeacher.setTeacherData(teacherData);
+        theSession.setAttribute("teacher", sessionTeacher);
 
         return "redirect:/course/add/success";
     }
@@ -79,5 +80,14 @@ public class CourseController {
     @GetMapping("/add/success")
     public String addCourseSuccess() {
         return "course/course-form-confirmation";
+    }
+
+    @GetMapping("/{courseId}")
+    public String viewCourse(@PathVariable("courseId") int courseId, Model theModel) {
+        Course course = courseService.findById(courseId);
+
+        theModel.addAttribute("course", course);
+
+        return "course/course-page";
     }
 }

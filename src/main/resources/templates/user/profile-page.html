@@ -16,7 +16,14 @@
             justify-content: center;
             height: 100vh;
         }
-
+        .left-top-corner {
+            position: absolute;
+            top: 15px;
+            left: 22px;
+        }
+        .logo {
+            width: 50px;
+        }
         .profile-container {
             display: flex;
             justify-content: center;
@@ -107,6 +114,13 @@
 <body>
 
 <div class="profile-container">
+
+    <!-- Header -->
+    <div class="left-top-corner">
+        <a class="navbar-brand" th:href="@{/home}">
+            <img th:src="@{/images/G-logo-black.webp}" alt="G-courses" class="logo">
+        </a>
+    </div>
     <!-- Student Information -->
     <div th:if="${session.student != null}" class="profile-card">
         <div class="display-flex-row">
@@ -145,8 +159,8 @@
         </div>
         <div class="display-flex-col">
             <a th:href="@{/teacher/profile/update}" class="btn btn-primary">Update profile</a>
-            <a href="#" class="btn btn-primary">Teacher Button 2</a>
-            <a href="#" class="btn btn-primary">Teacher Button 3</a>
+            <a th:href="@{/course/add}" class="btn btn-primary">Create a new course</a>
+            <a th:href="@{/teacher/courses}" class="btn btn-primary">View my corses</a>
             <a href="#" class="btn btn-primary">Teacher Button 4</a>
             <form action="#" th:action="@{/logout}" method="post">
                 <input class="btn btn-danger " type="submit" value="Logout">

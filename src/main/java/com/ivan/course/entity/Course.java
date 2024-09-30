@@ -1,16 +1,12 @@
 package com.ivan.course.entity;
 
 import com.ivan.course.dto.CourseDto;
-import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.teacher.TeacherData;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "course")
@@ -42,11 +38,9 @@ public class Course {
     @JoinColumn(name = "teacher_data_id", referencedColumnName = "id")
     private TeacherData teacher;
 
-    @ManyToMany
-    @JoinTable(name = "courses_students",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id"))
-    private List<Student> students;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "student_group_id", referencedColumnName = "id")
+    private StudentGroup studentGroup;
 
     public Course(CourseDto theCourse) {
         this.name = theCourse.getName();
@@ -55,6 +49,8 @@ public class Course {
         this.languageLevel = theCourse.getLanguageLevel();
         this.price = theCourse.getPrice();
         this.teacher = theCourse.getTeacher();
-        this.students = new ArrayList<>();
+        this.studentGroup = new StudentGroup();
     }
 }
+// TODO: after finishing the course level, examine(filter) students, increase the price and raise the level of the course
+// TODO: implement enrolling students to courses

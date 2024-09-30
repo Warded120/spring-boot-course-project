@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course info</title>
+</head>
+<body>
+    <div class="card-body text-center"> <!-- Center align all text in card body -->
+        <h5 class="card-title" th:text="${course.name}">Course Name</h5>
+        <p class="card-text" th:text="${course.description}">Course description goes here.</p>
+        <p class="card-text"><strong>Language:</strong> <span th:text="${course.language}">English</span></p>
+        <p class="card-text"><strong>Level:</strong> <span th:text="${course.languageLevel}">Beginner</span></p>
+        <p class="card-text"><strong>Price:</strong> <span th:text="${course.price}">0.00</span></p>
+        <a th:href="@{/course/{id}(id=${course.id})}" class="btn btn-primary">View Course</a>
+    </div>
+</body>
+</html>
