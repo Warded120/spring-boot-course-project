@@ -9,9 +9,11 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,19 +35,24 @@ public class CourseController {
     @Value("${course.language-levels}")
     List<String> languageLevels;
 
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        StringTrimmerEditor trimmerEditor = new StringTrimmerEditor(true);
+        dataBinder.registerCustomEditor(String.class, trimmerEditor);
+    }
+
     @GetMapping("/add")
     public String addCourse(Model theModel, HttpSession session) {
 
         CourseDto course = new CourseDto();
 
+        //fixme: this variable is not required (maybe)
         Teacher teacher = (Teacher) session.getAttribute("teacher");
 
         //todo change to throw "NoTeacherFoundException"
         if(teacher == null) {
             return "redirect:/login?noTeacherError";
         }
-
-        System.out.println("teacher in course: " + course.getTeacher());
 
         theModel.addAttribute("course", course);
         theModel.addAttribute("languages", languages);
@@ -66,10 +73,10 @@ public class CourseController {
         Course course = new Course(theCourse);
 
         course.setTeacher( ((Teacher)theSession.getAttribute("teacher")).getTeacherData() );
-        System.out.println(course);
 
         Course savedCourse = courseService.save(course);
         TeacherData teacherData = savedCourse.getTeacher();
+        teacherData.addCourse(course);
         Teacher sessionTeacher = (Teacher)theSession.getAttribute("teacher");
         sessionTeacher.setTeacherData(teacherData);
         theSession.setAttribute("teacher", sessionTeacher);

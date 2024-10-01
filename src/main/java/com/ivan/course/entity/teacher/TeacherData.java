@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "teacher_data")
 @Getter
 @Setter
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = "courses")
 @NoArgsConstructor
 public class TeacherData extends UserData {
 
@@ -24,5 +24,13 @@ public class TeacherData extends UserData {
 
     public TeacherData(int id, String firstName, String lastName, LocalDate birthDate) {
         super(id, firstName, lastName, birthDate);
+    }
+
+    public void addCourse(Course course) {
+        courses.add(course);
+    }
+
+    public boolean isMyCourse(Course course) {
+        return courses.contains(course);
     }
 }

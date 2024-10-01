@@ -1,20 +1,24 @@
 package com.ivan.course.dto;
 
 import com.ivan.course.entity.teacher.TeacherData;
+import com.ivan.course.validation.inList.InList;
+import com.ivan.course.validation.inList.ListType;
+import com.ivan.course.validation.price.Price;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 public class CourseDto {
+
     int id;
 
     @NotBlank(message = "required")
@@ -24,14 +28,16 @@ public class CourseDto {
     @NotBlank(message = "required")
     String description;
 
-    @NotBlank(message = "required")
+    @NotNull(message = "required")
+    @InList
     String language;
 
-    @NotNull
+    @NotNull(message = "required")
+    @InList(list = ListType.LANGUAGE_LEVELS, message = "not a language level")
     String languageLevel;
 
     @NotNull(message = "required")
-    @Min(value = 0, message = "price must be bigger that 0$")
+    @Price
     float price;
 
     TeacherData teacher;

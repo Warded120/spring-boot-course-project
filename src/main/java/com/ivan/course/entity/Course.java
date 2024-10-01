@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString()
 public class Course {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

@@ -90,7 +90,9 @@ public class TeacherController {
     @GetMapping("/courses")
     public String myCourses(Model theModel, HttpSession session) {
 
-        theModel.addAttribute("courses", (Teacher) session.getAttribute("teacher"));
+        Teacher teacher = (Teacher) session.getAttribute("teacher");
+
+        theModel.addAttribute("courses", teacher.getTeacherData().getCourses());
 
         return "teacher/courses-list-page";
     }
