@@ -1,0 +1,1 @@
+docker run -d --name psql-course-project --network spring-boot-network -e POSTGRES_DB=course_project -e POSTGRES_USER=course_project_owner -e POSTGRES_PASSWORD=course_project_owner_password -p 5432:5432 postgres:latest
