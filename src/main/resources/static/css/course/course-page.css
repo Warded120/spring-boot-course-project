@@ -1,0 +1,70 @@
+body {
+    background-color: #FFD700; /* Primary yellow */
+    color: #000; /* Black text */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.display-flex-col {
+    display: flex;
+    flex-direction: column;
+}
+.display-flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.course-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+.course-card {
+    background-color: #222; /* Slightly lighter dark background for the card */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    color: #FFD700;
+    width: 100%;
+    max-width: 800px;
+}
+.course-image {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+    border-radius: 50%;
+    border: 3px solid #FFD700; /* Yellow border around the picture */
+}
+.course-info {
+    flex: 1;
+}
+.btn-primary {
+    background-color: #FFD700;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%; /* Full width of the card */
+}
+.btn-primary:hover {
+    background-color: #FFC107 !important;
+}
+.btn-primary:active {
+    background-color: #FFB300 !important;
+}
+.teacher-message {
+    font-size: 1.2rem; /* Slightly larger font */
+    text-align: center; /* Center the text */
+    margin-top: 20px;
+}
+
+strong {
+    color: #FFFFFF;
+}

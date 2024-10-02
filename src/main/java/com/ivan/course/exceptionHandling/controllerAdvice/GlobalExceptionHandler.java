@@ -5,11 +5,13 @@ import org.eclipse.angus.mail.util.MailConnectException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = UserNotFoundException.class)
+    @GetMapping("/error/UserNotFound")
     public String userNotFoundExceptionHandler(UserNotFoundException ex, Model theModel) {
         System.out.println("in userNotFoundExceptionHandler");
 
@@ -20,6 +22,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = MailConnectException.class)
+    @GetMapping("/error/MailConnectionException")
     public String mailConnectExceptionHandler(MailConnectException ex, Model theModel) {
         System.out.println("in mailConnectExceptionHandler");
 

@@ -5,77 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-    <style>
-        body {
-            background-color: #FFD700; /* Saturated yellow background */
-            color: #000; /* Black text color */
-            font-family: Arial, sans-serif;
-        }
-        .navbar {
-            background-color: #000; /* Black navbar background */
-            padding: 10px;
-        }
-        .navbar a, .navbar-brand {
-            color: #FFD700; /* Yellow text/logo in navbar */
-        }
-        .navbar a:hover, .navbar-brand:hover {
-            color: #FFC107; /* Lighter yellow on hover */
-        }
-        .course-card {
-            background-color: #000; /* Black background for course cards */
-            color: #FFD700; /* Yellow text for course titles */
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(255, 215, 0, 0.5); /* Glowing effect */
-            margin-bottom: 20px;
-            padding: 15px;
-        }
-        .course-card h5 {
-            margin-bottom: 15px;
-            text-align: center; /* Center align course title */
-        }
-        .course-card p {
-            margin-bottom: 10px; /* Consistent margin for paragraphs */
-        }
-        .btn-primary {
-            background-color: #000; /* Black button background */
-            color: #FFD700; /* Yellow text on button */
-            border: none;
-            width: 100%; /* Full width for button */
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            text-align: center; /* Center text in button */
-        }
-        .btn-primary:hover {
-            background-color: #333; /* Darker black on hover */
-            color: #FFD700;
-        }
-        .btn-primary-inverted {
-            color: #000; /* Black button background */
-            background-color: #FFD700; /* Yellow text on button */
-            border: none;
-            width: 100%; /* Full width for button */
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            text-align: center; /* Center text in button */
-        }
-        .btn-primary-inverted:hover {
-            background-color: #333; /* Darker black on hover */
-            color: #FFD700;
-        }
-        .footer {
-            background-color: #000; /* Black footer background */
-            color: #FFD700; /* Yellow text in footer */
-            padding: 20px;
-            text-align: center;
-        }
-        .logo {
-            width: 50px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/main/home-page.css}">
 </head>
 <body>
 
@@ -84,12 +14,20 @@
     <div class="container-fluid">
         <!--For Student-->
         <a class="navbar-brand" th:if="${session.student}" th:href="@{/student/profile}">
-            <img th:src="@{/images/G-logo.png}" alt="G-courses" class="logo">
+            <img th:src="@{/images/G-logo.webp}" alt="G-courses" class="logo">
         </a>
         <!--For Teacher-->
         <a class="navbar-brand" th:if="${session.teacher}" th:href="@{/teacher/profile}">
-            <img th:src="@{/images/G-logo.png}" alt="G-courses" class="logo">
+            <img th:src="@{/images/G-logo.webp}" alt="G-courses" class="logo">
         </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About Us</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 

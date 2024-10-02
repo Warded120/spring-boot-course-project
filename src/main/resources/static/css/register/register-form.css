@@ -1,0 +1,54 @@
+body {
+    background-color: #FFD700; /* Saturated yellow background */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+p {
+    font-size: large;
+    color: #B0B0B0;
+}
+.access-denied-container {
+    background-color: #000; /* Black background for the access denied container */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px 20px rgba(255, 215, 0, 0.5); /* Outer shadow with glowing effect */
+    text-align: center;
+    width: 35%;
+}
+.access-denied-container h2 {
+    color: #FFD700; /* Yellow text for heading */
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+.btn-custom {
+    background-color: #FFD700; /* Yellow button */
+    color: #000; /* Black text on button */
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+.btn-custom:hover {
+    background-color: #FFC107; /* Lighter yellow on hover */
+    color: #000;
+}
+.btn-secondary-custom {
+    background-color: #333; /* Dark gray button */
+    color: #FFF; /* White text on button */
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.btn-secondary-custom:hover {
+    background-color: #555; /* Lighter gray on hover */
+    color: #FFF;
+}

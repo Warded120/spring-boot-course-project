@@ -4,14 +4,10 @@ import com.ivan.course.entity.teacher.TeacherData;
 import com.ivan.course.validation.inList.InList;
 import com.ivan.course.validation.inList.ListType;
 import com.ivan.course.validation.price.Price;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Value;
-
-import java.util.List;
 
 @Getter
 @Setter

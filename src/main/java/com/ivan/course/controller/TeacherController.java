@@ -1,6 +1,7 @@
 package com.ivan.course.controller;
 
 import com.ivan.course.dto.usersDto.TeacherDto;
+import com.ivan.course.entity.Course;
 import com.ivan.course.entity.teacher.Teacher;
 import com.ivan.course.service.teacher.TeacherService;
 import com.ivan.course.service.teacherData.TeacherDataService;
@@ -69,6 +70,10 @@ public class TeacherController {
         Teacher updatedTeacher = new Teacher(teacherDto);
         System.out.println("updated teacher: " + updatedTeacher);
 
+        //set courses to updated teacher
+        Teacher teacherWithCourses = teacherService.findByUserId(updatedTeacher.getId());
+        List<Course> coursesOfTeacher = teacherWithCourses.getTeacherData().getCourses();
+        updatedTeacher.getTeacherData().setCourses(coursesOfTeacher);
 
         //teacherService.save(updatedTeacher, false);
         teacherDataService.save(updatedTeacher.getTeacherData());
