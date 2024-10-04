@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,7 @@ public class TeacherData extends UserData {
 
     public TeacherData(int id, String firstName, String lastName, LocalDate birthDate) {
         super(id, firstName, lastName, birthDate);
+        courses = new ArrayList<>();
     }
 
     public void addCourse(Course course) {
