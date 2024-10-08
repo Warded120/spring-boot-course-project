@@ -62,113 +62,131 @@
             background-color: #FFC107; /* Lighter yellow on hover */
             color: #000;
         }
-
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            align-items: start;
+        }
+        .link-container a {
+            color: #FFD700; /* Yellow text for links */
+            display: block;
+            margin-bottom: 5px;
+        }
+        .link-container a:hover {
+            color: #FFC107; /* Lighter yellow on hover */
+        }
     </style>
     <!--<link rel="stylesheet" th:href="@{/css/register/student-form.css}">-->
 </head>
 <body>
-<form th:action="@{/register-student}" th:object="${student}" method="post">
-    <!--Student-->
-    <div class="card mt-2 mb-2">
-        <div class="card-header">
-            <h2>Student Registration</h2>
+    <form th:action="@{/register-student}" th:object="${student}" method="post">
+        <!--Student-->
+        <div class="card mt-2 mb-2">
+            <div class="card-header">
+                <h2>Student Registration</h2>
+            </div>
+            <div class="card-body">
+                <!-- Id -->
+                <input type="hidden" id="id" name="id" th:field="*{id}">
+
+                <!-- Username -->
+                <div class="mb-2">
+                    <label for="username" class="form-label">Username:</label>
+
+                    <!-- Validation -->
+                    <span   th:if="${#fields.hasErrors('username')}"
+                            th:errors="${student.username}"
+                            class="text-danger"
+                    ></span>
+
+                    <input type="text" id="username" name="username" th:field="*{username}" class="form-control" placeholder="Enter username">
+                </div>
+
+                <!-- Password -->
+                <div class="mb-2">
+                    <label for="password" class="form-label">Password:</label>
+
+                    <!-- Validation -->
+                    <span   th:if="${#fields.hasErrors('password')}"
+                            th:errors="${student.password}"
+                            class="text-danger"
+                    ></span>
+
+                    <input type="password" id="password" name="password" th:field="*{password}" class="form-control" placeholder="Enter password">
+                </div>
+
+                <!-- Confirm password -->
+                <div class="mb-2">
+                    <label for="confirmPassword" class="form-label">Confirm Password:</label>
+
+                    <!-- Validation -->
+                    <span   th:if="${#fields.hasErrors('confirmPassword')}"
+                            th:errors="${student.confirmPassword}"
+                            class="text-danger"
+                    ></span>
+
+                    <input type="password" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}" class="form-control" placeholder="Confirm your password">
+                </div>
+
+                <!-- First Name -->
+                <div class="mb-2">
+                    <label for="firstName" class="form-label">First Name:</label>
+
+                    <!-- Validation -->
+                    <span   th:if="${#fields.hasErrors('firstName')}"
+                            th:errors="${student.firstName}"
+                            class="text-danger"
+                    ></span>
+
+                    <input type="text" id="firstName" name="firstName" th:field="*{firstName}" class="form-control" placeholder="Enter first name">
+                </div>
+
+                <!-- Last Name -->
+                <div class="mb-2">
+                    <label for="lastName" class="form-label">Last Name:</label>
+
+                    <!-- Validation -->
+                    <span   th:if="${#fields.hasErrors('lastName')}"
+                            th:errors="${student.lastName}"
+                            class="text-danger"
+                    ></span>
+
+                    <input type="text" id="lastName" name="lastName" th:field="*{lastName}" class="form-control" placeholder="Enter last name">
+                </div>
+
+                <!-- Birth Date -->
+                <div class="mb-2">
+                    <label for="birthDate" class="form-label">Birth Date:</label>
+
+                    <!-- Validation -->
+                    <span   th:if="${#fields.hasErrors('birthDate')}"
+                            th:errors="${student.birthDate}"
+                            class="text-danger"
+                    ></span>
+
+                    <input type="date" id="birthDate" name="birthDate" th:field="*{birthDate}" class="form-control">
+                </div>
+
+                <!-- Enabled -->
+                <input type="hidden" id="enabled" name="enabled" th:field="*{enabled}">
+
+                <!-- Roles -->
+                <div class="mb-2" hidden="hidden">
+                    <select id="role" th:field="*{topRole}" name="role" class="form-control">
+                        <option th:each="tempRole: ${roles}" th:value="${tempRole}" th:text="${tempRole}" th:selected="${tempRole} == 'student'"/>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary mt-3">Submit</button> <!-- Button inside card body -->
+
+                <div class="link-container">
+                    <a th:href="@{/login}" class="register-link">Back to login</a>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <!-- Id -->
-            <input type="hidden" id="id" name="id" th:field="*{id}">
+    </form>
 
-            <!-- Username -->
-            <div class="mb-2">
-                <label for="username" class="form-label">Username:</label>
-
-                <!-- Validation -->
-                <span   th:if="${#fields.hasErrors('username')}"
-                        th:errors="${student.username}"
-                        class="text-danger"
-                ></span>
-
-                <input type="text" id="username" name="username" th:field="*{username}" class="form-control" placeholder="Enter username">
-            </div>
-
-            <!-- Password -->
-            <div class="mb-2">
-                <label for="password" class="form-label">Password:</label>
-
-                <!-- Validation -->
-                <span   th:if="${#fields.hasErrors('password')}"
-                        th:errors="${student.password}"
-                        class="text-danger"
-                ></span>
-
-                <input type="password" id="password" name="password" th:field="*{password}" class="form-control" placeholder="Enter password">
-            </div>
-
-            <!-- Confirm password -->
-            <div class="mb-2">
-                <label for="confirmPassword" class="form-label">Confirm Password:</label>
-
-                <!-- Validation -->
-                <span   th:if="${#fields.hasErrors('confirmPassword')}"
-                        th:errors="${student.confirmPassword}"
-                        class="text-danger"
-                ></span>
-
-                <input type="password" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}" class="form-control" placeholder="Confirm your password">
-            </div>
-
-            <!-- First Name -->
-            <div class="mb-2">
-                <label for="firstName" class="form-label">First Name:</label>
-
-                <!-- Validation -->
-                <span   th:if="${#fields.hasErrors('firstName')}"
-                        th:errors="${student.firstName}"
-                        class="text-danger"
-                ></span>
-
-                <input type="text" id="firstName" name="firstName" th:field="*{firstName}" class="form-control" placeholder="Enter first name">
-            </div>
-
-            <!-- Last Name -->
-            <div class="mb-2">
-                <label for="lastName" class="form-label">Last Name:</label>
-
-                <!-- Validation -->
-                <span   th:if="${#fields.hasErrors('lastName')}"
-                        th:errors="${student.lastName}"
-                        class="text-danger"
-                ></span>
-
-                <input type="text" id="lastName" name="lastName" th:field="*{lastName}" class="form-control" placeholder="Enter last name">
-            </div>
-
-            <!-- Birth Date -->
-            <div class="mb-2">
-                <label for="birthDate" class="form-label">Birth Date:</label>
-
-                <!-- Validation -->
-                <span   th:if="${#fields.hasErrors('birthDate')}"
-                        th:errors="${student.birthDate}"
-                        class="text-danger"
-                ></span>
-
-                <input type="date" id="birthDate" name="birthDate" th:field="*{birthDate}" class="form-control">
-            </div>
-
-            <!-- Enabled -->
-            <input type="hidden" id="enabled" name="enabled" th:field="*{enabled}">
-
-            <!-- Roles -->
-            <div class="mb-2" hidden="hidden">
-                <select id="role" th:field="*{topRole}" name="role" class="form-control">
-                    <option th:each="tempRole: ${roles}" th:value="${tempRole}" th:text="${tempRole}" th:selected="${tempRole} == 'student'"/>
-                </select>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary mt-3">Submit</button> <!-- Button inside card body -->
-        </div>
-    </div>
-</form>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.ivan.course.entity;
 
 import com.ivan.course.entity.student.Student;
+import com.ivan.course.entity.student.StudentData;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,5 @@ public class StudentGroup {
     @JoinTable(name = "groups_students",
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id"))
-    private List<Student> students;
+    private List<StudentData> students;
 }

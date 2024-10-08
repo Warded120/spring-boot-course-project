@@ -51,7 +51,9 @@
 <div class="card">
     <h2>Registration Successful!</h2>
     <p>You have successfully registered. Click below to login.</p>
-    <a th:href="@{/login}" class="btn btn-primary mt-3">Login with registered user</a>
+    <form th:action="@{/login}" method="get">
+        <button type="submit" class="btn btn-primary mt-3">Login with registered user</button>
+    </form>
 </div>
 </body>
 </html>

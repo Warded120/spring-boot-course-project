@@ -46,7 +46,6 @@ public class CourseController {
 
         CourseDto course = new CourseDto();
 
-        //fixme: this variable is not required (maybe)
         Teacher teacher = (Teacher) session.getAttribute("teacher");
 
         //todo change to throw "NoTeacherFoundException"
@@ -96,5 +95,14 @@ public class CourseController {
         theModel.addAttribute("course", course);
 
         return "course/course-page";
+    }
+
+    @GetMapping("/enroll/{courseId}")
+    public String enrollToCourse(@PathVariable("courseId") int courseId, Model theModel) {
+        Course course = courseService.findById(courseId);
+
+        theModel.addAttribute("course", course);
+
+        return "course/course-enroll-form";
     }
 }

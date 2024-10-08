@@ -56,19 +56,13 @@ public class TeacherController {
                          HttpSession session,
                          Model theModel) {
 
-/*        if (theBindingResult.hasErrors()) {
-            System.out.println("errors exist");
-            return "user/update-teacher-page";
-        }*/
         if(thereAreErrorsIn(theBindingResult, List.of("username", "password", "confirmPassword"))) {
             System.out.println("errors exist");
             return "user/update-teacher-form";
         }
         System.out.println("no errors exist");
 
-        System.out.println("teacherDto = " + teacherDto);
         Teacher updatedTeacher = new Teacher(teacherDto);
-        System.out.println("updated teacher: " + updatedTeacher);
 
         //set courses to updated teacher
         Teacher teacherWithCourses = teacherService.findByUserId(updatedTeacher.getId());

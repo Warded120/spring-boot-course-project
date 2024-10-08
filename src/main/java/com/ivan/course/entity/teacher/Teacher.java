@@ -20,10 +20,6 @@ import java.util.List;
 @ToString(callSuper = true)
 public class Teacher extends User {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "teacher_data_id", referencedColumnName = "id")
     TeacherData teacherData;

@@ -35,8 +35,10 @@
 <div class="container mt-5">
 
     <!--Student-->
-    <div th:if="${session.student != null}" class="row">
+    <div th:if="${session.student != null}">
         <!-- Content for students -->
+        <h2 class="card-header mb-4 text-center">You don't have any courses, choose any and enroll now!</h2>
+        <hr>
     </div>
 
     <!--Teacher-->
@@ -51,7 +53,7 @@
     </div>
 
     <!-- General -->
-    <div th:if="${courses.size() != 0}" class="container mt-5">
+    <div th:if="${courses.size() != 0}" class="container">
         <h2 class="card-header mb-4 text-center">Available Courses</h2>
         <div class="row">
             <div class="col-md-4" th:each="course : ${courses}">

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: create a separate branch and move all css code from html files
 @Controller
 public class MainController {
 

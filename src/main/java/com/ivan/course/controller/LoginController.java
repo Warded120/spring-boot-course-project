@@ -37,6 +37,11 @@ public class LoginController {
         return "access-denied";
     }
 
+    @GetMapping("/error")
+    public String error() {
+        return "error/error-page";
+    }
+
     @GetMapping("/change-password")
     public String changePassword(@ModelAttribute("user") User changePasswordUser,
                                  Model theModel) {
