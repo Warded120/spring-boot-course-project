@@ -2,6 +2,7 @@ package com.ivan.course.entity.student;
 
 import com.ivan.course.entity.user.UserData;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,9 @@ import java.time.LocalDate;
 public class StudentData extends UserData {
 
     //courses(joinTable courses_students) debts examinations certificates
+
+    @OneToOne(mappedBy = "studentData", orphanRemoval = true)
+    private Student student;
 
     public StudentData(int id, String firstName, String lastName, LocalDate birthDate) {
         super(id, firstName, lastName, birthDate);
