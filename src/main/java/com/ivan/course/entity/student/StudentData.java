@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 public class StudentData extends UserData {
 
-    //courses(joinTable courses_students) debts examinations certificates
+
     @ManyToMany(mappedBy = "students")
     List<StudentGroup> groups;
 

@@ -34,7 +34,6 @@ public class Course {
     @Column(name = "price")
     private float price;
 
-    //FIXME: use Teacher class instead of TeacherData, debug
     @ManyToOne
     @JoinColumn(name = "teacher_data_id", referencedColumnName = "id")
     private TeacherData teacher;

@@ -103,6 +103,9 @@ public class CourseController {
 
         theModel.addAttribute("course", course);
 
+        // TODO: throw exception if it is not a student
+
+        //TODO: finish html page
         return "course/course-enroll-form";
     }
 }
