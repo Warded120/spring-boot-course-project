@@ -1,6 +1,7 @@
 package com.ivan.course.entity;
 
 import com.ivan.course.dto.CourseDto;
+import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.teacher.TeacherData;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -50,6 +51,10 @@ public class Course {
         this.price = theCourse.getPrice();
         this.teacher = theCourse.getTeacher();
         this.studentGroup = new StudentGroup();
+    }
+
+    public void enroll(Student theStudent) {
+        studentGroup.addStudent(theStudent);
     }
 }
 // TODO: after finishing the course level, examine(filter) students, increase the price and raise the level of the course

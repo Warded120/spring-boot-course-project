@@ -1,12 +1,39 @@
-.confirmation-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #222;
-    color: #FFD700;
+body {
+    background-color: #FFD700; /* Primary yellow */
+    color: #000; /* Black text */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.display-flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+.course-info {
+    flex: 1;
+}
+.course-card {
+    background-color: #222; /* Slightly lighter dark background for the card */
+    padding: 20px;
     border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    color: #FFD700;
+    width: 100%;
+    max-width: 800px;
+    text-align: center; /* Center content */
 }
 
 .main-text {
@@ -21,14 +48,13 @@
 }
 
 .btn-primary {
-    background-color: #FFD700; /* Primary yellow for button */
+    background-color: #FFD700;
     border: none;
-    color: #000; /* Black text */
+    color: #000;
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 5px;
-    text-transform: uppercase;
-    width: 100%; /* Full width button */
+    width: 100%;
 }
 
 .btn-primary:hover {
@@ -37,4 +63,21 @@
 
 .btn-primary:active {
     background-color: #FFB300 !important;
+}
+
+.btn-danger {
+    background-color: #CC2222;
+    border: none;
+    color: #FFF;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+.btn-danger:hover {
+    background-color: #AA2222 !important;
+}
+.btn-danger:active {
+    background-color: #772222 !important;
 }

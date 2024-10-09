@@ -110,9 +110,23 @@ public class CourseController {
 
         theModel.addAttribute("course", course);
 
-        //TODO: finish html page
         return "course/course-enroll-form";
     }
 
-    // TODO: postmapping /enroll/{id}
+    //TODO: test it
+    @PostMapping("/enroll/{courseId}")
+    public String confirmEnrollToCourse(@PathVariable("courseId") int courseId, Model theModel, HttpSession theSession) {
+
+        Student theStudent = (Student) theSession.getAttribute("student");
+        Course course = courseService.findById(courseId);
+
+        course.enroll(theStudent);
+
+        return "redirect:/course/enroll/confirm";
+    }
+
+    @GetMapping("/enroll/confirm")
+    public String successEnrollToCourse() {
+        return "course/course-enroll-confirmation";
+    }
 }

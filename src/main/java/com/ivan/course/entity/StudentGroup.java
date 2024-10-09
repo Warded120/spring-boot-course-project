@@ -29,4 +29,8 @@ public class StudentGroup {
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<StudentData> students;
+
+    public void addStudent(Student theStudent) {
+        students.add(theStudent.getStudentData());
+    }
 }
