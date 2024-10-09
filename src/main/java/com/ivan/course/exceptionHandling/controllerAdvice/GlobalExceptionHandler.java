@@ -1,6 +1,8 @@
 package com.ivan.course.exceptionHandling.controllerAdvice;
 
-import com.ivan.course.exceptionHandling.UserNotFoundException;
+import com.ivan.course.exceptionHandling.exception.NoStudentFoundException;
+import com.ivan.course.exceptionHandling.exception.NoTeacherFoundException;
+import com.ivan.course.exceptionHandling.exception.UserNotFoundException;
 import org.eclipse.angus.mail.util.MailConnectException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,6 +32,25 @@ public class GlobalExceptionHandler {
         theModel.addAttribute("errorTitle", "Mail Connect Error");
         theModel.addAttribute("message", ex.getMessage());
 
+        // FIXME: fix redirect
         return "redirect:/error?UserNotFound";
+    }
+
+    @ExceptionHandler(value = NoTeacherFoundException.class)
+    public String noTeacherFoundExceptionHandler(NoTeacherFoundException ex) {
+        System.out.println("in noTeacherFoundExceptionHandler");
+
+        System.out.println(ex.what());
+
+        return "redirect:/login?noTeacherError";
+    }
+
+    @ExceptionHandler(value = NoStudentFoundException.class)
+    public String noStudentFoundExceptionHandler(NoTeacherFoundException ex) {
+        System.out.println("in noStudentFoundExceptionHandler");
+
+        System.out.println(ex.what());
+
+        return "redirect:/login?noStudentError";
     }
 }

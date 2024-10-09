@@ -45,7 +45,6 @@
     <div th:if="${session.teacher != null && session.teacher.teacherData.courses.size() == 0}" class="row">
         <div class="text-center">
             <h3 class="mb-4">It seems like you don't own any courses yet, let's create one!</h3>
-            <h3 th:text="${session.teacher.teacherData.courses.size()}"></h3>
             <div class="d-flex justify-content-center">
                 <a th:href="@{/course/add}" class="btn btn-primary mb-2">Create a New Course</a>
             </div>

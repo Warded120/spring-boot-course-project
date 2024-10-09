@@ -2,8 +2,11 @@ package com.ivan.course.controller;
 
 import com.ivan.course.dto.CourseDto;
 import com.ivan.course.entity.Course;
+import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.teacher.Teacher;
 import com.ivan.course.entity.teacher.TeacherData;
+import com.ivan.course.exceptionHandling.exception.NoStudentFoundException;
+import com.ivan.course.exceptionHandling.exception.NoTeacherFoundException;
 import com.ivan.course.service.course.CourseService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -48,9 +51,8 @@ public class CourseController {
 
         Teacher teacher = (Teacher) session.getAttribute("teacher");
 
-        //todo change to throw "NoTeacherFoundException"
         if(teacher == null) {
-            return "redirect:/login?noTeacherError";
+            throw new NoTeacherFoundException("teacher not found");
         }
 
         theModel.addAttribute("course", course);
@@ -98,14 +100,19 @@ public class CourseController {
     }
 
     @GetMapping("/enroll/{courseId}")
-    public String enrollToCourse(@PathVariable("courseId") int courseId, Model theModel) {
+    public String enrollToCourse(@PathVariable("courseId") int courseId, Model theModel, HttpSession theSession) {
+
+        if((theSession.getAttribute("student")) == null) {
+            throw new NoStudentFoundException("student not found");
+        }
+
         Course course = courseService.findById(courseId);
 
         theModel.addAttribute("course", course);
 
-        // TODO: throw exception if it is not a student
-
         //TODO: finish html page
         return "course/course-enroll-form";
     }
+
+    // TODO: postmapping /enroll/{id}
 }

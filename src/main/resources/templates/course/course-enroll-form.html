@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment</title>
+    <link rel="stylesheet" th:href="@{/css/course/course-enroll-form.css}">
 </head>
 <body>
-    enrolling...
+
+<div class="confirmation-container">
+    <!-- Main Confirmation Text -->
+    <p class="main-text" th:text="'Are you sure you want to enroll for this course for $' + ${course.price} + '?'">
+        Are you sure you want to enroll for this course for $99.99?
+    </p>
+
+    <!-- Secondary Information Text -->
+    <p class="secondary-text" th:text="'After finishing this course and passing the test, you will have '
+            + ${course.languageLevel} + ' level of ' + ${course.language} + ' language.'">
+        After finishing this course and passing the test, you will have Beginner level of English language.
+    </p>
+
+    <!-- Pay and Enroll Button -->
+    <form th:action="@{/course/enroll/{id}(id=${course.id})}" method="post">
+        <button type="submit" class="btn btn-primary">Pay and Enroll</button>
+    </form>
+</div>
+
 </body>
 </html>

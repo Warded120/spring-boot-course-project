@@ -99,8 +99,14 @@
                     </div>
 
                     <div th:if="${param.noTeacherError}">
-                        <div class="green alert alert-success col-xs-offset-1 col-xs-10">
+                        <div class="red alert alert-danger col-xs-offset-1 col-xs-10">
                             An error occurred. you are not a teacher
+                        </div>
+                    </div>
+
+                    <div th:if="${param.noStudentError}">
+                        <div class="red alert alert-danger col-xs-offset-1 col-xs-10">
+                            An error occurred. you are not a student
                         </div>
                     </div>
 

@@ -1,0 +1,40 @@
+.confirmation-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #222;
+    color: #FFD700;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.main-text {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.secondary-text {
+    font-size: 1rem;
+    color: #FFF;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: #FFD700; /* Primary yellow for button */
+    border: none;
+    color: #000; /* Black text */
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    width: 100%; /* Full width button */
+}
+
+.btn-primary:hover {
+    background-color: #FFC107 !important;
+}
+
+.btn-primary:active {
+    background-color: #FFB300 !important;
+}

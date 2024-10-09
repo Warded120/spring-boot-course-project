@@ -3,7 +3,7 @@ package com.ivan.course.controller;
 import com.ivan.course.dto.usersDto.UserDto;
 import com.ivan.course.entity.Keys;
 import com.ivan.course.entity.user.User;
-import com.ivan.course.exceptionHandling.UserNotFoundException;
+import com.ivan.course.exceptionHandling.exception.UserNotFoundException;
 import com.ivan.course.service.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
