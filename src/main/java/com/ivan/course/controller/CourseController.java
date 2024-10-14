@@ -115,17 +115,19 @@ public class CourseController {
 
     //TODO: test it
     @PostMapping("/enroll/{courseId}")
-    public String confirmEnrollToCourse(@PathVariable("courseId") int courseId, Model theModel, HttpSession theSession) {
+    public String confirmEnrollToCourse(@PathVariable("courseId") int courseId, HttpSession theSession) {
 
         Student theStudent = (Student) theSession.getAttribute("student");
         Course course = courseService.findById(courseId);
 
         course.enroll(theStudent);
 
+        System.out.println("enrolled: " + theStudent);
+
         return "redirect:/course/enroll/confirm";
     }
 
-    @GetMapping("/enroll/confirm")
+    @PostMapping("/confirm/enroll")
     public String successEnrollToCourse() {
         return "course/course-enroll-confirmation";
     }
