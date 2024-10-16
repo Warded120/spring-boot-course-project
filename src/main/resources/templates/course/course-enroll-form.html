@@ -29,7 +29,7 @@
             </div>
         </div>
 
-            <form th:action="@{/course/confirm/enroll}" method="post" class="display-flex-col">
+            <form th:action="@{/course/enroll/{id}(id=${course.id})}" method="post" class="display-flex-col">
                 <button type="submit" class="btn btn-primary">Pay and Enroll</button>
                 <a onclick="window.history.back()" class="btn btn-danger">Go Back</a>
             </form>

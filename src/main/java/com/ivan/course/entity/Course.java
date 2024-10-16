@@ -44,6 +44,7 @@ public class Course {
     private StudentGroup studentGroup;
 
     public Course(CourseDto theCourse) {
+        this.id = theCourse.getId();
         this.name = theCourse.getName();
         this.description = theCourse.getDescription();
         this.language = theCourse.getLanguage();

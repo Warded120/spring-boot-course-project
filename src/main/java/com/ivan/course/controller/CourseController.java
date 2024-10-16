@@ -3,11 +3,13 @@ package com.ivan.course.controller;
 import com.ivan.course.dto.CourseDto;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.student.Student;
+import com.ivan.course.entity.student.StudentData;
 import com.ivan.course.entity.teacher.Teacher;
 import com.ivan.course.entity.teacher.TeacherData;
 import com.ivan.course.exceptionHandling.exception.NoStudentFoundException;
 import com.ivan.course.exceptionHandling.exception.NoTeacherFoundException;
 import com.ivan.course.service.course.CourseService;
+import com.ivan.course.service.studentGroup.StudentGroupService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,12 @@ import java.util.List;
 public class CourseController {
 
     CourseService courseService;
+    StudentGroupService studentGroupService;
 
     @Autowired
-    public CourseController(CourseService courseService) {
+    public CourseController(CourseService courseService, StudentGroupService studentGroupService) {
         this.courseService = courseService;
+        this.studentGroupService = studentGroupService;
     }
 
     @Value("${course.languages}")
@@ -101,7 +105,7 @@ public class CourseController {
 
     @GetMapping("/enroll/{courseId}")
     public String enrollToCourse(@PathVariable("courseId") int courseId, Model theModel, HttpSession theSession) {
-
+        System.out.println("in get enroll id");
         if((theSession.getAttribute("student")) == null) {
             throw new NoStudentFoundException("student not found");
         }
@@ -113,21 +117,35 @@ public class CourseController {
         return "course/course-enroll-form";
     }
 
-    //TODO: test it
+    //TODO: detached studentData, multiple instances of a same object
     @PostMapping("/enroll/{courseId}")
     public String confirmEnrollToCourse(@PathVariable("courseId") int courseId, HttpSession theSession) {
+        System.out.println("in post enroll id");
 
         Student theStudent = (Student) theSession.getAttribute("student");
         Course course = courseService.findById(courseId);
 
-        course.enroll(theStudent);
+        // Ensure that only one instance of the student data is used
+        if (theStudent != null) {
+            System.out.println("student exists");
+            StudentData studentData = theStudent.getStudentData();
 
-        System.out.println("enrolled: " + theStudent);
+            // Avoid enrolling a detached instance
+            if (!course.getStudentGroup().getStudents().contains(studentData)) {
+                System.out.println("enrolling");
+                course.enroll(theStudent);
+            } else {
+                System.out.println("not enrolling");
+            }
+        }
+
+        courseService.save(course);
 
         return "redirect:/course/enroll/confirm";
     }
 
-    @PostMapping("/confirm/enroll")
+
+    @GetMapping("/confirm/enroll")
     public String successEnrollToCourse() {
         return "course/course-enroll-confirmation";
     }
