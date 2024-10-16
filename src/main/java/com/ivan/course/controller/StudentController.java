@@ -87,6 +87,8 @@ public class StudentController {
         return "user/update-confirm-page";
     }
 
+    // TODO: page create a page with enrolled courses
+
     boolean thereAreErrorsIn(BindingResult theBindingResult, List<String> fieldsToIgnore) {
         if (!theBindingResult.hasErrors()) {
             return false;

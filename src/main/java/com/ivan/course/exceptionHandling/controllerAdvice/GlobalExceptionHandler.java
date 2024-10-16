@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
         theModel.addAttribute("errorTitle", "Mail Connect Error");
         theModel.addAttribute("message", ex.getMessage());
 
-        // FIXME: fix redirect
+        // FIXME: fix redirect. pass cannotMail param
         return "redirect:/error?UserNotFound";
     }
 

@@ -25,13 +25,24 @@ public class StudentGroup {
     @Column(name = "id")
     private int id;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    //remove CascadeType.MERGE to avoid detached studentData exception
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "groups_students",
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<StudentData> students = new ArrayList<>();
 
     public void addStudent(Student theStudent) {
-        students.add(theStudent.getStudentData());
+        System.out.println("adding student: " + theStudent);
+        StudentData studentData = theStudent.getStudentData();
+
+        // Ensure that the studentData is merged into the current session
+        if (!students.contains(studentData)) {
+            System.out.println("adding student");
+            students.add(studentData);
+
+        } else {
+            System.out.println("student already exists");
+        }
     }
 }

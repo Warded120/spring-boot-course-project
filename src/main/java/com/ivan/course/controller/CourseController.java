@@ -117,7 +117,7 @@ public class CourseController {
         return "course/course-enroll-form";
     }
 
-    //TODO: detached studentData, multiple instances of a same object
+    //TODO: dont allow enrolling if 20 students or more
     @PostMapping("/enroll/{courseId}")
     public String confirmEnrollToCourse(@PathVariable("courseId") int courseId, HttpSession theSession) {
         System.out.println("in post enroll id");
@@ -125,12 +125,10 @@ public class CourseController {
         Student theStudent = (Student) theSession.getAttribute("student");
         Course course = courseService.findById(courseId);
 
-        // Ensure that only one instance of the student data is used
         if (theStudent != null) {
             System.out.println("student exists");
             StudentData studentData = theStudent.getStudentData();
 
-            // Avoid enrolling a detached instance
             if (!course.getStudentGroup().getStudents().contains(studentData)) {
                 System.out.println("enrolling");
                 course.enroll(theStudent);
@@ -141,7 +139,7 @@ public class CourseController {
 
         courseService.save(course);
 
-        return "redirect:/course/enroll/confirm";
+        return "redirect:/course/confirm/enroll";
     }
 
 
