@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owned Courses</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/teacher/courses-list-page.css}">
+</head>
+<body>
+
+<div class="container mt-5">
+    <!-- Header -->
+    <div class="left-top-corner">
+        <a class="navbar-brand" th:href="@{/student/profile}">
+            <img th:src="@{/images/G-logo-black.webp}" alt="G-courses" class="logo">
+        </a>
+    </div>
+    <h2 class="text-center">My Courses</h2>
+
+    <!-- List Courses -->
+    <div class="row">
+        <!-- Loop through the list of courses passed to the model -->
+        <div class="col-md-4" th:each="course : ${courses}">
+            <div class="course-card">
+                <!-- Display course information -->
+                <h3 th:text="${course.name}">Course Name</h3>
+                <p th:text="${course.description}">Course Description</p>
+                <p><strong>Language:</strong> <span th:text="${course.language}">English</span></p>
+                <p><strong>Level:</strong> <span th:text="${course.languageLevel}">Beginner</span></p>
+                <p><strong>Price:</strong> $<span th:text="${course.price}">0.00</span></p>
+
+                <!-- View Course button -->
+                <a th:href="@{/course/{id}(id=${course.id})}" class="btn btn-primary">View Course</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+body {
+    background-color: #FFD700; /* Primary yellow */
+    color: #000; /* Black text */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.left-top-corner {
+    position: absolute;
+    top: 15px;
+    left: 22px;
+}
+.logo {
+    width: 50px;
+}
+.profile-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.display-flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.display-flex-col {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px; /* Add some spacing above the buttons */
+}
+
+.profile-card {
+    background-color: #222; /* Slightly lighter dark background for the card */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    color: #FFD700;
+    width: 100%;
+    max-width: 800px;
+}
+
+.profile-picture {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+    border-radius: 50%;
+    border: 3px solid #FFD700; /* Yellow border around the picture */
+}
+
+.profile-info {
+    flex: 1;
+}
+
+h2 {
+    color: #FFD700;
+    margin-bottom: 15px;
+}
+
+strong {
+    color: #FFF; /* White for labels */
+}
+
+.btn-primary {
+    background-color: #FFD700; /* Primary yellow for buttons */
+    border: none;
+    color: #000; /* Black text */
+    font-weight: bold;
+    margin-bottom: 10px; /* Spacing between buttons */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Full width of the column */
+}
+.btn-primary:hover {
+    background-color: #FFC107 !important;
+}
+.btn-primary:active {
+    background-color: #FFB300 !important;
+}
+
+.btn-danger {
+    background-color: #CC2222 !important; /* Red color */
+    border: none;
+    color: #FFF; /* White text */
+    font-weight: bold;
+    margin-bottom: 10px; /* Spacing between buttons */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Full width of the column */
+}
+.btn-danger:hover {
+    background-color: #AA2222 !important; /* Darker red on hover */
+}
+.btn-danger:active {
+    background-color: #772222 !important; /* Even darker red when active */
+}

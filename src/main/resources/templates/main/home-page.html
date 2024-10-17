@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+    <link rel="stylesheet" th:href="@{/css/main/home-page.css}">
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <!--For Student-->
+        <a class="navbar-brand" th:if="${session.student}" th:href="@{/student/profile}">
+            <img th:src="@{/images/G-logo.webp}" alt="G-courses" class="logo">
+        </a>
+        <!--For Teacher-->
+        <a class="navbar-brand" th:if="${session.teacher}" th:href="@{/teacher/profile}">
+            <img th:src="@{/images/G-logo.webp}" alt="G-courses" class="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5">
+
+    <!--Student-->
+    <div th:if="${session.student != null}">
+        <!-- Content for students -->
+        <div th:if="${session.student.getStudentData().getGroups().size() == 0}">
+            <h2 class="card-header mb-4 text-center">You don't have any courses, choose any and enroll now!</h2>
+            <hr>
+        </div>
+    </div>
+
+    <!--Teacher-->
+    <div th:if="${session.teacher != null && session.teacher.teacherData.courses.size() == 0}" class="row">
+        <div class="text-center">
+            <h3 class="mb-4">It seems like you don't own any courses yet, let's create one!</h3>
+            <div class="d-flex justify-content-center">
+                <a th:href="@{/course/add}" class="btn btn-primary mb-2">Create a New Course</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- General -->
+    <div th:if="${courses.size() != 0}" class="container">
+        <h2 class="card-header mb-4 text-center">Available Courses</h2>
+        <div class="row">
+            <div class="col-md-4" th:each="course : ${courses}">
+                <div class="card course-card mb-4">
+                    <div class="card-body text-center"> <!-- Center align all text in card body -->
+                        <h5 class="card-title" th:text="${course.name}">Course Name</h5>
+                        <p class="card-text" th:text="${course.description}">Course description goes here.</p>
+                        <p class="card-text"><strong>Language:</strong> <span th:text="${course.language}">English</span></p>
+                        <p class="card-text"><strong>Level:</strong> <span th:text="${course.languageLevel}">Beginner</span></p>
+                        <p class="card-text"><strong>Price:</strong> <span th:text="${course.price}">0.00</span></p>
+                        <a th:href="@{/course/{id}(id=${course.id})}" class="btn btn-primary-inverted">View Course</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 Language Courses. All Rights Reserved.</p>
+    <p>Contact Us: info@g-courses.com</p>
+</div>
+
+</body>
+</html>

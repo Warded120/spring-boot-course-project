@@ -1,0 +1,53 @@
+body {
+    background-color: #FFD700; /* Saturated yellow background */
+    color: #000; /* Black text color */
+    font-family: Arial, sans-serif;
+}
+.navbar {
+    background-color: #000; /* Black navbar background */
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.navbar a, .navbar button {
+    color: #FFD700; /* Yellow text/buttons in navbar */
+}
+.navbar a:hover, .navbar button:hover {
+    color: #FFC107; /* Lighter yellow on hover */
+}
+.course-card {
+    background-color: #000; /* Black background for course cards */
+    color: #FFD700; /* Yellow text for course titles */
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(255, 215, 0, 0.5); /* Glowing effect */
+    margin-bottom: 20px;
+    padding: 15px;
+}
+.course-card h4 {
+    margin-bottom: 15px;
+}
+.btn-primary {
+    background-color: #FFD700; /* Yellow button background */
+    color: #000; /* Black text on button */
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+    background-color: #FFC107; /* Lighter yellow on hover */
+    color: #000;
+}
+.footer {
+    background-color: #000; /* Black footer background */
+    color: #FFD700; /* Yellow text in footer */
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+}
+.logo {
+    width: 50px;
+}

@@ -1,0 +1,45 @@
+body {
+    background-color: #FFD700; /* Saturated yellow background */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.access-denied-container {
+    background-color: #000; /* Black background for the access denied form */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px 20px rgba(255, 215, 0, 0.5); /* Outer shadow with glowing effect */
+    text-align: center;
+    width: 35%;
+}
+.access-denied-container h2 {
+    color: #FFD700; /* Yellow text for heading */
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+.access-denied-container p {
+    color: #FFF; /* White text for messages */
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.btn-custom {
+    background-color: #FFD700; /* Yellow button */
+    color: #000; /* Black text on button */
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.btn-custom:hover {
+    background-color: #FFC107; /* Lighter yellow on hover */
+    color: #000;
+}
+.access-denied-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
