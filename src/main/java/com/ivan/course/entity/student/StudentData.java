@@ -20,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 public class StudentData extends UserData {
 
+    // TODO: create debt class
 
     @ManyToMany(mappedBy = "students", fetch = FetchType.EAGER)
     List<StudentGroup> groups;
