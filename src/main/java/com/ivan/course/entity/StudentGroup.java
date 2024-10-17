@@ -18,8 +18,8 @@ import java.util.List;
 @Setter
 @ToString(exclude = "students")
 public class StudentGroup {
-    private static final int MAX_STUDENTS = 20;
-    private static final int MIN_STUDENTS = 5;
+    public static final int MAX_STUDENTS = 20;
+    public static final int MIN_STUDENTS = 5;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

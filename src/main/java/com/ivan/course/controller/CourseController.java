@@ -118,7 +118,6 @@ public class CourseController {
         return "course/course-enroll-form";
     }
 
-    //TODO: dont allow enrolling if 20 students or more
     @PostMapping("/enroll/{courseId}")
     public String confirmEnrollToCourse(@PathVariable("courseId") int courseId, HttpSession theSession) {
         System.out.println("in post enroll id");
@@ -126,13 +125,15 @@ public class CourseController {
         Student theStudent = (Student) theSession.getAttribute("student");
         Course course = courseService.findById(courseId);
 
+        boolean isEnrolled = false;
         if (theStudent != null) {
             System.out.println("student exists");
             StudentData studentData = theStudent.getStudentData();
 
+            // if student is not already enrolled...
             if (!course.getStudentGroup().getStudents().contains(studentData)) {
                 System.out.println("enrolling");
-                course.enroll(theStudent);
+                isEnrolled = course.enroll(theStudent);
             } else {
                 System.out.println("not enrolling");
             }
@@ -140,12 +141,21 @@ public class CourseController {
 
         courseService.save(course);
 
-        return "redirect:/course/confirm/enroll";
+        System.out.println("enroll status: " + isEnrolled);
+        if (isEnrolled) {
+            return "redirect:/course/confirm/enroll/1";
+        } else {
+            return "redirect:/course/confirm/enroll/0";
+        }
     }
 
+    @GetMapping("/confirm/enroll/{status}")
+    public String successEnrollToCourse(@PathVariable(name = "status", required = false) int status, Model theModel) {
 
-    @GetMapping("/confirm/enroll")
-    public String successEnrollToCourse() {
+        theModel.addAttribute("status", status);
+
         return "course/course-enroll-confirmation";
     }
+
+    // TODO: add "remove course" for student and teacher
 }

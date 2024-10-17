@@ -14,8 +14,11 @@
         <div class="course-info">
             <!-- Main Confirmation Text -->
             <div class="text-center">
-                <h2 class="main-text">
+                <h2 th:if="${status == 1}" class="main-text">
                     You successfully enrolled to this course
+                </h2>
+                <h2 th:if="${status == 0}" class="main-text">
+                    You have not been enrolled. group is full or you already enrolled to this course
                 </h2>
             </div>
         </div>

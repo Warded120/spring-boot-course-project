@@ -56,8 +56,15 @@ public class Course {
         this.studentGroup = new StudentGroup();
     }
 
-    public void enroll(Student theStudent) {
+    public boolean enroll(Student theStudent) {
+
+        if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {
+            System.out.println("course already have 20 students:" + this);
+            return false;
+        }
+
         studentGroup.addStudent(theStudent);
+        return true;
     }
 }
 // TODO: after finishing the course level, examine(filter) students, increase the price and raise the level of the course

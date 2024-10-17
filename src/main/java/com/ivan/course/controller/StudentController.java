@@ -91,7 +91,6 @@ public class StudentController {
         return "user/update-confirm-page";
     }
 
-    // TODO: page create a page with enrolled courses
     @GetMapping("/courses")
     public String myCourses(Model theModel, HttpSession theSession) {
 
