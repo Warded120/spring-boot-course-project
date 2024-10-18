@@ -28,8 +28,15 @@ public class StudentData extends UserData {
     @OneToOne(mappedBy = "studentData", orphanRemoval = true)
     private Student student;
 
+    @Column(name = "balance")
+    private float balance;
+
     public StudentData(int id, String firstName, String lastName, LocalDate birthDate) {
         super(id, firstName, lastName, birthDate);
         groups = new ArrayList<>();
+    }
+
+    public void addBalance(float depositAmount) {
+        this.balance += depositAmount;
     }
 }

@@ -102,6 +102,36 @@ public class StudentController {
         return "student/courses-list-page";
     }
 
+    // TODO: test and debug
+    @GetMapping("/balance")
+    public String getBalance(Model theModel, HttpSession theSession) {
+
+        Student student = (Student) theSession.getAttribute("student");
+        Student dbStudent = studentService.getStudentBySessionStudent(student);
+
+        theSession.setAttribute("student", dbStudent);
+
+        theModel.addAttribute("depositAmount", (float)0.0);
+
+        return "student/balance-page";
+    }
+
+    @PostMapping("/balance")
+    public String postBalance(@ModelAttribute("depositAmount") Float depositAmount, HttpSession theSession) {
+
+        Student student = studentService.getStudentBySessionStudent((Student) theSession.getAttribute("student"));
+        student.getStudentData().addBalance(depositAmount);
+
+        studentService.save(student);
+
+        return "redirect:/student/balance/success";
+    }
+
+    @GetMapping("/balance/success")
+    public String successBalance(Model theModel) {
+        return "student/balance-confirm-page";
+    }
+
     boolean thereAreErrorsIn(BindingResult theBindingResult, List<String> fieldsToIgnore) {
         if (!theBindingResult.hasErrors()) {
             return false;
