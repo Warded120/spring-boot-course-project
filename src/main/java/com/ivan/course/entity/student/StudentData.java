@@ -1,5 +1,6 @@
 package com.ivan.course.entity.student;
 
+import com.ivan.course.entity.Course;
 import com.ivan.course.entity.StudentGroup;
 import com.ivan.course.entity.user.UserData;
 import jakarta.persistence.*;
@@ -38,5 +39,9 @@ public class StudentData extends UserData {
 
     public void addBalance(float depositAmount) {
         this.balance += depositAmount;
+    }
+
+    public void payForCourse(Course course) {
+        balance -= course.getPrice();
     }
 }

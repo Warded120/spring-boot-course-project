@@ -26,7 +26,7 @@
                 <strong>Last Name:</strong> <span th:text="${session.student.studentData.lastName}"></span><br>
                 <strong>Birth Date:</strong> <span th:text="${session.student.studentData.birthDate}"></span><br>
                 <strong>Age:</strong> <span th:text="${session.student.studentData.birthDate.getYear()}"></span><br>
-                <strong>Balance:</strong> <span th:text="${session.student.studentData.balance}"></span><br>
+                <strong>Balance:</strong> <span th:text="'$' + ${session.student.studentData.balance}"></span><br>
             </div>
         </div>
         <div class="display-flex-col">

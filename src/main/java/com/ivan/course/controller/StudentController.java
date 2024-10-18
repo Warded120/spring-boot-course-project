@@ -102,7 +102,6 @@ public class StudentController {
         return "student/courses-list-page";
     }
 
-    // TODO: test and debug
     @GetMapping("/balance")
     public String getBalance(Model theModel, HttpSession theSession) {
 
@@ -122,7 +121,7 @@ public class StudentController {
         Student student = studentService.getStudentBySessionStudent((Student) theSession.getAttribute("student"));
         student.getStudentData().addBalance(depositAmount);
 
-        studentService.save(student);
+        studentService.save(student, false);
 
         return "redirect:/student/balance/success";
     }

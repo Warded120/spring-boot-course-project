@@ -30,8 +30,17 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public Student save(Student student) {
+        return save(student, true);
+    }
+
+    @Override
+    @Transactional
+    public Student save(Student student, boolean isEncodePassword) {
         theSession.setAttribute("student", student);
-        student.setPassword(new Keys(bCryptPasswordEncoder.encode(student.getPassword().getPassword())));
+
+        if(isEncodePassword) {
+            student.setPassword(new Keys(bCryptPasswordEncoder.encode(student.getPassword().getPassword())));
+        }
 
         return studentRepository.save(student);
     }

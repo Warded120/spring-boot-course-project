@@ -104,9 +104,9 @@ public class CourseController {
         return "course/course-page";
     }
 
+    // TODO: check if there is enough balance in Student
     @GetMapping("/enroll/{courseId}")
     public String enrollToCourse(@PathVariable("courseId") int courseId, Model theModel, HttpSession theSession) {
-        System.out.println("in get enroll id");
         if((theSession.getAttribute("student")) == null) {
             throw new NoStudentFoundException("student not found");
         }
@@ -120,8 +120,6 @@ public class CourseController {
 
     @PostMapping("/enroll/{courseId}")
     public String confirmEnrollToCourse(@PathVariable("courseId") int courseId, HttpSession theSession) {
-        System.out.println("in post enroll id");
-
         Student theStudent = (Student) theSession.getAttribute("student");
         Course course = courseService.findById(courseId);
 
@@ -155,6 +153,16 @@ public class CourseController {
         theModel.addAttribute("status", status);
 
         return "course/course-enroll-confirmation";
+    }
+
+    // TODO: finish implementing partial payment and Debt
+    @GetMapping("/enroll/partial/{courseId}")
+    public String partialPaymentToEnroll(@PathVariable("courseId") int courseId, Model theModel, HttpSession theSession) {
+        Course course = courseService.findById(courseId);
+
+        theModel.addAttribute("course", course);
+
+        return "course/course-partial-payment-form";
     }
 
     // TODO: add "remove course" for student and teacher

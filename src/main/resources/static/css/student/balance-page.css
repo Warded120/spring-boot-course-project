@@ -53,3 +53,19 @@ body {
     background-color: #FFC107; /* Lighter yellow on hover */
     color: #000;
 }
+.btn-danger {
+    background-color: #CC2222;
+    border: none;
+    color: #FFF;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+.btn-danger:hover {
+    background-color: #AA2222 !important;
+}
+.btn-danger:active {
+    background-color: #772222 !important;
+}

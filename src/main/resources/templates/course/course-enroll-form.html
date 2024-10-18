@@ -29,10 +29,15 @@
             </div>
         </div>
 
-            <form th:action="@{/course/enroll/{id}(id=${course.id})}" method="post" class="display-flex-col">
-                <button type="submit" class="btn btn-primary">Pay and Enroll</button>
-                <a onclick="window.history.back()" class="btn btn-danger">Go Back</a>
-            </form>
+        <!-- If enough balance, then be able to pay -->
+        <form th:if="${true}" th:action="@{/course/enroll/{id}(id=${course.id})}" method="post" class="display-flex-col">
+            <button type="submit" class="btn btn-primary">Pay and Enroll</button>
+        </form>
+
+        <!-- Partial payment is available anytime -->
+        <a th:href="@{/course/enroll/partial/{id}(id=${course.id})}" class="btn btn-primary">Partial Payment</a>
+
+        <a onclick="window.history.back()" class="btn btn-danger">Go Back</a>
     </div>
 </div>
 

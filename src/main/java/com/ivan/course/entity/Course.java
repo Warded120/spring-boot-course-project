@@ -63,6 +63,7 @@ public class Course {
             return false;
         }
 
+        theStudent.getStudentData().payForCourse(this);
         studentGroup.addStudent(theStudent);
         return true;
     }
