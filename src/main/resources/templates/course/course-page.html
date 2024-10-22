@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="display-flex-col" th:if="${session.student != null && session.teacher == null}">
-            <a th:href="@{/course/enroll/{id}(id=${course.id})}" class="btn btn-primary">Enroll Now</a>
+            <a th:href="@{/course/enroll/{id}(id=${course.id})}" th:if="${!service.isStudentEnrolled(course, session.student)}" class="btn btn-primary">Enroll Now</a>
             <a onclick="window.history.back()" class="btn btn-danger">Go Back</a>
         </div>
         <div class="display-flex-col" th:unless="${session.student != null && session.teacher == null}">

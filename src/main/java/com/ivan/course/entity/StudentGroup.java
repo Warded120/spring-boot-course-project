@@ -16,16 +16,20 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "students")
+@ToString
 public class StudentGroup {
-    private static final int MAX_STUDENTS = 20;
-    private static final int MIN_STUDENTS = 5;
+    public static final int MAX_STUDENTS = 20;
+    public static final int MIN_STUDENTS = 5;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    @OneToOne(mappedBy = "studentGroup")
+    private Course course;
+
     //remove CascadeType.MERGE to avoid detached studentData exception
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "groups_students",
             joinColumns = @JoinColumn(name = "group_id"),

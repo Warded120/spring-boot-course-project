@@ -1,7 +1,11 @@
 package com.ivan.course.controller;
 
 import com.ivan.course.dto.usersDto.StudentDto;
+import com.ivan.course.entity.Course;
+import com.ivan.course.entity.Debt;
+import com.ivan.course.entity.StudentGroup;
 import com.ivan.course.entity.student.Student;
+import com.ivan.course.entity.teacher.Teacher;
 import com.ivan.course.service.student.StudentService;
 import com.ivan.course.service.studentData.StudentDataService;
 import jakarta.servlet.http.HttpSession;
@@ -14,6 +18,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -87,7 +92,45 @@ public class StudentController {
         return "user/update-confirm-page";
     }
 
-    // TODO: page create a page with enrolled courses
+    @GetMapping("/courses")
+    public String myCourses(Model theModel, HttpSession theSession) {
+
+        List<Course> studentCourses = studentService.getCoursesByStudent((Student) theSession.getAttribute("student"));
+        System.out.println("studentCourses = " + studentCourses);
+
+        theModel.addAttribute("courses", studentCourses);
+
+        return "student/courses-list-page";
+    }
+
+    @GetMapping("/balance")
+    public String getBalance(Model theModel, HttpSession theSession) {
+
+        Student student = (Student) theSession.getAttribute("student");
+        Student dbStudent = studentService.getStudentBySessionStudent(student);
+
+        theSession.setAttribute("student", dbStudent);
+
+        theModel.addAttribute("depositAmount", (float)0.0);
+
+        return "student/balance-page";
+    }
+
+    @PostMapping("/balance")
+    public String postBalance(@ModelAttribute("depositAmount") Float depositAmount, HttpSession theSession) {
+
+        Student student = studentService.getStudentBySessionStudent((Student) theSession.getAttribute("student"));
+        student.getStudentData().addBalance(depositAmount);
+
+        studentService.save(student, false);
+
+        return "redirect:/student/balance/success";
+    }
+
+    @GetMapping("/balance/success")
+    public String successBalance(Model theModel) {
+        return "student/balance-confirm-page";
+    }
 
     boolean thereAreErrorsIn(BindingResult theBindingResult, List<String> fieldsToIgnore) {
         if (!theBindingResult.hasErrors()) {
@@ -100,5 +143,17 @@ public class StudentController {
             }
         }
         return false;
+    }
+
+    // TODO: finish debts page and implement paying off debts
+    @GetMapping("/debts")
+    public String debts(Model theModel, HttpSession theSession) {
+        Student student = studentService.getSessionStudent();
+
+        List<Debt> debts = student.getStudentData().getDebts();
+
+        theModel.addAttribute("debts", debts);
+
+        return "student/debts-page";
     }
 }

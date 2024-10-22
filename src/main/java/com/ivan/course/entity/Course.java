@@ -1,5 +1,6 @@
 package com.ivan.course.entity;
 
+import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.dto.CourseDto;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.teacher.TeacherData;
@@ -14,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString()
+@ToString
 public class Course {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -37,10 +38,12 @@ public class Course {
 
     @ManyToOne
     @JoinColumn(name = "teacher_data_id", referencedColumnName = "id")
+    @ToString.Exclude
     private TeacherData teacher;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "student_group_id", referencedColumnName = "id")
+    @ToString.Exclude
     private StudentGroup studentGroup;
 
     public Course(CourseDto theCourse) {
@@ -54,8 +57,30 @@ public class Course {
         this.studentGroup = new StudentGroup();
     }
 
-    public void enroll(Student theStudent) {
+    public EnrollStatus enroll(Student theStudent) {
+
+        if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {
+            System.out.println("course already have 20 students:" + this);
+            return EnrollStatus.GROUP_FULL;
+        }
+
+        EnrollStatus status = theStudent.getStudentData().payForCourse(this);
+
+        if(status == EnrollStatus.SUCCESS) {
+            studentGroup.addStudent(theStudent);
+            return EnrollStatus.SUCCESS;
+        }
+        return status;
+    }
+
+    public EnrollStatus enrollDebtStudent(Student theStudent) {
+        if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {
+            System.out.println("course already have 20 students:");
+            return EnrollStatus.GROUP_FULL;
+        }
+
         studentGroup.addStudent(theStudent);
+        return EnrollStatus.SUCCESS;
     }
 }
 // TODO: after finishing the course level, examine(filter) students, increase the price and raise the level of the course

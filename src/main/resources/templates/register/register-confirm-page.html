@@ -49,9 +49,9 @@
 </head>
 <body>
 <div class="card">
-    <h2>Registration Successful!</h2>
-    <p>You have successfully registered. Click below to login.</p>
     <form th:action="@{/login}" method="get">
+        <h2>Registration Successful!</h2>
+        <p>You have successfully registered. Click below to login.</p>
         <button type="submit" class="btn btn-primary mt-3">Login with registered user</button>
     </form>
 </div>

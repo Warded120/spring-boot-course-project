@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Partial Payment Setup</title>
+</head>
+<body>
+    <div class="course-info">
+        <div class="text-center">
+            <h2 class="main-text">Partial payment confirmation</h2>
+            <p class="secondary-text" th:text="'By partial payment you will be charged 5% more. Final course price is: ' + ${debt.debt}">
+            </p>
+            <form th:action="@{/course/enroll/partial/{id}(id=${courseId})}" th:object="${debt}" method="post">
+
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{studentDataId}">
+                <input type="hidden" th:field="*{courseId}">
+                <input type="hidden" th:field="*{debt}">
+
+                <button type="submit" class="btn btn-primary">Enroll</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

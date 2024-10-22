@@ -29,20 +29,29 @@ body {
     margin-bottom: 10px; /* Consistent margin for paragraphs */
 }
 .btn-primary {
-    background-color: #000; /* Black button background */
-    color: #FFD700; /* Yellow text on button */
+    background-color: #000; /* Black background */
+    color: #FFD700; /* Yellow text */
     border: none;
-    width: 100%; /* Full width for button */
+    width: 100%;
     padding: 10px;
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
-    text-align: center; /* Center text in button */
+    text-align: center;
 }
+
 .btn-primary:hover {
     background-color: #333; /* Darker black on hover */
     color: #FFD700;
 }
+
+.btn-primary:focus, .btn-primary:active {
+    background-color: #333 !important;
+    color: #FFD700 !important;
+    box-shadow: none;
+    outline: none;
+}
+
 .btn-primary-inverted {
     color: #000; /* Black button background */
     background-color: #FFD700; /* Yellow text on button */

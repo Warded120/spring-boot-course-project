@@ -24,15 +24,23 @@
             <div class="text-center">
                 <p class="secondary-text" th:text="'After finishing this course and passing the test, you will have '
                 + ${course.languageLevel} + ' level of ' + ${course.language} + ' language.'">
-                    After finishing this course and passing the test, you will have Beginner level of English language.
+                    After finishing this course and passing the test, you will have A1 level of English language.
                 </p>
             </div>
         </div>
 
-            <form th:action="@{/course/enroll/{id}(id=${course.id})}" method="post" class="display-flex-col">
-                <button type="submit" class="btn btn-primary">Pay and Enroll</button>
-                <a onclick="window.history.back()" class="btn btn-danger">Go Back</a>
-            </form>
+        <!-- If enough balance, then be able to pay -->
+        <form th:if="${session.student.studentData.balance >= course.price}" th:action="@{/course/enroll/{id}(id=${course.id})}" method="post" class="display-flex-col">
+            <button type="submit" class="btn btn-primary">Pay and Enroll</button>
+        </form>
+        <div class="text-center" th:unless="${session.student.studentData.balance >= course.price}">
+            <p class="secondary-text">You don't have enough balance to enroll now, but you can pay partially</p>
+        </div>
+
+        <!-- Partial payment is available anytime -->
+        <a th:href="@{/course/enroll/partial/{id}(id=${course.id})}" class="btn btn-primary">Partial Payment</a>
+
+        <a onclick="window.history.back()" class="btn btn-danger">Go Back</a>
     </div>
 </div>
 

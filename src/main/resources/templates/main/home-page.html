@@ -37,8 +37,10 @@
     <!--Student-->
     <div th:if="${session.student != null}">
         <!-- Content for students -->
-        <h2 class="card-header mb-4 text-center">You don't have any courses, choose any and enroll now!</h2>
-        <hr>
+        <div th:if="${session.student.getStudentData().getGroups().size() == 0}">
+            <h2 class="card-header mb-4 text-center">You don't have any courses, choose any and enroll now!</h2>
+            <hr>
+        </div>
     </div>
 
     <!--Teacher-->

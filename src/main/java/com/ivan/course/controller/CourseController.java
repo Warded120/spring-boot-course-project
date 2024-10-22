@@ -1,7 +1,10 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.dto.CourseDto;
+import com.ivan.course.dto.DebtDto;
 import com.ivan.course.entity.Course;
+import com.ivan.course.entity.Debt;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.student.StudentData;
 import com.ivan.course.entity.teacher.Teacher;
@@ -9,6 +12,8 @@ import com.ivan.course.entity.teacher.TeacherData;
 import com.ivan.course.exceptionHandling.exception.NoStudentFoundException;
 import com.ivan.course.exceptionHandling.exception.NoTeacherFoundException;
 import com.ivan.course.service.course.CourseService;
+import com.ivan.course.service.debt.DebtService;
+import com.ivan.course.service.student.StudentService;
 import com.ivan.course.service.studentGroup.StudentGroupService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -29,11 +34,18 @@ public class CourseController {
 
     CourseService courseService;
     StudentGroupService studentGroupService;
+    StudentService studentService;
+    DebtService debtService;
 
     @Autowired
-    public CourseController(CourseService courseService, StudentGroupService studentGroupService) {
+    public CourseController(CourseService courseService,
+                            StudentGroupService studentGroupService,
+                            StudentService studentService,
+                            DebtService debtService) {
         this.courseService = courseService;
         this.studentGroupService = studentGroupService;
+        this.studentService = studentService;
+        this.debtService = debtService;
     }
 
     @Value("${course.languages}")
@@ -99,14 +111,14 @@ public class CourseController {
         Course course = courseService.findById(courseId);
 
         theModel.addAttribute("course", course);
+        theModel.addAttribute("service", courseService);
 
         return "course/course-page";
     }
 
     @GetMapping("/enroll/{courseId}")
     public String enrollToCourse(@PathVariable("courseId") int courseId, Model theModel, HttpSession theSession) {
-        System.out.println("in get enroll id");
-        if((theSession.getAttribute("student")) == null) {
+        if(studentService.getStudentBySessionStudent((Student) theSession.getAttribute("student")) == null) {
             throw new NoStudentFoundException("student not found");
         }
 
@@ -117,21 +129,20 @@ public class CourseController {
         return "course/course-enroll-form";
     }
 
-    //TODO: dont allow enrolling if 20 students or more
     @PostMapping("/enroll/{courseId}")
     public String confirmEnrollToCourse(@PathVariable("courseId") int courseId, HttpSession theSession) {
-        System.out.println("in post enroll id");
-
         Student theStudent = (Student) theSession.getAttribute("student");
         Course course = courseService.findById(courseId);
 
+        EnrollStatus enrollStatus = EnrollStatus.CANNOT_ENROLL;
         if (theStudent != null) {
             System.out.println("student exists");
             StudentData studentData = theStudent.getStudentData();
 
+            // if student is not already enrolled...
             if (!course.getStudentGroup().getStudents().contains(studentData)) {
                 System.out.println("enrolling");
-                course.enroll(theStudent);
+                enrollStatus = course.enroll(theStudent);
             } else {
                 System.out.println("not enrolling");
             }
@@ -139,12 +150,45 @@ public class CourseController {
 
         courseService.save(course);
 
-        return "redirect:/course/confirm/enroll";
+        System.out.println("enroll status: " + enrollStatus.name());
+        return "redirect:/course/confirm/enroll/" + enrollStatus.ordinal();
     }
 
+    @GetMapping("/confirm/enroll/{status}")
+    public String successEnrollToCourse(@PathVariable(name = "status", required = false) int status, Model theModel) {
 
-    @GetMapping("/confirm/enroll")
-    public String successEnrollToCourse() {
+        theModel.addAttribute("status", status);
+
         return "course/course-enroll-confirmation";
     }
+
+    @GetMapping("/enroll/partial/{courseId}")
+    public String partialPaymentToEnroll(@PathVariable("courseId") int courseId, Model theModel) {
+        Course course = courseService.findById(courseId);
+
+        System.out.println("get /enroll/partial/{courseId}: " + course);
+        theModel.addAttribute("debt", new DebtDto(studentService.getSessionStudent().getStudentData().getId(), course.getId(), course.getPrice()));
+
+        return "course/course-partial-payment-form";
+    }
+
+    @PostMapping("/enroll/partial/{courseId}")
+    public String postPartialPaymentToEnroll(@PathVariable("courseId") int courseId, @ModelAttribute("debt") DebtDto theDebt) {
+        System.out.println("in postPartialPaymentToEnroll()");
+        Student student = studentService.getSessionStudent();
+        Course course = courseService.findById(theDebt.getCourseId());
+
+        System.out.println("post /enroll/partial/{courseId}: " + course);
+
+        Debt debt = new Debt(student.getStudentData(), course, theDebt.getDebt());
+
+        student.getStudentData().addDebt(debt);
+        EnrollStatus enrollStatus = course.enrollDebtStudent(student);
+
+        studentService.save(student, false);
+
+        return "redirect:/course/confirm/enroll/" + enrollStatus.ordinal();
+    }
+
+    // TODO: add "remove course" for student and teacher
 }
