@@ -13,4 +13,5 @@ public interface StudentService {
     Student findByUserId(int id);
     Student getStudentBySessionStudent(Student sessionStudent);
     List<Course> getCoursesByStudent(Student student);
+    Student getSessionStudent();
 }

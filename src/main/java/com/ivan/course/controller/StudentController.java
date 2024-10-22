@@ -2,6 +2,7 @@ package com.ivan.course.controller;
 
 import com.ivan.course.dto.usersDto.StudentDto;
 import com.ivan.course.entity.Course;
+import com.ivan.course.entity.Debt;
 import com.ivan.course.entity.StudentGroup;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.teacher.Teacher;
@@ -142,5 +143,17 @@ public class StudentController {
             }
         }
         return false;
+    }
+
+    // TODO: finish debts page and implement paying off debts
+    @GetMapping("/debts")
+    public String debts(Model theModel, HttpSession theSession) {
+        Student student = studentService.getSessionStudent();
+
+        List<Debt> debts = student.getStudentData().getDebts();
+
+        theModel.addAttribute("debts", debts);
+
+        return "student/debts-page";
     }
 }

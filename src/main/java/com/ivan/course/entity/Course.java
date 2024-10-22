@@ -72,5 +72,15 @@ public class Course {
         }
         return status;
     }
+
+    public EnrollStatus enrollDebtStudent(Student theStudent) {
+        if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {
+            System.out.println("course already have 20 students:");
+            return EnrollStatus.GROUP_FULL;
+        }
+
+        studentGroup.addStudent(theStudent);
+        return EnrollStatus.SUCCESS;
+    }
 }
 // TODO: after finishing the course level, examine(filter) students, increase the price and raise the level of the course

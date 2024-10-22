@@ -71,4 +71,11 @@ public class StudentServiceImpl implements StudentService {
 
         return studentCourses;
     }
+
+    @Override
+    public Student getSessionStudent() {
+        Student student = (Student) theSession.getAttribute("student");
+
+        return getStudentBySessionStudent(student);
+    }
 }

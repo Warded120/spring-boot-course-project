@@ -2,6 +2,7 @@ package com.ivan.course.entity.student;
 
 import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.entity.Course;
+import com.ivan.course.entity.Debt;
 import com.ivan.course.entity.StudentGroup;
 import com.ivan.course.entity.user.UserData;
 import jakarta.persistence.*;
@@ -18,20 +19,25 @@ import java.util.List;
 @Table(name = "student_data")
 @Getter
 @Setter
-@ToString(callSuper = true, exclude = "student")
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class StudentData extends UserData {
-
-    // TODO: create debt class
-
     @ManyToMany(mappedBy = "students", fetch = FetchType.EAGER)
     List<StudentGroup> groups;
 
+    @ToString.Exclude
     @OneToOne(mappedBy = "studentData", orphanRemoval = true)
     private Student student;
 
     @Column(name = "balance")
     private float balance;
+
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name = "students_debts",
+            joinColumns = @JoinColumn(name = "student_data_id"),
+            inverseJoinColumns = @JoinColumn(name = "debt_id"))
+    private List<Debt> debts;
 
     public StudentData(int id, String firstName, String lastName, LocalDate birthDate) {
         super(id, firstName, lastName, birthDate);
@@ -48,5 +54,12 @@ public class StudentData extends UserData {
             return EnrollStatus.SUCCESS;
         }
         return EnrollStatus.NOT_ENOUGH_BALANCE;
+    }
+
+    public void addDebt(Debt debt) {
+        if (this.debts == null) {
+            this.debts = new ArrayList<>();
+        }
+        this.debts.add(debt);
     }
 }

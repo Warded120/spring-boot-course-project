@@ -21,6 +21,7 @@ public class Debt {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id", referencedColumnName = "id")
+    @ToString.Exclude
     private StudentData student;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -29,4 +30,11 @@ public class Debt {
 
     @Column(name = "debt")
     private float debt;
+
+    public Debt(StudentData student, Course course, float debt) {
+        this.id = 0;
+        this.student = student;
+        this.course = course;
+        this.debt = debt;
+    }
 }
