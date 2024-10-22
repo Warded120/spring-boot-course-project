@@ -1,5 +1,6 @@
 package com.ivan.course.entity;
 
+import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.dto.CourseDto;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.teacher.TeacherData;
@@ -56,16 +57,20 @@ public class Course {
         this.studentGroup = new StudentGroup();
     }
 
-    public boolean enroll(Student theStudent) {
+    public EnrollStatus enroll(Student theStudent) {
 
         if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {
             System.out.println("course already have 20 students:" + this);
-            return false;
+            return EnrollStatus.GROUP_FULL;
         }
 
-        theStudent.getStudentData().payForCourse(this);
-        studentGroup.addStudent(theStudent);
-        return true;
+        EnrollStatus status = theStudent.getStudentData().payForCourse(this);
+
+        if(status == EnrollStatus.SUCCESS) {
+            studentGroup.addStudent(theStudent);
+            return EnrollStatus.SUCCESS;
+        }
+        return status;
     }
 }
 // TODO: after finishing the course level, examine(filter) students, increase the price and raise the level of the course

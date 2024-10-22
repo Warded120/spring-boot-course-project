@@ -20,6 +20,10 @@
 
     <!-- List Courses -->
     <div class="row">
+        <div th:if="${courses.size() == 0}">
+            <hr>
+            <h2 class="card-header mb-4 text-center">You don't have any courses yet</h2>
+        </div>
         <!-- Loop through the list of courses passed to the model -->
         <div class="col-md-4" th:each="course : ${courses}">
             <div class="course-card">

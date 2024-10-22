@@ -1,5 +1,6 @@
 package com.ivan.course.entity.student;
 
+import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.StudentGroup;
 import com.ivan.course.entity.user.UserData;
@@ -41,7 +42,11 @@ public class StudentData extends UserData {
         this.balance += depositAmount;
     }
 
-    public void payForCourse(Course course) {
-        balance -= course.getPrice();
+    public EnrollStatus payForCourse(Course course) {
+        if (balance >= course.getPrice()) {
+            balance -= course.getPrice();
+            return EnrollStatus.SUCCESS;
+        }
+        return EnrollStatus.NOT_ENOUGH_BALANCE;
     }
 }

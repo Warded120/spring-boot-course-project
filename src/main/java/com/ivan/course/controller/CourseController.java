@@ -1,5 +1,6 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.dto.CourseDto;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.student.Student;
@@ -9,6 +10,7 @@ import com.ivan.course.entity.teacher.TeacherData;
 import com.ivan.course.exceptionHandling.exception.NoStudentFoundException;
 import com.ivan.course.exceptionHandling.exception.NoTeacherFoundException;
 import com.ivan.course.service.course.CourseService;
+import com.ivan.course.service.student.StudentService;
 import com.ivan.course.service.studentGroup.StudentGroupService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -29,11 +31,13 @@ public class CourseController {
 
     CourseService courseService;
     StudentGroupService studentGroupService;
+    StudentService studentService;
 
     @Autowired
-    public CourseController(CourseService courseService, StudentGroupService studentGroupService) {
+    public CourseController(CourseService courseService, StudentGroupService studentGroupService, StudentService studentService) {
         this.courseService = courseService;
         this.studentGroupService = studentGroupService;
+        this.studentService = studentService;
     }
 
     @Value("${course.languages}")
@@ -107,7 +111,7 @@ public class CourseController {
     // TODO: check if there is enough balance in Student
     @GetMapping("/enroll/{courseId}")
     public String enrollToCourse(@PathVariable("courseId") int courseId, Model theModel, HttpSession theSession) {
-        if((theSession.getAttribute("student")) == null) {
+        if(studentService.getStudentBySessionStudent((Student) theSession.getAttribute("student")) == null) {
             throw new NoStudentFoundException("student not found");
         }
 
@@ -123,7 +127,7 @@ public class CourseController {
         Student theStudent = (Student) theSession.getAttribute("student");
         Course course = courseService.findById(courseId);
 
-        boolean isEnrolled = false;
+        EnrollStatus enrollStatus = EnrollStatus.CANNOT_ENROLL;
         if (theStudent != null) {
             System.out.println("student exists");
             StudentData studentData = theStudent.getStudentData();
@@ -131,7 +135,7 @@ public class CourseController {
             // if student is not already enrolled...
             if (!course.getStudentGroup().getStudents().contains(studentData)) {
                 System.out.println("enrolling");
-                isEnrolled = course.enroll(theStudent);
+                enrollStatus = course.enroll(theStudent);
             } else {
                 System.out.println("not enrolling");
             }
@@ -139,12 +143,8 @@ public class CourseController {
 
         courseService.save(course);
 
-        System.out.println("enroll status: " + isEnrolled);
-        if (isEnrolled) {
-            return "redirect:/course/confirm/enroll/1";
-        } else {
-            return "redirect:/course/confirm/enroll/0";
-        }
+        System.out.println("enroll status: " + enrollStatus.name());
+        return "redirect:/course/confirm/enroll/" + enrollStatus.ordinal();
     }
 
     @GetMapping("/confirm/enroll/{status}")
