@@ -2,9 +2,9 @@ package com.ivan.course.controller;
 
 import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.dto.CourseDto;
-import com.ivan.course.dto.DebtDto;
+import com.ivan.course.dto.CoursePaymentDto;
 import com.ivan.course.entity.Course;
-import com.ivan.course.entity.Debt;
+import com.ivan.course.entity.CoursePayment;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.student.StudentData;
 import com.ivan.course.entity.teacher.Teacher;
@@ -12,7 +12,7 @@ import com.ivan.course.entity.teacher.TeacherData;
 import com.ivan.course.exceptionHandling.exception.NoStudentFoundException;
 import com.ivan.course.exceptionHandling.exception.NoTeacherFoundException;
 import com.ivan.course.service.course.CourseService;
-import com.ivan.course.service.debt.DebtService;
+import com.ivan.course.service.coursePayment.CoursePaymentService;
 import com.ivan.course.service.student.StudentService;
 import com.ivan.course.service.studentGroup.StudentGroupService;
 import jakarta.servlet.http.HttpSession;
@@ -35,17 +35,17 @@ public class CourseController {
     CourseService courseService;
     StudentGroupService studentGroupService;
     StudentService studentService;
-    DebtService debtService;
+    CoursePaymentService coursePaymentService;
 
     @Autowired
     public CourseController(CourseService courseService,
                             StudentGroupService studentGroupService,
                             StudentService studentService,
-                            DebtService debtService) {
+                            CoursePaymentService coursePaymentService) {
         this.courseService = courseService;
         this.studentGroupService = studentGroupService;
         this.studentService = studentService;
-        this.debtService = debtService;
+        this.coursePaymentService = coursePaymentService;
     }
 
     @Value("${course.languages}")
@@ -167,22 +167,22 @@ public class CourseController {
         Course course = courseService.findById(courseId);
 
         System.out.println("get /enroll/partial/{courseId}: " + course);
-        theModel.addAttribute("debt", new DebtDto(studentService.getSessionStudent().getStudentData().getId(), course.getId(), course.getPrice()));
+        theModel.addAttribute("coursePayment", new CoursePaymentDto(studentService.getSessionStudent().getStudentData().getId(), course.getId(), course.getPrice()));
 
         return "course/course-partial-payment-form";
     }
 
     @PostMapping("/enroll/partial/{courseId}")
-    public String postPartialPaymentToEnroll(@PathVariable("courseId") int courseId, @ModelAttribute("debt") DebtDto theDebt) {
+    public String postPartialPaymentToEnroll(@PathVariable("courseId") int courseId, @ModelAttribute("debt") CoursePaymentDto theDebt) {
         System.out.println("in postPartialPaymentToEnroll()");
         Student student = studentService.getSessionStudent();
         Course course = courseService.findById(theDebt.getCourseId());
 
         System.out.println("post /enroll/partial/{courseId}: " + course);
 
-        Debt debt = new Debt(student.getStudentData(), course, theDebt.getDebt());
+        CoursePayment coursePayment = new CoursePayment(student.getStudentData(), course, theDebt.getPayment());
 
-        student.getStudentData().addDebt(debt);
+        student.getStudentData().addCoursePayment(coursePayment);
         EnrollStatus enrollStatus = course.enrollDebtStudent(student);
 
         studentService.save(student, false);

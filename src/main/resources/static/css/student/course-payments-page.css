@@ -1,0 +1,37 @@
+body {
+    background-color: #FFD700; /* Yellow background */
+    color: #000; /* Black text */
+    font-family: Arial, sans-serif;
+}
+.left-top-corner {
+    position: absolute;
+    top: 15px;
+    left: 22px;
+}
+.logo {
+    width: 50px;
+}
+.course-payment-card {
+    background-color: #222; /* Dark background for payment cards */
+    color: #FFD700; /* Yellow text */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+.btn-primary {
+    background-color: #FFD700; /* Yellow button */
+    border: none;
+    color: #000; /* Black text */
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+.btn-primary:hover {
+    background-color: #FFC107 !important; /* Slightly lighter yellow on hover */
+}
+.btn-primary:active {
+    background-color: #FFB300 !important; /* Darker yellow on active */
+}

@@ -2,7 +2,7 @@ package com.ivan.course.entity.student;
 
 import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.entity.Course;
-import com.ivan.course.entity.Debt;
+import com.ivan.course.entity.CoursePayment;
 import com.ivan.course.entity.StudentGroup;
 import com.ivan.course.entity.user.UserData;
 import jakarta.persistence.*;
@@ -34,10 +34,10 @@ public class StudentData extends UserData {
 
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "students_debts",
+    @JoinTable(name = "students_payments",
             joinColumns = @JoinColumn(name = "student_data_id"),
             inverseJoinColumns = @JoinColumn(name = "debt_id"))
-    private List<Debt> debts;
+    private List<CoursePayment> coursePayments;
 
     public StudentData(int id, String firstName, String lastName, LocalDate birthDate) {
         super(id, firstName, lastName, birthDate);
@@ -56,10 +56,24 @@ public class StudentData extends UserData {
         return EnrollStatus.NOT_ENOUGH_BALANCE;
     }
 
-    public void addDebt(Debt debt) {
-        if (this.debts == null) {
-            this.debts = new ArrayList<>();
+    public boolean payCoursePayment(float payOffAmount) {
+        if(payOffAmount > this.balance) {
+            return false;
         }
-        this.debts.add(debt);
+        this.balance -= payOffAmount;
+        return true;
+    }
+
+    public void addCoursePayment(CoursePayment coursePayment) {
+        if (this.coursePayments == null) {
+            this.coursePayments = new ArrayList<>();
+        }
+        this.coursePayments.add(coursePayment);
+    }
+
+    public void removeCoursePayment(CoursePayment coursePayment) {
+        if (this.coursePayments != null) {
+            this.coursePayments.remove(coursePayment);
+        }
     }
 }

@@ -8,31 +8,40 @@ body {
     color: #FFD700;
     font-family: Arial, sans-serif;
 }
+
+/* Make the card bigger */
 .course-card {
     background-color: #000; /* Black background for the card */
-    border-radius: 8px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px 20px rgba(255, 215, 0, 0.5); /* Glowing effect */
+    border-radius: 12px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.7), 0px 0px 30px rgba(255, 215, 0, 0.7); /* Enhanced glowing effect */
     color: #FFD700; /* Yellow text color */
-    width: 100%;
-    max-width: 500px;
-    padding: 20px;
+    width: 90%; /* Increased width for larger appearance */
+    max-width: 800px; /* Allow the card to be bigger */
+    padding: 40px; /* More padding for a larger feel */
     text-align: center;
 }
+
+.course-info {
+    margin-bottom: 30px; /* Space between text and button */
+}
+
 .btn-primary {
     background-color: #FFD700; /* Yellow button background */
     color: #000; /* Black text on button */
     border: none;
     width: 100%;
-    padding: 10px;
-    border-radius: 4px;
+    padding: 15px; /* Larger button padding */
+    border-radius: 6px;
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
+
 .btn-primary:hover {
     background-color: #FFC107; /* Lighter yellow on hover */
     color: #000;
 }
+
 .main-text {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: 1.8rem; /* Larger font size */
+    margin-bottom: 25px; /* More space below the heading */
 }

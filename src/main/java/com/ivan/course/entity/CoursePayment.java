@@ -8,18 +8,18 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "debt")
+@Table(name = "payment")
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Debt {
+public class CoursePayment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     @ToString.Exclude
     private StudentData student;
@@ -28,13 +28,21 @@ public class Debt {
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course course;
 
-    @Column(name = "debt")
-    private float debt;
+    @Column(name = "payment")
+    private float payment;
 
-    public Debt(StudentData student, Course course, float debt) {
+    public CoursePayment(StudentData student, Course course, float payment) {
         this.id = 0;
         this.student = student;
         this.course = course;
-        this.debt = debt;
+        this.payment = payment;
+    }
+
+    public boolean payOff(float payment) {
+        if(this.student.payCoursePayment(payment)) {
+            this.payment -= payment;
+            return true;
+        }
+        return false;
     }
 }
