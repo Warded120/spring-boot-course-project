@@ -28,6 +28,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// TODO: add course status (prepareState, StartedState, EndedState etc.)
+// TODO: AND/OR
+// TODO: add course startDate, endDate
 @Controller
 @RequestMapping("/course")
 public class CourseController {

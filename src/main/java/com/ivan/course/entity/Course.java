@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+// TODO: add lesson schedule (optional) and course duration
 @Entity
 @Table(name = "course")
 @NoArgsConstructor
@@ -57,6 +58,7 @@ public class Course {
         this.studentGroup = new StudentGroup();
     }
 
+    // TODO: check if the student already learns a certan language
     public EnrollStatus enroll(Student theStudent) {
 
         if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {

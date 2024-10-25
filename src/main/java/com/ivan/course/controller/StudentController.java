@@ -149,7 +149,6 @@ public class StudentController {
         return false;
     }
 
-    // TODO: finish debts page and implement paying off debts
     @GetMapping("/payments")
     public String payments(Model theModel, HttpSession theSession) {
         Student student = studentService.getSessionStudent();
