@@ -15,6 +15,7 @@ import com.ivan.course.service.course.CourseService;
 import com.ivan.course.service.coursePayment.CoursePaymentService;
 import com.ivan.course.service.student.StudentService;
 import com.ivan.course.service.studentGroup.StudentGroupService;
+import com.ivan.course.service.teacher.TeacherService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +40,19 @@ public class CourseController {
     StudentGroupService studentGroupService;
     StudentService studentService;
     CoursePaymentService coursePaymentService;
+    TeacherService teacherService;
 
     @Autowired
     public CourseController(CourseService courseService,
                             StudentGroupService studentGroupService,
                             StudentService studentService,
-                            CoursePaymentService coursePaymentService) {
+                            CoursePaymentService coursePaymentService,
+                            TeacherService teacherService) {
         this.courseService = courseService;
         this.studentGroupService = studentGroupService;
         this.studentService = studentService;
         this.coursePaymentService = coursePaymentService;
+        this.teacherService = teacherService;
     }
 
     @Value("${course.languages}")
@@ -68,7 +72,7 @@ public class CourseController {
 
         CourseDto course = new CourseDto();
 
-        Teacher teacher = (Teacher) session.getAttribute("teacher");
+        Teacher teacher = teacherService.getSessionTeacher();
 
         if(teacher == null) {
             throw new NoTeacherFoundException("teacher not found");
@@ -92,7 +96,7 @@ public class CourseController {
 
         Course course = new Course(theCourse);
 
-        course.setTeacher( ((Teacher)theSession.getAttribute("teacher")).getTeacherData() );
+        course.setTeacher( teacherService.getSessionTeacher().getTeacherData() );
 
         Course savedCourse = courseService.save(course);
         TeacherData teacherData = savedCourse.getTeacher();
@@ -176,14 +180,14 @@ public class CourseController {
     }
 
     @PostMapping("/enroll/partial/{courseId}")
-    public String postPartialPaymentToEnroll(@PathVariable("courseId") int courseId, @ModelAttribute("debt") CoursePaymentDto theDebt) {
+    public String postPartialPaymentToEnroll(@PathVariable("courseId") int courseId, @ModelAttribute("debt") CoursePaymentDto theCoursePayment) {
         System.out.println("in postPartialPaymentToEnroll()");
         Student student = studentService.getSessionStudent();
-        Course course = courseService.findById(theDebt.getCourseId());
+        Course course = courseService.findById(theCoursePayment.getCourseId());
 
         System.out.println("post /enroll/partial/{courseId}: " + course);
 
-        CoursePayment coursePayment = new CoursePayment(student.getStudentData(), course, theDebt.getPayment());
+        CoursePayment coursePayment = new CoursePayment(student.getStudentData(), course, theCoursePayment.getPayment());
 
         student.getStudentData().addCoursePayment(coursePayment);
         EnrollStatus enrollStatus = course.enrollDebtStudent(student);
@@ -191,6 +195,17 @@ public class CourseController {
         studentService.save(student, false);
 
         return "redirect:/course/confirm/enroll/" + enrollStatus.ordinal();
+    }
+
+    @PostMapping("/start/{courseId}")
+    public String start(@PathVariable("courseId") int courseId, Model theModel) {
+        Course course = courseService.findById(courseId);
+
+        course.start();
+
+        courseService.save(course);
+
+        return "redirect:/teacher/courses-list-page";
     }
 
     // TODO: add "remove course" for student and teacher

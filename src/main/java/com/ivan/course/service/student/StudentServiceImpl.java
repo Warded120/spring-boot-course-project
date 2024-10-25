@@ -67,9 +67,7 @@ public class StudentServiceImpl implements StudentService {
 
         Student dbStudent = getStudentBySessionStudent(sessionStudent);
 
-        List<Course> studentCourses = dbStudent.getStudentData().getGroups().stream().map(StudentGroup::getCourse).toList();
-
-        return studentCourses;
+        return dbStudent.getStudentData().getGroups().stream().map(StudentGroup::getCourse).toList();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.constants.CourseState;
 import com.ivan.course.dto.usersDto.TeacherDto;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.teacher.Teacher;
@@ -86,11 +87,11 @@ public class TeacherController {
         return "user/update-confirm-page";
     }
 
-    // TODO: add "Start course" button in course-page. check if the course belongs to current teacher
+    // TODO: add "Start course" button in course-page
     @GetMapping("/courses")
     public String myCourses(Model theModel, HttpSession session) {
 
-        Teacher teacher = (Teacher) session.getAttribute("teacher");
+        Teacher teacher = teacherService.getSessionTeacher();
 
         theModel.addAttribute("courses", teacher.getTeacherData().getCourses());
 

@@ -1,5 +1,6 @@
 package com.ivan.course.entity;
 
+import com.ivan.course.constants.CourseState;
 import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.dto.CourseDto;
 import com.ivan.course.entity.student.Student;
@@ -9,8 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import java.time.LocalDate;
 
-// TODO: add lesson schedule (optional) and course duration
+// TODO: add course schedule (optional) and course duration
 @Entity
 @Table(name = "course")
 @NoArgsConstructor
@@ -36,6 +38,13 @@ public class Course {
 
     @Column(name = "price")
     private float price;
+    
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
+    private CourseState state;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
     @ManyToOne
     @JoinColumn(name = "teacher_data_id", referencedColumnName = "id")
@@ -54,6 +63,8 @@ public class Course {
         this.language = theCourse.getLanguage();
         this.languageLevel = theCourse.getLanguageLevel();
         this.price = theCourse.getPrice();
+        this.state = theCourse.getState();
+        this.startDate = null;
         this.teacher = theCourse.getTeacher();
         this.studentGroup = new StudentGroup();
     }
@@ -83,6 +94,27 @@ public class Course {
 
         studentGroup.addStudent(theStudent);
         return EnrollStatus.SUCCESS;
+    }
+
+    public boolean canBeStarted() {
+        return state == CourseState.CREATED
+                && startDate == null
+                && studentGroup.getStudents().size() >= StudentGroup.MIN_STUDENTS;
+    }
+
+    public boolean start() {
+
+        if(!canBeStarted()) {
+            return false;
+        }
+
+        state = CourseState.STARTED;
+        startDate = LocalDate.now();
+        return true;
+    }
+
+    public boolean isStarted() {
+        return state == CourseState.STARTED;
     }
 }
 // TODO: after finishing the course level, examine(filter) students, increase the price and raise the level of the course

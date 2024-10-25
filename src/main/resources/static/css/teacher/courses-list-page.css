@@ -35,3 +35,20 @@ body {
 .btn-primary:active {
     background-color: #FFB300 !important;
 }
+
+.btn-success {
+    background-color: #28a745; /* Bootstrap green */
+    border: none;
+    color: #fff; /* White text */
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+.btn-success:hover {
+    background-color: #218838 !important; /* Darker green on hover */
+}
+.btn-success:active {
+    background-color: #1e7e34 !important; /* Even darker green on active */
+}

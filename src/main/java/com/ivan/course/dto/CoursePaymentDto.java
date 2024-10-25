@@ -20,6 +20,6 @@ public class CoursePaymentDto {
         this.id = 0;
         this.studentDataId = studentDataId;
         this.courseId = courseId;
-        this.payment = (coursePrice * (float) 1.05); // 5% more
+        this.payment = Math.round(coursePrice * 1.05f * 100.0f) / 100.0f;// 5% more
     }
 }

@@ -18,7 +18,7 @@
     <!-- Student Information -->
     <div th:if="${session.student != null}" class="profile-card">
         <div class="display-flex-row">
-            <img src="#" alt="Student Profile Picture" class="profile-picture">
+            <img th:src="@{/images/default-profile-image.png}" alt="Student Profile Picture" class="profile-picture">
             <div class="profile-info">
                 <h2>Profile Information</h2>
                 <strong>Username:</strong> <span th:text="${session.student.username}"></span><br>
@@ -43,7 +43,7 @@
     <!-- Teacher Information -->
     <div th:if="${session.teacher != null}" class="profile-card">
         <div class="display-flex-row">
-            <img src="#" alt="Teacher Profile Picture" class="profile-picture">
+            <img th:src="@{/images/default-profile-image.png}" alt="Teacher Profile Picture" class="profile-picture">
             <div class="profile-info">
                 <h2>Profile Information</h2>
                 <strong>Username:</strong> <span th:text="${session.teacher.username}"></span><br>

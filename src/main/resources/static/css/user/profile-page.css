@@ -48,7 +48,7 @@ body {
 
 .profile-picture {
     width: 200px;
-    height: 200px;
+    height: auto;
     margin-right: 20px;
     border-radius: 50%;
     border: 3px solid #FFD700; /* Yellow border around the picture */

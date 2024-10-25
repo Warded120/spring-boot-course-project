@@ -1,5 +1,6 @@
 package com.ivan.course.dto;
 
+import com.ivan.course.constants.CourseState;
 import com.ivan.course.entity.teacher.TeacherData;
 import com.ivan.course.validation.inList.InList;
 import com.ivan.course.validation.inList.ListType;
@@ -8,6 +9,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -35,6 +38,8 @@ public class CourseDto {
     @NotNull(message = "required")
     @Price
     float price;
+
+    private CourseState state = CourseState.CREATED;
 
     TeacherData teacher;
 }

@@ -32,6 +32,21 @@
 
                 <!-- View Course button -->
                 <a th:href="@{/course/{id}(id=${course.id})}" class="btn btn-primary">View Course</a>
+
+                <div th:if="${course.isStarted()}">
+                    <!-- place for start examination button -->
+                    <p class="text-center m-3 mb-2">Course is started</p>
+                </div>
+                <div th:unless="${course.isStarted()}">
+
+                    <form th:if="${course.canBeStarted()}" th:action="@{/course/start/{id}(id=${course.id})}" method="post">
+                        <button type="submit" class="btn btn-success">Start Course</button>
+                    </form>
+
+                    <div class="text-center m-3 mb-2" th:unless="${course.canBeStarted()}">
+                        Must be 5 students or more to start a course
+                    </div>
+                </div>
             </div>
         </div>
     </div>
