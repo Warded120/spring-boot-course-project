@@ -14,16 +14,19 @@
         <div class="course-info">
             <!-- Main Confirmation Text -->
             <div class="text-center">
-                <h2 th:if="${status == 0}" class="main-text">
+                <h2 th:if="${status == 'SUCCESS'}" class="main-text">
                     You successfully enrolled to this course
                 </h2>
-                <h2 th:if="${status == 1}" class="main-text">
+                <h2 th:if="${status == 'GROUP_FULL'}" class="main-text">
                     You have not been enrolled. Course group is full
                 </h2>
-                <h2 th:if="${status == 2}" class="main-text">
+                <h2 th:if="${status == 'NOT_ENOUGH_BALANCE'}" class="main-text">
                     You have not been enrolled. Not enough balance
                 </h2>
-                <h2 th:if="${status == 3}" class="main-text">
+                <h2 th:if="${status == 'LANGUAGE_IS_LEARNED'}" class="main-text">
+                    You have not been enrolled. You already learn this language
+                </h2>
+                <h2 th:if="${status == 'CANNOT_ENROLL'}" class="main-text">
                     You have not been enrolled. Something went wrong
                 </h2>
             </div>

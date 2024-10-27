@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @MappedSuperclass
 @Getter
@@ -30,5 +31,9 @@ public abstract class UserData {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+    }
+
+    public int getAge() {
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 }

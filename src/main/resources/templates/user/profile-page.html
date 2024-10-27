@@ -25,7 +25,7 @@
                 <strong>First Name:</strong> <span th:text="${session.student.studentData.firstName}"></span><br>
                 <strong>Last Name:</strong> <span th:text="${session.student.studentData.lastName}"></span><br>
                 <strong>Birth Date:</strong> <span th:text="${session.student.studentData.birthDate}"></span><br>
-                <strong>Age:</strong> <span th:text="${session.student.studentData.birthDate.getYear()}"></span><br>
+                <strong>Age:</strong> <span th:text="${session.student.studentData.getAge()}"></span><br>
                 <strong>Balance:</strong> <span th:text="'$' + ${session.student.studentData.balance}"></span><br>
             </div>
         </div>
@@ -50,7 +50,7 @@
                 <strong>First Name:</strong> <span th:text="${session.teacher.teacherData.firstName}"></span><br>
                 <strong>Last Name:</strong> <span th:text="${session.teacher.teacherData.lastName}"></span><br>
                 <strong>Birth Date:</strong> <span th:text="${session.teacher.teacherData.birthDate}"></span><br>
-                <strong>Age:</strong> <span th:text="${session.teacher.teacherData.birthDate.getYear()}"></span><br>
+                <strong>Age:</strong> <span th:text="${session.teacher.teacherData.getAge()}"></span><br>
             </div>
         </div>
         <div class="display-flex-col">

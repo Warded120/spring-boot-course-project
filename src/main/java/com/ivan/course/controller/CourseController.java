@@ -29,9 +29,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// TODO: add course status (prepareState, StartedState, EndedState etc.)
-// TODO: AND/OR
-// TODO: add course startDate, endDate
 @Controller
 @RequestMapping("/course")
 public class CourseController {
@@ -162,9 +159,10 @@ public class CourseController {
     }
 
     @GetMapping("/confirm/enroll/{status}")
-    public String successEnrollToCourse(@PathVariable(name = "status", required = false) int status, Model theModel) {
+    public String successEnrollToCourse(@PathVariable(name = "status", required = false) int statusValue, Model theModel) {
 
-        theModel.addAttribute("status", status);
+        EnrollStatus status = EnrollStatus.values()[statusValue];
+        theModel.addAttribute("status", status.name());
 
         return "course/course-enroll-confirmation";
     }

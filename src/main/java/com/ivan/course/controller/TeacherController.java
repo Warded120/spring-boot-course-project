@@ -87,7 +87,6 @@ public class TeacherController {
         return "user/update-confirm-page";
     }
 
-    // TODO: add "Start course" button in course-page
     @GetMapping("/courses")
     public String myCourses(Model theModel, HttpSession session) {
 
@@ -111,5 +110,5 @@ public class TeacherController {
         return false;
     }
 
-    // TODO: implement starting a course. then implement examination and certificates
+    // TODO: implement examination and certificates
 }

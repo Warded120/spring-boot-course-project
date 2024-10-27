@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import java.time.LocalDate;
+import java.util.List;
 
 // TODO: add course schedule (optional) and course duration
 @Entity
@@ -69,31 +70,28 @@ public class Course {
         this.studentGroup = new StudentGroup();
     }
 
-    // TODO: check if the student already learns a certan language
     public EnrollStatus enroll(Student theStudent) {
 
-        if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {
-            System.out.println("course already have 20 students:" + this);
-            return EnrollStatus.GROUP_FULL;
-        }
+        EnrollStatus validationStatus = validateTheStudent(theStudent);
+        if (validationStatus == EnrollStatus.SUCCESS) {
+            EnrollStatus status = theStudent.getStudentData().payForCourse(this);
 
-        EnrollStatus status = theStudent.getStudentData().payForCourse(this);
-
-        if(status == EnrollStatus.SUCCESS) {
-            studentGroup.addStudent(theStudent);
-            return EnrollStatus.SUCCESS;
+            if(status == EnrollStatus.SUCCESS) {
+                studentGroup.addStudent(theStudent);
+                return EnrollStatus.SUCCESS;
+            }
+            return status;
         }
-        return status;
+        return validationStatus;
     }
 
     public EnrollStatus enrollDebtStudent(Student theStudent) {
-        if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {
-            System.out.println("course already have 20 students:");
-            return EnrollStatus.GROUP_FULL;
+        EnrollStatus validationStatus = validateTheStudent(theStudent);
+        if (validationStatus == EnrollStatus.SUCCESS) {
+            studentGroup.addStudent(theStudent);
+            return EnrollStatus.SUCCESS;
         }
-
-        studentGroup.addStudent(theStudent);
-        return EnrollStatus.SUCCESS;
+        return validationStatus;
     }
 
     public boolean canBeStarted() {
@@ -115,6 +113,33 @@ public class Course {
 
     public boolean isStarted() {
         return state == CourseState.STARTED;
+    }
+
+    private EnrollStatus validateTheStudent(Student theStudent) {
+        if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {
+            System.out.println("course already have 20 students:" + this);
+            return EnrollStatus.GROUP_FULL;
+        }
+
+        if(studentAlreadyLearnsThisLanguage(theStudent)) {
+            System.out.println("Cannot enroll. Student already learns this language:" + this.language);
+            return EnrollStatus.LANGUAGE_IS_LEARNED;
+        }
+        return EnrollStatus.SUCCESS;
+    }
+
+    private boolean studentAlreadyLearnsThisLanguage(Student theStudent) {
+
+        System.out.println(this);
+
+        List<Course> studentCourses = theStudent.getStudentData().getGroups()
+                .stream()
+                .map(StudentGroup::getCourse).toList();
+
+        List<Course> listWithLearnedLanguage = studentCourses.stream().filter(course -> course.language.equals(this.language))
+                .toList();
+
+        return ! listWithLearnedLanguage.isEmpty();
     }
 }
 // TODO: after finishing the course level, examine(filter) students, increase the price and raise the level of the course
