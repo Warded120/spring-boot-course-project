@@ -25,6 +25,8 @@
             <div class="certificate-card">
                 <h3 th:text="${certificate.course.name}">Course Name</h3>
                 <p th:text="${certificate.course.description}">Certificate Description</p>
+                <p><strong>Language:</strong> <span th:text="${certificate.course.language}">English</span></p>
+                <p><strong>Level:</strong> <span th:text="${certificate.course.languageLevel}">A1</span></p>
                 <p><strong>Date Issued:</strong> <span th:text="${certificate.course.endDate}">01/01/2024</span></p>
                 <p><strong>Result:</strong> <span th:text="${certificate.mark} + '%'">Student Mark</span></p>
             </div>

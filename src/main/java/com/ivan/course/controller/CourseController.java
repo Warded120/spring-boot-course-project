@@ -223,6 +223,7 @@ public class CourseController {
         return "course/course-examination-form";
     }
 
+    // TODO: increase the course level (create a copy of a Course, increase languageLevel and price)
     @PostMapping("/examination/submit")
     public String submitExamination(@ModelAttribute("exam") ExaminationDto theExamination, Model theModel) {
         Course course = courseService.findById(theExamination.getCourseId());
@@ -247,7 +248,6 @@ public class CourseController {
         course.setState(CourseState.FINISHED);
         courseService.save(course);
 
-        // TODO: redirect to confirmation page
         return "redirect:/course/examination/success";
     }
 

@@ -110,6 +110,4 @@ public class TeacherController {
         }
         return false;
     }
-
-    // TODO: implement examination and certificates
 }
