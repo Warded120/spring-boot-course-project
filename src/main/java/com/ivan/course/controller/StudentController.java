@@ -225,11 +225,6 @@ public class StudentController {
         return "student/payment-pay-off-confirmation";
     }
 
-    // Helper method to encode URL parameters
-    private String encodeURIComponent(String value) {
-        return URLEncoder.encode(value, StandardCharsets.UTF_8);
-    }
-
     @GetMapping("/certificates")
     public String viewCertificates(Model theModel) {
 
@@ -238,5 +233,10 @@ public class StudentController {
         theModel.addAttribute("certificates", student.getStudentData().getCertificates());
 
         return "student/certificates-page";
+    }
+
+    // Helper method to encode URL parameters
+    private String encodeURIComponent(String value) {
+        return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
 }
