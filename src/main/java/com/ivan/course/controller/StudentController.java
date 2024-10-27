@@ -230,4 +230,13 @@ public class StudentController {
         return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
 
+    @GetMapping("/certificates")
+    public String viewCertificates(Model theModel) {
+
+        Student student = studentService.getSessionStudent();
+
+        theModel.addAttribute("certificates", student.getStudentData().getCertificates());
+
+        return "student/certificates-page";
+    }
 }

@@ -47,15 +47,23 @@ public class Course {
     @Column(name = "start_date")
     private LocalDate startDate;
 
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "teacher_data_id", referencedColumnName = "id")
-    @ToString.Exclude
     private TeacherData teacher;
 
+    @ToString.Exclude
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "student_group_id", referencedColumnName = "id")
-    @ToString.Exclude
     private StudentGroup studentGroup;
+
+    @ToString.Exclude
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "examination_id", referencedColumnName = "id")
+    private Examination examination = null;
 
     public Course(CourseDto theCourse) {
         this.id = theCourse.getId();
@@ -113,6 +121,9 @@ public class Course {
 
     public boolean isStarted() {
         return state == CourseState.STARTED;
+    }
+    public boolean isFinished() {
+        return state == CourseState.FINISHED;
     }
 
     private EnrollStatus validateTheStudent(Student theStudent) {

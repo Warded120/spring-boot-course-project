@@ -1,10 +1,15 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.constants.CourseState;
 import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.dto.CourseDto;
 import com.ivan.course.dto.CoursePaymentDto;
+import com.ivan.course.dto.examinationDto.ExaminationDto;
+import com.ivan.course.dto.examinationDto.StudentMark;
+import com.ivan.course.entity.Certificate;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.CoursePayment;
+import com.ivan.course.entity.Examination;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.student.StudentData;
 import com.ivan.course.entity.teacher.Teacher;
@@ -27,7 +32,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/course")
@@ -203,7 +211,49 @@ public class CourseController {
 
         courseService.save(course);
 
-        return "redirect:/teacher/courses-list-page";
+        return "redirect:/teacher/courses";
+    }
+
+    @GetMapping("/examination/{courseId}")
+    public String examination(@PathVariable("courseId") int courseId, Model theModel) {
+        Course course = courseService.findById(courseId);
+
+        theModel.addAttribute("exam", new ExaminationDto(course));
+
+        return "course/course-examination-form";
+    }
+
+    @PostMapping("/examination/submit")
+    public String submitExamination(@ModelAttribute("exam") ExaminationDto theExamination, Model theModel) {
+        Course course = courseService.findById(theExamination.getCourseId());
+
+        Map<Student, Integer> studentMarks = new HashMap<>();
+
+        for(StudentMark studentMark : theExamination.getStudentMarks()) {
+            Student student = studentService.findByUserId(studentMark.getStudentId());
+
+            Certificate certificate = new Certificate(0, student.getStudentData(), course, studentMark.getMark());
+
+            student.getStudentData().addCertificate(certificate);
+
+            studentMarks.put(student, studentMark.getMark());
+
+            studentService.save(student, false);
+        }
+
+        Examination examination = new Examination(course, studentMarks);
+        course.setExamination(examination);
+        course.setEndDate(LocalDate.now());
+        course.setState(CourseState.FINISHED);
+        courseService.save(course);
+
+        // TODO: redirect to confirmation page
+        return "redirect:/course/examination/success";
+    }
+
+    @GetMapping("/examination/success")
+    public String successExamination() {
+        return "course/course-examination-confirmation";
     }
 
     // TODO: add "remove course" for student and teacher

@@ -1,6 +1,7 @@
 package com.ivan.course.entity.student;
 
 import com.ivan.course.constants.EnrollStatus;
+import com.ivan.course.entity.Certificate;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.CoursePayment;
 import com.ivan.course.entity.StudentGroup;
@@ -39,6 +40,10 @@ public class StudentData extends UserData {
             inverseJoinColumns = @JoinColumn(name = "debt_id"))
     private List<CoursePayment> coursePayments;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "student")
+    private List<Certificate> certificates;
+
+
     public StudentData(int id, String firstName, String lastName, LocalDate birthDate) {
         super(id, firstName, lastName, birthDate);
         groups = new ArrayList<>();
@@ -75,5 +80,12 @@ public class StudentData extends UserData {
         if (this.coursePayments != null) {
             this.coursePayments.remove(coursePayment);
         }
+    }
+
+    public void addCertificate(Certificate certificate) {
+        if (this.certificates == null) {
+            this.certificates = new ArrayList<>();
+        }
+        this.certificates.add(certificate);
     }
 }

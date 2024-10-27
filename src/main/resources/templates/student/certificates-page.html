@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Certificates</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/student/certificates-page.css}">
+</head>
+<body>
+
+<div class="container mt-5">
+    <!-- Header with logo -->
+    <div class="left-top-corner">
+        <a class="navbar-brand" th:href="@{/student/profile}">
+            <img th:src="@{/images/G-logo-black.webp}" alt="G-Certificates" class="logo">
+        </a>
+    </div>
+    <h2 class="text-center">My Certificates</h2>
+
+    <!-- Certificate List -->
+    <div class="row">
+        <!-- Loop through certificates passed to the model -->
+        <div class="col-md-4" th:each="certificate : ${certificates}">
+            <div class="certificate-card">
+                <h3 th:text="${certificate.course.name}">Course Name</h3>
+                <p th:text="${certificate.course.description}">Certificate Description</p>
+                <p><strong>Date Issued:</strong> <span th:text="${certificate.course.endDate}">01/01/2024</span></p>
+                <p><strong>Result:</strong> <span th:text="${certificate.mark} + '%'">Student Mark</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

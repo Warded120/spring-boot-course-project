@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 public class TeacherData extends UserData {
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "teacher", cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "teacher", cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<Course> courses;
 
     @OneToOne(mappedBy = "teacherData", orphanRemoval = true)

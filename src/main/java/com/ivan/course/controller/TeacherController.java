@@ -87,6 +87,7 @@ public class TeacherController {
         return "user/update-confirm-page";
     }
 
+    // TODO: create a page to view examination results
     @GetMapping("/courses")
     public String myCourses(Model theModel, HttpSession session) {
 
