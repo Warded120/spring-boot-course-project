@@ -40,6 +40,7 @@ public class StudentData extends UserData {
             inverseJoinColumns = @JoinColumn(name = "debt_id"))
     private List<CoursePayment> coursePayments;
 
+    @ToString.Exclude
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "student")
     private List<Certificate> certificates;
 

@@ -223,7 +223,6 @@ public class CourseController {
         return "course/course-examination-form";
     }
 
-    // TODO: increase the course level (create a copy of a Course, increase languageLevel and price)
     @PostMapping("/examination/submit")
     public String submitExamination(@ModelAttribute("exam") ExaminationDto theExamination, Model theModel) {
         Course course = courseService.findById(theExamination.getCourseId());
@@ -239,7 +238,7 @@ public class CourseController {
 
             studentMarks.put(student, studentMark.getMark());
 
-            studentService.save(student, false);
+            studentService.save(student, false, false);
         }
 
         Examination examination = new Examination(course, studentMarks);
@@ -247,6 +246,12 @@ public class CourseController {
         course.setEndDate(LocalDate.now());
         course.setState(CourseState.FINISHED);
         courseService.save(course);
+
+        // create a next level course
+        Course nextLevelCourse = course.getNextLevelCourse();
+        if (nextLevelCourse != null) {
+            courseService.save(nextLevelCourse);
+        }
 
         return "redirect:/course/examination/success";
     }

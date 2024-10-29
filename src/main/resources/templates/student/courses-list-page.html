@@ -33,6 +33,7 @@
                 <p><strong>Language:</strong> <span th:text="${course.language}">English</span></p>
                 <p><strong>Level:</strong> <span th:text="${course.languageLevel}">Beginner</span></p>
                 <p><strong>Price:</strong> $<span th:text="${course.price}">0.00</span></p>
+                <p><strong>State:</strong> <span th:text="${course.getStateMessage()}">0.00</span></p>
 
                 <!-- View Course button -->
                 <a th:href="@{/course/{id}(id=${course.id})}" class="btn btn-primary">View Course</a>

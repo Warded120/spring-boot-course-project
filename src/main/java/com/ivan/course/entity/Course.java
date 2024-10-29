@@ -4,12 +4,11 @@ import com.ivan.course.constants.CourseState;
 import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.dto.CourseDto;
 import com.ivan.course.entity.student.Student;
+import com.ivan.course.entity.student.StudentData;
 import com.ivan.course.entity.teacher.TeacherData;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "course")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -76,6 +76,23 @@ public class Course {
         this.startDate = null;
         this.teacher = theCourse.getTeacher();
         this.studentGroup = new StudentGroup();
+    }
+
+    // constructor for next level course
+    public Course(String name, String description, String language, String languageLevel, float price, CourseState state, LocalDate startDate, LocalDate endDate, TeacherData teacher, StudentGroup studentGroup, Examination examination) {
+        this.name = name;
+        this.description = description;
+        this.language = language;
+        this.languageLevel = languageLevel;
+        this.price = price;
+        this.state = state;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.teacher = teacher;
+        this.studentGroup = studentGroup;
+        this.examination = examination;
+
+        sendPaymentsToStudents();
     }
 
     public EnrollStatus enroll(Student theStudent) {
@@ -152,5 +169,49 @@ public class Course {
 
         return ! listWithLearnedLanguage.isEmpty();
     }
+
+    public Course getNextLevelCourse() {
+        if (languageLevel.equals("C1")) {
+            return null;
+        }
+        return new Course(name, description, language, getNextlanguageLevel(), (float) (price*1.25), CourseState.CREATED, null, null, teacher, new StudentGroup(studentGroup), null);
+    }
+
+    private String getNextlanguageLevel() {
+        switch(languageLevel) {
+            case "A1" -> {
+                return "A2";
+            }
+            case "A2" -> {
+                return "B1";
+            }
+            case "B1" -> {
+                return "B2";
+            }
+            case "B2" -> {
+                return "C1";
+            }
+            default -> {
+                return "A1";
+            }
+        }
+    }
+
+    private void sendPaymentsToStudents() {
+        List<StudentData> students = this.studentGroup.getStudents();
+        for(StudentData student : students) {
+            student.addCoursePayment(new CoursePayment(student, this, this.price));
+        }
+    }
+
+    public String getStateMessage() {
+        switch (state.name()) {
+            case "STARTED":
+                return "Course started";
+            case "FINISHED":
+                return "Course finished";
+            default:
+                return "Course not started yet";
+        }
+    }
 }
-// TODO: after finishing the course level, examine(filter) students, increase the price and raise the level of the course

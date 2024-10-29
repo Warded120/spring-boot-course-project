@@ -36,6 +36,11 @@ public class StudentGroup {
             inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<StudentData> students = new ArrayList<>();
 
+    public StudentGroup(StudentGroup copyStudentGroup) {
+        this.course = copyStudentGroup.getCourse();
+        this.students = new ArrayList<>(copyStudentGroup.getStudents());
+    }
+
     public void addStudent(Student theStudent) {
         System.out.println("adding student: " + theStudent);
         StudentData studentData = theStudent.getStudentData();

@@ -9,6 +9,7 @@ import java.util.List;
 public interface StudentService {
     Student save(Student student);
     Student save(Student student, boolean isEncodePassword);
+    Student save(Student student, boolean isEncodePassword, boolean isSetSession);
     boolean existsByUserId(int id);
     Student findByUserId(int id);
     Student getStudentBySessionStudent(Student sessionStudent);
