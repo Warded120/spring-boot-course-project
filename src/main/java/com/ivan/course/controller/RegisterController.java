@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
-
+// TODO: create operator (work with queries) and admin users (work with queries and create operators)
 @Controller
 public class RegisterController {
 
