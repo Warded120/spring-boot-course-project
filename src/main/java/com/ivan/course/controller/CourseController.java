@@ -31,7 +31,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -259,6 +258,17 @@ public class CourseController {
     @GetMapping("/examination/success")
     public String successExamination() {
         return "course/course-examination-confirmation";
+    }
+
+    @GetMapping("/exam-result/{courseId}")
+    public String courseExaminationResult(@PathVariable int courseId, Model theModel) {
+        Course course = courseService.findById(courseId);
+
+        Examination examination = course.getExamination();
+
+        theModel.addAttribute("examination", examination);
+
+        return "course/course-examination-page";
     }
 
     // TODO: add "remove course" for student and teacher

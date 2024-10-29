@@ -1,6 +1,5 @@
 package com.ivan.course.controller;
 
-import com.ivan.course.constants.CourseState;
 import com.ivan.course.dto.usersDto.TeacherDto;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.teacher.Teacher;
@@ -15,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.util.List;
 
 @Controller
@@ -54,8 +52,7 @@ public class TeacherController {
     @PostMapping("/profile/update")
     public String update(@Valid @ModelAttribute("teacher") TeacherDto teacherDto,
                          BindingResult theBindingResult,
-                         HttpSession session,
-                         Model theModel) {
+                         HttpSession session) {
 
         if(thereAreErrorsIn(theBindingResult, List.of("username", "password", "confirmPassword"))) {
             System.out.println("errors exist");
@@ -87,9 +84,8 @@ public class TeacherController {
         return "user/update-confirm-page";
     }
 
-    // TODO: create a page to view examination results
     @GetMapping("/courses")
-    public String myCourses(Model theModel, HttpSession session) {
+    public String myCourses(Model theModel) {
 
         Teacher teacher = teacherService.getSessionTeacher();
 

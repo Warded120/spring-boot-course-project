@@ -1,0 +1,66 @@
+body {
+    background-color: #FFD700; /* Yellow background */
+    color: #000;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.exam-container {
+    width: 90%;
+    max-width: 600px; /* Smaller width for single column */
+    padding: 20px;
+}
+
+.exam-card {
+    background-color: #222;
+    color: #FFD700;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.student-marks-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.student-mark-entry {
+    background-color: #333;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: #FFD700;
+    width: 100%;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+h2, h4 {
+    color: #FFD700;
+}
+
+.btn-danger {
+    background-color: #CC2222;
+    color: #FFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.btn-danger:hover {
+    background-color: #AA2222;
+}
+
+.btn-danger:active {
+    background-color: #772222;
+}

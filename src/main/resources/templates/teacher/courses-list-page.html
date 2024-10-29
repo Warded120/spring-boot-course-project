@@ -44,9 +44,11 @@
                         <button type="submit" class="btn btn-success">Start Course</button>
                     </form>
 
-                    <div class="text-center m-3 mb-2" th:if="${course.isFinished()}">
+                    <div th:if="${course.isFinished()}">
                         <!-- button to view examination results -->
-                        Course is finished
+                        <a th:href="@{/course/exam-result/{courseId}(courseId=${course.id})}" class="btn btn-success">View Examination Result</a>
+
+                        <p class="text-center m-3 mb-2">Course is finished</p>
                     </div>
 
                     <div class="text-center m-3 mb-2" th:if="${!course.canBeStarted() && !course.isFinished()}">
