@@ -71,6 +71,7 @@ public class StudentDto implements Dto {
         this.birthDate = student.getStudentData().getBirthDate();
     }
 
+    // TODO: remove manager\operator and admin roles from student and teacher
     private String getTopRoleFromRoles(Student student) {
         List<Role> roles = (List<Role>) student.getRoles();
 

@@ -21,6 +21,9 @@
         <a class="navbar-brand" sec:authorize="hasRole('ROLE_TEACHER')" th:href="@{/teacher/profile}">
             <img th:src="@{/images/G-logo.webp}" alt="G-courses" class="logo">
         </a>
+        <a class="navbar-brand" sec:authorize="hasRole('ROLE_OPERATOR')" th:href="@{/operator/profile}">
+            <img th:src="@{/images/G-logo.webp}" alt="G-courses" class="logo">
+        </a>
 
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto">

@@ -38,13 +38,13 @@ public class Teacher extends User {
             case "teacher":
                 tempAuthorities.add(new Role("ROLE_TEACHER"));
                 break;
-            case "manager":
+            case "operator":
                 tempAuthorities.add(new Role("ROLE_TEACHER"));
-                tempAuthorities.add(new Role("ROLE_MANAGER"));
+                tempAuthorities.add(new Role("ROLE_OPERATOR"));
                 break;
             case "admin":
                 tempAuthorities.add(new Role("ROLE_TEACHER"));
-                tempAuthorities.add(new Role("ROLE_MANAGER"));
+                tempAuthorities.add(new Role("ROLE_OPERATOR"));
                 tempAuthorities.add(new Role("ROLE_ADMIN"));
                 break;
         }

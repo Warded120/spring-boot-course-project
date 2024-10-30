@@ -12,7 +12,7 @@ import java.time.Period;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class UserData {
+public class UserData {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

@@ -39,13 +39,13 @@ public class Student extends User {
             case "student":
                 tempAuthorities.add(new Role("ROLE_STUDENT"));
                 break;
-            case "manager":
+            case "operator":
                 tempAuthorities.add(new Role("ROLE_STUDENT"));
-                tempAuthorities.add(new Role("ROLE_MANAGER"));
+                tempAuthorities.add(new Role("ROLE_OPERATOR"));
                 break;
             case "admin":
                 tempAuthorities.add(new Role("ROLE_STUDENT"));
-                tempAuthorities.add(new Role("ROLE_MANAGER"));
+                tempAuthorities.add(new Role("ROLE_OPERATOR"));
                 tempAuthorities.add(new Role("ROLE_ADMIN"));
                 break;
         }
