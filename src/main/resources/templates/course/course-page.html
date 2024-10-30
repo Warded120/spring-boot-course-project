@@ -21,6 +21,18 @@
                 <p><strong>Language:</strong> <span th:text="${course.language}">English</span></p>
                 <p><strong>Level:</strong> <span th:text="${course.languageLevel}">Beginner</span></p>
                 <p><strong>Price:</strong> <span th:text="${course.price}">0.00</span></p>
+
+                <!-- Course Schedule -->
+                <div th:if="${course.isStarted()}" class="course-schedule mt-4">
+                    <h4>Course Schedule</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item" th:each="lessonDate : ${course.getSchedule().getFormattedSchedule(3)}">
+                            <span class="lesson-item" th:text="${lessonDate}">
+                                Lesson date goes here
+                            </span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <!-- Student buttons -->

@@ -214,4 +214,12 @@ public class Course {
                 return "Course not started yet";
         }
     }
+
+    public Schedule getSchedule() {
+        if(startDate == null) {
+            return null;
+        }
+        return new Schedule(startDate);
+    }
+
 }
