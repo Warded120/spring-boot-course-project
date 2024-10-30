@@ -9,11 +9,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Schedule {
 
     @Getter
     private final List<LocalDateTime> schedule;
+    private LocalDate startDate;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMM dd yyyy - hh:mm a");
 
     public Schedule(LocalDate startDate) {
@@ -59,6 +61,13 @@ public class Schedule {
     }
 
     public List<String> getFormattedSchedule(int amount) {
-        return getFormattedSchedule().subList(0, amount);
+        LocalDateTime today = LocalDateTime.now();
+
+        // Filter schedule to include only future or today's dates and limit to specified amount
+        return schedule.stream()
+                .filter(dateTime -> dateTime.isAfter(today) || dateTime.isEqual(today))
+                .limit(amount)
+                .map(dateTime -> dateTime.format(formatter))
+                .collect(Collectors.toList());
     }
 }

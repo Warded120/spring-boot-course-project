@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
@@ -16,7 +17,7 @@
         </a>
     </div>
     <!-- Student Information -->
-    <div th:if="${session.student != null}" class="profile-card">
+    <div sec:authorize="hasRole('ROLE_STUDENT')" class="profile-card">
         <div class="display-flex-row">
             <img th:src="@{/images/default-profile-image.png}" alt="Student Profile Picture" class="profile-picture">
             <div class="profile-info">
@@ -42,7 +43,7 @@
     </div>
 
     <!-- Teacher Information -->
-    <div th:if="${session.teacher != null}" class="profile-card">
+    <div sec:authorize="hasRole('ROLE_TEACHER')" class="profile-card">
         <div class="display-flex-row">
             <img th:src="@{/images/default-profile-image.png}" alt="Teacher Profile Picture" class="profile-picture">
             <div class="profile-info">

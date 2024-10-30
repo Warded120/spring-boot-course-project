@@ -221,5 +221,4 @@ public class Course {
         }
         return new Schedule(startDate);
     }
-
 }

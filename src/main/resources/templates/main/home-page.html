@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +14,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <!--For Student-->
-        <a class="navbar-brand" th:if="${session.student}" th:href="@{/student/profile}">
+        <a class="navbar-brand" sec:authorize="hasRole('ROLE_STUDENT')" th:href="@{/student/profile}">
             <img th:src="@{/images/G-logo.webp}" alt="G-courses" class="logo">
         </a>
         <!--For Teacher-->
-        <a class="navbar-brand" th:if="${session.teacher}" th:href="@{/teacher/profile}">
+        <a class="navbar-brand" sec:authorize="hasRole('ROLE_TEACHER')" th:href="@{/teacher/profile}">
             <img th:src="@{/images/G-logo.webp}" alt="G-courses" class="logo">
         </a>
 
@@ -35,7 +36,7 @@
 <div class="container mt-5">
 
     <!--Student-->
-    <div th:if="${session.student != null}">
+    <div sec:authorize="hasRole('ROLE_STUDENT')">
         <!-- Content for students -->
         <div th:if="${session.student.getStudentData().getGroups().size() == 0}">
             <h2 class="card-header mb-4 text-center">You don't have any courses, choose any and enroll now!</h2>
@@ -44,7 +45,7 @@
     </div>
 
     <!--Teacher-->
-    <div th:if="${session.teacher != null && session.teacher.teacherData.courses.size() == 0}" class="row">
+    <div sec:authorize="hasRole('ROLE_TEACHER')" th:if="${session.teacher.teacherData.courses.size() == 0}" class="row">
         <div class="text-center">
             <h3 class="mb-4">It seems like you don't own any courses yet, let's create one!</h3>
             <div class="d-flex justify-content-center">
