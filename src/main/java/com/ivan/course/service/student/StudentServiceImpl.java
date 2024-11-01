@@ -30,7 +30,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public Student save(Student student) {
-        return save(student, true);
+        return save(student, true, true);
     }
 
     @Override

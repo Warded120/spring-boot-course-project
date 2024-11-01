@@ -1,7 +1,7 @@
 package com.ivan.course.dto.usersDto;
 
 import com.ivan.course.entity.Role;
-import com.ivan.course.entity.operator.SuperUser;
+import com.ivan.course.entity.superuser.SuperUser;
 import com.ivan.course.validation.age.Age;
 import com.ivan.course.validation.nonexistent.Nonexistent;
 import com.ivan.course.validation.password.Password;
@@ -10,10 +10,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -22,6 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @PasswordMatch
 public class SuperUserDto implements Dto {

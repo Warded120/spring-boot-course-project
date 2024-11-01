@@ -1,7 +1,18 @@
 package com.ivan.course;
 
+import com.ivan.course.dto.usersDto.SuperUserDto;
+import com.ivan.course.entity.superuser.SuperUser;
+import com.ivan.course.service.superUser.SuperUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.Month;
 
 @SpringBootApplication
 public class SpringBootCourseProjectApplication {
@@ -51,5 +62,5 @@ public class SpringBootCourseProjectApplication {
         student5.setLastName("Davis");
         student5.setBirthDate(LocalDate.of(2003, 12, 19));
     */
-
 }
+

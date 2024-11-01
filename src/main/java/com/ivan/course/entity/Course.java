@@ -12,7 +12,6 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
-// TODO: add course schedule (optional) and course duration
 @Entity
 @Table(name = "course")
 @NoArgsConstructor
