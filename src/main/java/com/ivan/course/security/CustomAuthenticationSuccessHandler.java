@@ -1,9 +1,11 @@
 package com.ivan.course.security;
 
 import com.ivan.course.entity.student.Student;
+import com.ivan.course.entity.superuser.SuperUser;
 import com.ivan.course.entity.teacher.Teacher;
 import com.ivan.course.entity.user.User;
 import com.ivan.course.service.student.StudentService;
+import com.ivan.course.service.superUser.SuperUserService;
 import com.ivan.course.service.teacher.TeacherService;
 import com.ivan.course.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,12 +24,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private final UserService userService;
     private final TeacherService teacherService;
     private final StudentService studentService;
+    private final SuperUserService superUserService;
 
     @Autowired
-    public CustomAuthenticationSuccessHandler(UserService theUserService, TeacherService theTeacherService, StudentService theStudentService) {
+    public CustomAuthenticationSuccessHandler(UserService theUserService, TeacherService theTeacherService, StudentService theStudentService, SuperUserService theSuperUserService) {
         userService = theUserService;
         teacherService = theTeacherService;
         studentService = theStudentService;
+        superUserService = theSuperUserService;
     }
 
     @Override
@@ -48,6 +52,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         } else if (studentService.existsByUserId(theUser.getId())) {
             Student theStudent = studentService.findByUserId(theUser.getId());
             session.setAttribute("student", theStudent);
+        } else if(superUserService.existsByUserId(theUser.getId())) {
+            SuperUser theSuperUser = superUserService.findById(theUser.getId());
+            session.setAttribute("superUser", theSuperUser);
         }
 
         // forward to home page

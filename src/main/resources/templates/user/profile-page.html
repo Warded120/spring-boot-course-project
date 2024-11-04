@@ -59,7 +59,6 @@
             <a th:href="@{/teacher/profile/update}" class="btn btn-primary">Update profile</a>
             <a th:href="@{/course/add}" class="btn btn-primary">Create a new course</a>
             <a th:href="@{/teacher/courses}" class="btn btn-primary">View my courses</a>
-            <a href="#" class="btn btn-primary">Teacher Button 4</a>
             <form action="#" th:action="@{/logout}" method="post">
                 <input class="btn btn-danger " type="submit" value="Logout">
             </form>
@@ -72,15 +71,15 @@
             <img th:src="@{/images/default-profile-image.png}" alt="Student Profile Picture" class="profile-picture">
             <div class="profile-info">
                 <h2>Profile Information</h2>
-                <strong>Username:</strong> <span ></span><br>
-                <strong>First Name:</strong> <span ></span><br>
-                <strong>Last Name:</strong> <span ></span><br>
-                <strong>Birth Date:</strong> <span ></span><br>
-                <strong>Age:</strong> <span ></span><br>
+                <strong>Username:</strong> <span th:text="${session.superUser.username}"></span><br>
+                <strong>First Name:</strong> <span th:text="${session.superUser.superUserData.firstName}"></span><br>
+                <strong>Last Name:</strong> <span th:text="${session.superUser.superUserData.lastName}"></span><br>
+                <strong>Birth Date:</strong> <span th:text="${session.superUser.superUserData.birthDate}"></span><br>
+                <strong>Age:</strong> <span th:text="${session.superUser.superUserData.getAge()}"></span><br>
             </div>
         </div>
         <div class="display-flex-col">
-            <a th:href="@{/operator/profile}" class="btn btn-primary">Go to Profile (for now)</a>
+            <a th:href="@{/operator/profile/update}" class="btn btn-primary">Update profile</a>
             <form action="#" th:action="@{/logout}" method="post">
                 <input class="btn btn-danger " type="submit" value="Logout">
             </form>

@@ -9,4 +9,5 @@ public interface SuperUserService {
     SuperUser save(SuperUser superUser, boolean isEncodePassword, boolean isSetSession);
     boolean existsByUsername(String username);
     SuperUser findById(int id);
+    boolean existsByUserId(int id);
 }

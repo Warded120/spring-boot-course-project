@@ -61,4 +61,9 @@ public class SuperUserServiceImpl implements SuperUserService {
     public SuperUser findById(int id) {
         return superUserRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public boolean existsByUserId(int id) {
+        return superUserRepository.existsById(id);
+    }
 }

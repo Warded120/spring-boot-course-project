@@ -1,9 +1,12 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.dto.usersDto.SuperUserDto;
 import com.ivan.course.dto.usersDto.UserDto;
 import com.ivan.course.entity.Keys;
+import com.ivan.course.entity.superuser.SuperUser;
 import com.ivan.course.entity.user.User;
 import com.ivan.course.exceptionHandling.exception.UserNotFoundException;
+import com.ivan.course.service.superUser.SuperUserService;
 import com.ivan.course.service.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +18,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 @Controller
 public class LoginController {
 
     UserService userService;
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    SuperUserService superUserService;
 
     @Autowired
-    public LoginController(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public LoginController(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder, SuperUserService superUserService) {
         this.userService = userService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.superUserService = superUserService;
     }
 
     @GetMapping("/login")
     public String login() {
+
+        // create an operator and admin users if they don't exist
+        if(!superUserService.existsByUsername("admin@gmail.com")) {
+            SuperUserDto superUserDto = new SuperUserDto(0, "admin@gmail.com", "Test123", "Test123", true, "admin", "admin", "admin", LocalDate.of(2005, Month.MAY, 18));
+            superUserService.save(new SuperUser(superUserDto), true, false);
+        }
+
         return "login/login-page";
     }
 
