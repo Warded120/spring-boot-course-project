@@ -40,7 +40,7 @@ public class SecurityConfig {
                     .requestMatchers("/register", "/register-student/**", "/register-teacher/**").permitAll()
                     .requestMatchers("/teacher/**", "/course/add/**", "/course/start/**", "/course/examination/**", "/course/exam-result/**").hasRole("ROLE_TEACHER")
                     .requestMatchers("/student/**", "/course/enroll/**", "/course/confirm/enroll/**").hasRole("ROLE_STUDENT")
-                    .requestMatchers("/operator/profile/**", "/actions/**").hasRole("ROLE_OPERATOR")
+                    .requestMatchers("/operator/profile/**", "/queries/**").hasRole("ROLE_OPERATOR")
                     .requestMatchers("/operator/create-operator/**").hasRole("ROLE_ADMIN")
                     .anyRequest().authenticated()
                 )

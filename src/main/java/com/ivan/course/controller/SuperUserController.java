@@ -78,9 +78,6 @@ public class SuperUserController {
         return "user/update-confirm-page";
     }
 
-    // TODO: all db queries must have @RequestMapping("/actions/...")
-    // TODO: maybe create ActionsController for this
-
     @GetMapping("/create-operator")
     public String createOperator(Model theModel) {
         theModel.addAttribute("operator", new SuperUserDto());
