@@ -1,10 +1,7 @@
 package com.ivan.course.controller;
 
 import com.ivan.course.dto.usersDto.SuperUserDto;
-import com.ivan.course.dto.usersDto.TeacherDto;
-import com.ivan.course.entity.Course;
 import com.ivan.course.entity.superuser.SuperUser;
-import com.ivan.course.entity.teacher.Teacher;
 import com.ivan.course.service.superUser.SuperUserService;
 import com.ivan.course.service.superUserData.SuperUserDataService;
 import jakarta.servlet.http.HttpSession;
@@ -25,17 +22,16 @@ import java.util.List;
 @RequestMapping("/operator")
 public class SuperUserController {
 
-    private SuperUserDataService superUserDataService;
+    private final SuperUserService superUserService;
+    private final SuperUserDataService superUserDataService;
     private SuperUserDto currentSuperUserDto;
 
     @Autowired
-    public SuperUserController(SuperUserDataService superUserDataService) {
+    public SuperUserController(SuperUserService superUserService, SuperUserDataService superUserDataService) {
+        this.superUserService = superUserService;
         this.superUserDataService = superUserDataService;
     }
 
-    // TODO: create a default operator and admin if they don't exist (hardcoded users)
-    // TODO: admin has an operator registration form
-    // TODO: implement db queries
     @GetMapping("/profile")
     public String profile() {
         return "/user/profile-page";
@@ -74,13 +70,40 @@ public class SuperUserController {
         return "redirect:/operator/profile/success";
     }
 
-    // TODO: set currentSuperUserDto
     @GetMapping("/profile/success")
     public String success(Model theModel) {
 
         theModel.addAttribute("superUser", currentSuperUserDto);
 
         return "user/update-confirm-page";
+    }
+
+    // TODO: all db queries must have @RequestMapping("/actions/...")
+    // TODO: maybe create ActionsController for this
+
+    @GetMapping("/create-operator")
+    public String createOperator(Model theModel) {
+        theModel.addAttribute("operator", new SuperUserDto());
+
+        return "register/operator-form";
+    }
+
+    @PostMapping("/create-operator")
+    public String createOperator(@Valid @ModelAttribute("operator") SuperUserDto superUserDto, BindingResult theBindingResult) {
+
+        if(theBindingResult.hasErrors()) {
+            return "register/operator-form";
+        }
+
+        SuperUser superUser = new SuperUser(superUserDto);
+        superUserService.save(superUser);
+
+        return "redirect:/operator/create-operator/success";
+    }
+
+    @GetMapping("/create-operator/success")
+    public String success() {
+        return "register/create-operator-confirm-page";
     }
 
     boolean thereAreErrorsIn(BindingResult theBindingResult, List<String> fieldsToIgnore) {

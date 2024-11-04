@@ -34,8 +34,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) throws Exception {
         http
                 .authorizeHttpRequests(configurer -> configurer
-                    .requestMatchers("/","/login", "/discover", "forgot-password", "verify", "change-password", "change-password/**").permitAll()
+                    .requestMatchers("/login", "/access-denied", "/verify", "/change-password/**").permitAll()
+                    .requestMatchers("/", "/discover", "/about").permitAll()
+                    .requestMatchers("/home").authenticated()
                     .requestMatchers("/register", "/register-student/**", "/register-teacher/**").permitAll()
+                    .requestMatchers("/teacher/**", "/course/add/**", "/course/start/**", "/course/examination/**", "/course/exam-result/**").hasRole("ROLE_TEACHER")
+                    .requestMatchers("/student/**", "/course/enroll/**", "/course/confirm/enroll/**").hasRole("ROLE_STUDENT")
+                    .requestMatchers("/operator/profile/**").hasRole("ROLE_OPERATOR")
+                    .requestMatchers("/operator/create-operator/**").hasRole("ROLE_ADMIN")
                     .anyRequest().authenticated()
                 )
 

@@ -80,12 +80,12 @@
         </div>
         <div class="display-flex-col">
             <a th:href="@{/operator/profile/update}" class="btn btn-primary">Update profile</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/operator/create-operator}" class="btn btn-primary">Create Operator User</a>
             <form action="#" th:action="@{/logout}" method="post">
                 <input class="btn btn-danger " type="submit" value="Logout">
             </form>
         </div>
     </div>
 </div>
-
 </body>
 </html>

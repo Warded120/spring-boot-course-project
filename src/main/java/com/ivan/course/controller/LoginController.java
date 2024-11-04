@@ -38,7 +38,7 @@ public class LoginController {
     @GetMapping("/login")
     public String login() {
 
-        // create an operator and admin users if they don't exist
+        // create an admin user if they don't exist
         if(!superUserService.existsByUsername("admin@gmail.com")) {
             SuperUserDto superUserDto = new SuperUserDto(0, "admin@gmail.com", "Test123", "Test123", true, "admin", "admin", "admin", LocalDate.of(2005, Month.MAY, 18));
             superUserService.save(new SuperUser(superUserDto), true, false);

@@ -61,13 +61,8 @@ public class StudentController {
     @PostMapping("/profile/update")
     public String update(@Valid @ModelAttribute("student") StudentDto studentDto,
                          BindingResult theBindingResult,
-                         HttpSession session,
-                         Model theModel) {
+                         HttpSession session) {
 
-/*        if (theBindingResult.hasErrors()) {
-            System.out.println("errors exist");
-            return "user/update-student-page";
-        }*/
         if(thereAreErrorsIn(theBindingResult, List.of("username", "password", "confirmPassword"))) {
             System.out.println("errors exist");
             return "user/update-student-form";
@@ -134,19 +129,6 @@ public class StudentController {
     @GetMapping("/balance/success")
     public String successBalance(Model theModel) {
         return "student/balance-confirm-page";
-    }
-
-    boolean thereAreErrorsIn(BindingResult theBindingResult, List<String> fieldsToIgnore) {
-        if (!theBindingResult.hasErrors()) {
-            return false;
-        }
-
-        for(FieldError theFieldError : theBindingResult.getFieldErrors()) {
-            if(!fieldsToIgnore.contains(theFieldError.getField())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @GetMapping("/payments")
@@ -233,6 +215,19 @@ public class StudentController {
         theModel.addAttribute("certificates", student.getStudentData().getCertificates());
 
         return "student/certificates-page";
+    }
+
+    boolean thereAreErrorsIn(BindingResult theBindingResult, List<String> fieldsToIgnore) {
+        if (!theBindingResult.hasErrors()) {
+            return false;
+        }
+
+        for(FieldError theFieldError : theBindingResult.getFieldErrors()) {
+            if(!fieldsToIgnore.contains(theFieldError.getField())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Helper method to encode URL parameters

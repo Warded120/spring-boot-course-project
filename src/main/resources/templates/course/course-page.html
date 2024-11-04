@@ -37,16 +37,14 @@
         </div>
         <!-- Student buttons -->
         <div class="display-flex-col" th:if="${session.student != null && session.teacher == null}">
-            <!-- if student.courses.contains(course) then don't show "Enroll now" button and show "Remove me from course" button -->
             <a th:href="@{/course/enroll/{id}(id=${course.id})}" th:if="${!service.isStudentEnrolled(course, session.student)}" class="btn btn-primary">Enroll Now</a>
             <a onclick="window.history.back()" class="btn btn-danger">Go Back</a>
         </div>
 
         <!-- Teacher buttons -->
         <div class="display-flex-col" th:unless="${session.student != null && session.teacher == null}">
-            <!-- if teacher.courses.contains(course) then render button "Start course" and "Delete Course" -->
             <p class="teacher-message">
-                You are a teacher. You cannot sign up for a course.
+                You are not a student. You cannot sign up for a course.
             </p>
         </div>
     </div>
