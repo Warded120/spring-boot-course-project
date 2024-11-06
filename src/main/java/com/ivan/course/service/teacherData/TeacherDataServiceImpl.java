@@ -5,6 +5,8 @@ import com.ivan.course.repo.TeacherDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeacherDataServiceImpl implements TeacherDataService {
 
@@ -18,5 +20,15 @@ public class TeacherDataServiceImpl implements TeacherDataService {
     @Override
     public TeacherData save(TeacherData teacherData) {
         return teacherDataRepository.save(teacherData);
+    }
+
+    @Override
+    public List<TeacherData> findAll() {
+        return teacherDataRepository.findAll();
+    }
+
+    @Override
+    public List<TeacherData> findOneTwoThreeLanguageTeachers() {
+        return teacherDataRepository.findOneTwoThreeLanguageTeachers();
     }
 }

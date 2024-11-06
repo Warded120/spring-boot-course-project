@@ -49,11 +49,7 @@ public class StudentData extends UserData {
         super(id, firstName, lastName, birthDate);
         groups = new ArrayList<>();
     }
-
-    public String getFullName() {
-        return getFirstName() + " " + getLastName();
-    }
-
+    
     public void addBalance(float depositAmount) {
         this.balance += depositAmount;
     }

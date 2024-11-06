@@ -177,6 +177,10 @@ public class Course {
     }
 
     private String getNextlanguageLevel() {
+        return getNextLLevel(languageLevel);
+    }
+
+    private String getNextLLevel(String languageLevel) {
         switch(languageLevel) {
             case "A1" -> {
                 return "A2";
@@ -219,5 +223,21 @@ public class Course {
             return null;
         }
         return new Schedule(startDate);
+    }
+
+    public float calculateCoursePriceToLevel(String languageLevel) {
+        if(this.languageLevel.compareTo(languageLevel) >= 0) {
+            return price;
+        }
+
+        String currentLLevel = this.languageLevel;
+        float currentPrice = this.price;
+
+        do {
+            currentLLevel = getNextLLevel(currentLLevel);
+            currentPrice *= 1.25F;
+        } while (currentLLevel.compareTo(languageLevel) < 0);
+
+        return currentPrice;
     }
 }

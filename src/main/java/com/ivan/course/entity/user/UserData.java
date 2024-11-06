@@ -33,6 +33,10 @@ public class UserData {
         this.birthDate = birthDate;
     }
 
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
+
     public int getAge() {
         return Period.between(birthDate, LocalDate.now()).getYears();
     }

@@ -62,7 +62,7 @@ public class SuperUserController {
 
         SuperUser updatedUser = new SuperUser(superUserDto);
 
-        superUserDataService.save(updatedUser.getSuperUserData());
+        superUserService.save(updatedUser, false, true);
         currentSuperUserDto = superUserDto;
 
         session.setAttribute("superUser", updatedUser);

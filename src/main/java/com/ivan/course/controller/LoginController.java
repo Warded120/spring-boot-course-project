@@ -40,6 +40,7 @@ public class LoginController {
 
         // create an admin user if they don't exist
         if(!superUserService.existsByUsername("admin@gmail.com")) {
+            System.out.println("super user does not exist");
             SuperUserDto superUserDto = new SuperUserDto(0, "admin@gmail.com", "Test123", "Test123", true, "admin", "admin", "admin", LocalDate.of(2005, Month.MAY, 18));
             superUserService.save(new SuperUser(superUserDto), true, false);
         }

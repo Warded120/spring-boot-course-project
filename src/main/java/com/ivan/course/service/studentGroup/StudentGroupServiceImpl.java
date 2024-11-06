@@ -6,6 +6,8 @@ import com.ivan.course.validation.age.Age;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentGroupServiceImpl implements StudentGroupService {
 
@@ -19,5 +21,10 @@ public class StudentGroupServiceImpl implements StudentGroupService {
     @Override
     public StudentGroup save(StudentGroup studentGroup) {
         return studentGroupRepository.save(studentGroup);
+    }
+
+    @Override
+    public List<StudentGroup> getGroupsByLanguageAndTeacher(String language, int teacherId) {
+        return studentGroupRepository.findGroupsByLanguageAndTeacher(language, teacherId);
     }
 }
