@@ -35,4 +35,26 @@ public interface StudentDataRepository extends JpaRepository<StudentData, Intege
             WHERE p.payment <= (0.5 * c.price)
     """, nativeQuery = true)
     List<StudentData> findStudentsWithCoursePaymentsOf50Percent();
+
+    @Query(value = """
+        SELECT s.*
+        FROM student_data s
+        JOIN certificate c ON s.id = c.student_id
+        JOIN course co ON c.course_id = co.id
+        GROUP BY s.id
+        HAVING COUNT(DISTINCT co.language_level) >= 3
+    """, nativeQuery = true)
+    List<StudentData> findStudentsWithThreeOrMoreCourseLevels();
+
+    @Query(value = """
+        SELECT sd.*
+        FROM student_data sd
+        JOIN groups_students gs ON sd.id = gs.student_id
+        JOIN student_group sg ON gs.group_id = sg.id
+        JOIN course c ON sg.id = c.student_group_id
+        GROUP BY sd.id
+        HAVING COUNT(DISTINCT CASE WHEN c.language = 'German' THEN 1 END) > 0
+           OR COUNT(DISTINCT c.language) >= 2;
+    """, nativeQuery = true)
+    List<StudentData> findStudentsWhoLearnGermanOrTwoLanguages();
 }

@@ -23,13 +23,13 @@
                     <div class="col-md-6">
                         <label for="language" class="form-label">Select Language:</label>
                         <select id="language" name="selectedLanguage" class="form-control">
-                            <option th:each="language : ${languages}" th:value="${language}" th:text="${language}" th:selected="${language == 'English'}"></option>
+                            <option th:each="language : ${languages}" th:value="${language}" th:text="${language}" th:selected="${language == selectedLanguage}"></option>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label for="teacher" class="form-label">Select Teacher:</label>
                         <select id="teacher" name="selectedTeacherId" class="form-control">
-                            <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.firstName}"></option>
+                            <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.firstName}" th:selected="${teacher == selectedTeacher}"></option>
                         </select>
                     </div>
                 </div>

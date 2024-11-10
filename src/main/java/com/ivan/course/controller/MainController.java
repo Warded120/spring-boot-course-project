@@ -1,5 +1,6 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.constants.CourseState;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.service.course.CourseService;
@@ -29,7 +30,7 @@ public class MainController {
     @GetMapping("/discover")
     public String discover(Model theModel) {
 
-        List<Course> courses = courseService.findAll();
+        List<Course> courses = courseService.findByCourseStateNotEqual(CourseState.FINISHED);
 
         theModel.addAttribute("courses", courses);
 
@@ -47,7 +48,7 @@ public class MainController {
 
         List<Course> courses;
         if(student == null) {
-            courses = courseService.findAll();
+            courses = courseService.findByCourseStateNotEqual(CourseState.FINISHED);
         } else {
             courses = courseService.findNotEnrolledCoursesByStudent(student);
         }

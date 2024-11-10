@@ -1,0 +1,13 @@
+INSERT INTO public.groups_students (group_id, student_id) VALUES (4, 1);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (4, 2);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (4, 3);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (4, 4);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (4, 5);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (1, 1);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (1, 2);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (1, 3);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (1, 4);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (1, 5);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (1, 6);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (2, 1);
+INSERT INTO public.groups_students (group_id, student_id) VALUES (2, 6);

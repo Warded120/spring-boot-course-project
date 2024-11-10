@@ -1,0 +1,9 @@
+INSERT INTO public.users_roles (user_id, role_id) VALUES (1, 1);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (2, 2);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (3, 3);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (4, 4);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (5, 5);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (6, 6);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (11, 19);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (11, 20);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (12, 21);

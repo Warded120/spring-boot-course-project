@@ -8,4 +8,6 @@ public interface TeacherDataService {
     TeacherData save(TeacherData teacherData);
     List<TeacherData> findAll();
     List<TeacherData> findOneTwoThreeLanguageTeachers();
+
+    TeacherData findById(int teacherId);
 }

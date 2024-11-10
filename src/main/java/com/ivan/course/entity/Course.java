@@ -38,7 +38,7 @@ public class Course {
 
     @Column(name = "price")
     private float price;
-    
+
     @Column(name = "state")
     @Enumerated(EnumType.STRING)
     private CourseState state;
@@ -239,5 +239,15 @@ public class Course {
         } while (currentLLevel.compareTo(languageLevel) < 0);
 
         return currentPrice;
+    }
+
+    public void changePricesForStudents(float scale) {
+        studentGroup.getStudents()
+                .forEach(
+                    st -> st.getCoursePayments()
+                        .stream()
+                        .filter(course -> course.getCourse().equals(this))
+                            .forEach(course -> course.setPayment(course.getPayment() * scale)) // +20% or -5%
+                );
     }
 }

@@ -1,18 +1,14 @@
 package com.ivan.course.service.course;
 
+import com.ivan.course.constants.CourseState;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.StudentGroup;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.repo.CourseRepository;
-import com.ivan.course.repo.StudentRepository;
 import com.ivan.course.service.student.StudentService;
-import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -40,6 +36,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<Course> findByCourseStateNotEqual(CourseState state) {
+        return courseRepository.findAllByStateNot(state);
+    }
+
+    @Override
     public Course findById(int id) {
         return courseRepository.findById(id).orElse(null);
     }
@@ -57,6 +58,17 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<Course> findNotEnrolledCoursesByStudentAndStateNot(Student sessionStudent, CourseState state) {
+
+        Student dbStudent = studentService.getStudentBySessionStudent(sessionStudent);
+        List<Course> studentCourses = studentService.getCoursesByStudent(dbStudent);
+
+        List<Course> courses = findByCourseStateNotEqual(state).stream().filter(course -> !studentCourses.contains(course)).toList();
+
+        return courses;
+    }
+
+    @Override
     public boolean isStudentEnrolled(Course course, Student sessionStudent) {
 
         boolean isEnrolled = false;
@@ -67,5 +79,15 @@ public class CourseServiceImpl implements CourseService {
         System.out.println("isEnrolled: " + isEnrolled);
 
         return isEnrolled;
+    }
+
+    @Override
+    public List<Course> findCoursesWithStudentCountLessThan(int minStudents) {
+        return courseRepository.findCoursesWithStudentCountLessThan(minStudents);
+    }
+
+    @Override
+    public List<Course> findCoursesWithStudentCountEquals(int count) {
+        return courseRepository.findCoursesWithStudentCountEquals(count);
     }
 }

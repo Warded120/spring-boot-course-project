@@ -63,6 +63,13 @@ public class Schedule {
     public List<String> getFormattedSchedule(int amount) {
         LocalDateTime today = LocalDateTime.now();
 
+        if(amount < 0) {
+            return schedule.stream()
+                    .filter(dateTime -> dateTime.isAfter(today) || dateTime.isEqual(today))
+                    .map(dateTime -> dateTime.format(formatter))
+                    .collect(Collectors.toList());
+        }
+
         // Filter schedule to include only future or today's dates and limit to specified amount
         return schedule.stream()
                 .filter(dateTime -> dateTime.isAfter(today) || dateTime.isEqual(today))

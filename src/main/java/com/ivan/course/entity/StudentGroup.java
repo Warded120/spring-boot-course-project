@@ -54,4 +54,20 @@ public class StudentGroup {
             System.out.println("student already exists");
         }
     }
+
+    public List<CoursePayment> getStudentsPayments() {
+        List<CoursePayment> thisCoursePayments = new ArrayList<>();
+        for (StudentData student : students) {
+            List<CoursePayment> payments = student.getCoursePayments();
+            CoursePayment thisCoursePayment = payments.stream().filter(coursePayment -> coursePayment.getCourse() == course).findFirst().orElse(null);
+
+            if(thisCoursePayment != null) {
+                thisCoursePayments.add(thisCoursePayment);
+            }
+        }
+
+        System.out.println(thisCoursePayments);
+
+        return thisCoursePayments;
+    }
 }

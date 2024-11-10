@@ -36,4 +36,14 @@ public class StudentDataServiceImpl implements StudentDataService {
     public List<StudentData> findStudentsWithCoursePaymentsOf50Percent() {
         return studentDataRepository.findStudentsWithCoursePaymentsOf50Percent();
     }
+
+    @Override
+    public List<StudentData> findStudentsWithThreeOrMoreCourseLevels() {
+        return studentDataRepository.findStudentsWithThreeOrMoreCourseLevels();
+    }
+
+    @Override
+    public List<StudentData> findStudentsWhoLearnGermanOrTwoLanguages() {
+        return studentDataRepository.findStudentsWhoLearnGermanOrTwoLanguages();
+    }
 }

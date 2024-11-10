@@ -89,4 +89,8 @@ public class StudentData extends UserData {
         }
         this.certificates.add(certificate);
     }
+
+    public void minusTenPercentDiscount() {
+        coursePayments.forEach(payment -> payment.setPayment(payment.getPayment() * 0.9f)); // minus 10% from the price
+    }
 }

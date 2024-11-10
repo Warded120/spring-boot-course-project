@@ -1,7 +1,11 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.constants.CourseState;
 import com.ivan.course.entity.Course;
+import com.ivan.course.entity.Schedule;
 import com.ivan.course.entity.StudentGroup;
+import com.ivan.course.entity.student.StudentData;
+import com.ivan.course.entity.teacher.TeacherData;
 import com.ivan.course.service.course.CourseService;
 import com.ivan.course.service.studentData.StudentDataService;
 import com.ivan.course.service.studentGroup.StudentGroupService;
@@ -56,6 +60,9 @@ public class QueriesController {
         theModel.addAttribute("languages", languages);
         theModel.addAttribute("teachers", teacherDataService.findAll());
 
+        theModel.addAttribute("selectedLanguage", "English");
+        theModel.addAttribute("selectedTeacher", teacherDataService.findAll().getFirst());
+
         return "queries/groups-by-language-and-teacher";
     }
 
@@ -70,6 +77,9 @@ public class QueriesController {
         theModel.addAttribute("studentGroupCourses", studentGroupCourses);
         theModel.addAttribute("languages", languages);
         theModel.addAttribute("teachers", teacherDataService.findAll());
+
+        theModel.addAttribute("selectedLanguage", language);
+        theModel.addAttribute("selectedTeacher", teacherDataService.findById(teacherId));
 
         return "queries/groups-by-language-and-teacher";
     }
@@ -144,5 +154,84 @@ public class QueriesController {
         }
 
         return "queries/students-course-payments";
+    }
+
+    // query 6
+    @GetMapping("/studentsCourseLevels")
+    public String findStudentsWithCourseLevels(Model theModel) {
+        List<StudentData> students = studentDataService.findStudentsWithThreeOrMoreCourseLevels();
+
+        for (StudentData student : students) {
+            student.minusTenPercentDiscount();
+        }
+
+        theModel.addAttribute("students", students);
+
+        return "queries/students-course-levels";
+    }
+
+    // query 7
+    @GetMapping("/germanStudents")
+    public String findStudentsWhoLearnGermanOrTwoLanguages(Model theModel) {
+        theModel.addAttribute("students", studentDataService.findStudentsWhoLearnGermanOrTwoLanguages());
+
+        return "queries/german-students";
+    }
+
+    // query 8
+    @GetMapping("/getSmallGroups")
+    public String findSmallGroups(Model theModel) {
+        List<Course> courses = courseService.findCoursesWithStudentCountLessThan(5);
+
+        for (Course course : courses) {
+            course.changePricesForStudents(1.2f);
+        }
+
+        theModel.addAttribute("courses", courses);
+
+        return "queries/small-groups";
+    }
+
+    // query 9
+    @GetMapping("/getFullGroups")
+    public String findFullGroups(Model theModel) {
+        List<Course> courses = courseService.findCoursesWithStudentCountEquals(20);
+
+        for (Course course : courses) {
+            course.changePricesForStudents(0.95f);
+        }
+
+        theModel.addAttribute("courses", courses);
+
+        return "queries/full-groups";
+    }
+
+    // query 10
+    @GetMapping("/courseSchedule")
+    public String getCourseSchedule(Model theModel) {
+
+        List<Course> startedCourses = courseService.findByCourseStateNotEqual(CourseState.CREATED);
+        theModel.addAttribute("courses", startedCourses);
+        theModel.addAttribute("selectedCourse", startedCourses.getFirst());
+
+        theModel.addAttribute("schedule", new ArrayList<Schedule>());
+
+        return "queries/course-schedule-by-teacher";
+    }
+
+    @PostMapping("/courseSchedule")
+    public String getCourseSchedule(@RequestParam("selectedCourseId") int courseId,
+                                    Model theModel) {
+
+        List<Course> startedCourses = courseService.findByCourseStateNotEqual(CourseState.CREATED);
+        Course selectedCourse = courseService.findById(courseId);
+
+        theModel.addAttribute("courses", startedCourses);
+        theModel.addAttribute("selectedCourse", selectedCourse);
+
+        theModel.addAttribute("schedule", selectedCourse.getSchedule().getFormattedSchedule(-1));
+
+        return "queries/course-schedule-by-teacher";
+
     }
 }

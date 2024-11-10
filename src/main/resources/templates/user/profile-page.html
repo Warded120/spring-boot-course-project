@@ -86,6 +86,11 @@
             <a th:href="@{/queries/failedStudents}" class="btn btn-primary">Find Failed Students</a>
             <a th:href="@{/queries/teachersLanguages}" class="btn btn-primary">Find Teachers Who teach 1-3 languages</a>
             <a th:href="@{/queries/studentsCoursePayments}" class="btn btn-primary">Find Students With Course Payments</a>
+            <a th:href="@{/queries/studentsCourseLevels}" class="btn btn-primary">Find Students With 3 Or More Course Levels</a>
+            <a th:href="@{/queries/germanStudents}" class="btn btn-primary">Find Students With 2 Or More Languages Or German</a>
+            <a th:href="@{/queries/getSmallGroups}" class="btn btn-primary">Find Groups where Not Enough Students</a>
+            <a th:href="@{/queries/getFullGroups}" class="btn btn-primary">Find Full Groups</a>
+            <a th:href="@{/queries/courseSchedule}" class="btn btn-primary">Get Course Schedule</a>
             <form action="#" th:action="@{/logout}" method="post">
                 <input class="btn btn-danger " type="submit" value="Logout">
             </form>

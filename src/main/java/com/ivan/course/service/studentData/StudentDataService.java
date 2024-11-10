@@ -9,4 +9,6 @@ public interface StudentDataService {
     List<StudentData> findFailedStudents();
     List<StudentData> findStudentsWithoutCoursePayments();
     List<StudentData> findStudentsWithCoursePaymentsOf50Percent();
+    List<StudentData> findStudentsWithThreeOrMoreCourseLevels();
+    List<StudentData> findStudentsWhoLearnGermanOrTwoLanguages();
 }

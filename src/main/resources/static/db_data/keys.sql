@@ -1,0 +1,12 @@
+INSERT INTO public.keys (id, password) VALUES (2, '$2a$10$DbuPbmj.VnxzfoO5YfEbJez.xYRRV9wJivpK6J9VnSH4XGi/wI5sy');
+INSERT INTO public.keys (id, password) VALUES (3, '$2a$10$Tzkbbl8kVHpJI/5FTnX/SeeO7YwyPOIaRW1EvGNnCJi8DgJOm9RqS');
+INSERT INTO public.keys (id, password) VALUES (4, '$2a$10$fj808IAjwtSlbzt.q6uuwOuOFy.3/sYeR2chl9kvEaOrUj.ZZ575i');
+INSERT INTO public.keys (id, password) VALUES (5, '$2a$10$/ldDA6E0narmp2UCwyN9NOQ.7Qjjkt21M0Q1Wre58pW9h6ztTdII2');
+INSERT INTO public.keys (id, password) VALUES (6, '$2a$10$MaDMkUZM6eg5gXLlww230OKty/pc/TNQWCnGD/4u0sjJhQUCxjD5W');
+INSERT INTO public.keys (id, password) VALUES (7, '$2a$10$MaDMkUZM6eg5gXLlww230OKty/pc/TNQWCnGD/4u0sjJhQUCxjD5W');
+INSERT INTO public.keys (id, password) VALUES (8, '$2a$10$ZqHyiZtct3MUtynRwR0qOOvU8aZFpS8oYwiSXebjUR4wimtVV32C2');
+INSERT INTO public.keys (id, password) VALUES (9, '$2a$10$me1M6xVS45.K3JatH9c.LuwYzz00b2VcNM6IKwyMLpkQdxmUXJUvC');
+INSERT INTO public.keys (id, password) VALUES (11, '$2a$10$YwG2ZBkjYFycNrkqINtmE.b1D7aOIuCG23uX1SIfyeCUj6Bweq3S6');
+INSERT INTO public.keys (id, password) VALUES (15, '$2a$10$me1M6xVS45.K3JatH9c.LuwYzz00b2VcNM6IKwyMLpkQdxmUXJUvC');
+INSERT INTO public.keys (id, password) VALUES (16, '$2a$10$DhC8i5eq2MaA8WH7/xZeDO/pjJcK73K.e0pGOW8YNHOdkYbFAqfXi');
+INSERT INTO public.keys (id, password) VALUES (17, '$2a$10$dlK3z/Fv6zyNdcQ.VKTeQ.3ghaJw5WV4oRZh0MPyBtJ22eDc3wDZO');

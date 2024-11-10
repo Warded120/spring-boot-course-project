@@ -31,4 +31,9 @@ public class TeacherDataServiceImpl implements TeacherDataService {
     public List<TeacherData> findOneTwoThreeLanguageTeachers() {
         return teacherDataRepository.findOneTwoThreeLanguageTeachers();
     }
+
+    @Override
+    public TeacherData findById(int teacherId) {
+        return teacherDataRepository.findById(teacherId).orElse(null);
+    }
 }

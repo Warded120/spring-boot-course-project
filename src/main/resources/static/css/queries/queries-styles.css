@@ -128,3 +128,38 @@ body {
 .logo {
     width: 50px;
 }
+.scrollable-lesson-dates {
+    max-height: 200px; /* Adjust height as needed */
+    overflow-y: auto;
+}
+
+.list-group-item {
+    background-color: #333; /* Dark background for each lesson item */
+    border: 1px solid #FFD700; /* Yellow border around each lesson */
+    color: #FFD700; /* Yellow text color */
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.lesson-item {
+    font-weight: 500;
+    color: #FFD700;
+    font-size: 1rem; /* Adjust font size */
+}
+
+/* Hover and active states for lesson items */
+.list-group-item:hover {
+    background-color: #444; /* Slightly lighter on hover */
+    color: #FFD700;
+    border-color: #FFC107; /* Brighten border on hover */
+}
+
+.list-group-item:active {
+    background-color: #555; /* Darker when clicked */
+    border-color: #FFB300;
+}
