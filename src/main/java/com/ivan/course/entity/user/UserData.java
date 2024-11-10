@@ -33,6 +33,12 @@ public class UserData {
         this.birthDate = birthDate;
     }
 
+    public void update(String firstName, String lastName, LocalDate birthDate) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setBirthDate(birthDate);
+    }
+
     public String getFullName() {
         return getFirstName() + " " + getLastName();
     }

@@ -28,7 +28,7 @@ public class Teacher extends User {
         super(teacherDto.getId(), teacherDto.getUsername(), teacherDto.getPassword(), teacherDto.isEnabled());
         this.id = teacherDto.getId();
         this.roles = getRolesFromTemplate(teacherDto.getTopRole());
-        this.teacherData = new TeacherData(teacherDto.getId(), teacherDto.getFirstName(), teacherDto.getLastName(), teacherDto.getBirthDate());
+        this.teacherData = new TeacherData(teacherDto.getId(), teacherDto.getFirstName(), teacherDto.getLastName(), teacherDto.getBirthDate(), this);
     }
 
     private List<Role> getRolesFromTemplate(String topRole) {

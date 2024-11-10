@@ -20,11 +20,21 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(255, 215, 0, 0.5); /* Glowing effect */
     margin-bottom: 20px;
     padding: 15px;
+    height: 300px;
 }
 .course-card h5 {
     margin-bottom: 15px;
     text-align: center; /* Center align course title */
 }
+
+.wrap-excess {
+    white-space: nowrap; /* Prevents the text from wrapping to the next line */
+    overflow: hidden; /* Hides the text that overflows */
+    text-overflow: ellipsis; /* Adds "..." at the end of the truncated text */
+    display: block; /* Ensure it behaves like a block element */
+    width: 100%; /* Optional: Set the width to make sure the text truncates within its container */
+}
+
 .course-card p {
     margin-bottom: 10px; /* Consistent margin for paragraphs */
 }
@@ -52,11 +62,18 @@ body {
     outline: none;
 }
 
+.btn-container {
+    display: flex;  /* Using Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%;  /* Fill the parent container's height */
+}
+
 .btn-primary-inverted {
     color: #000; /* Black button background */
     background-color: #FFD700; /* Yellow text on button */
     border: none;
-    width: 100%; /* Full width for button */
+    width: 80%; /* Full width for button */
     padding: 10px;
     border-radius: 5px;
     font-weight: bold;

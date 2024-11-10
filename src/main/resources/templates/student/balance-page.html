@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Balance</title>
+  <title>Мій Баланс</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/student/balance-page.css}">
 </head>
 <body>
-
+  <!-- Header with logo -->
+  <div class="left-top-corner">
+    <a class="navbar-brand" th:href="@{/student/profile}">
+      <img th:src="@{/images/G-logo-black.webp}" alt="G-Certificates" class="logo">
+    </a>
+  </div>
   <div class="card">
     <div class="card-header">
-      <h2>Balance Management</h2>
+      <h2>Управління Балансом</h2>
     </div>
     <form th:action="@{/student/balance}" th:object="${student}" method="post" class="card-body">
       <!-- Balance Text -->
       <div class="mb-2">
-        <p class="form-label">Currently, your balance is $<span th:text="${session.student.getStudentData().balance}">0.00</span></p>
+        <p class="form-label">На даний момент ваш баланс складає $<span th:text="${session.student.getStudentData().balance}">0.00</span></p>
       </div>
 
       <!-- Deposit Input -->
       <div class="mb-2">
-        <label for="deposit" class="form-label">Enter the deposit amount:</label>
-        <input type="number" id="deposit" th:value="${depositAmount}" name="depositAmount" class="form-control" placeholder="Enter amount">
+        <label for="deposit" class="form-label">Введіть суму депозиту:</label>
+        <input type="number" id="deposit" th:value="${depositAmount}" name="depositAmount" class="form-control" placeholder="Введіть суму">
       </div>
 
       <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary mt-3">Deposit</button>
-      <a onclick="window.history.back()" class="btn btn-danger">Go Back</a>
+      <button type="submit" class="btn btn-primary mt-3">Поповнити</button>
+      <a onclick="window.history.back()" class="btn btn-danger">Назад</a>
     </form>
   </div>
-
 </body>
 </html>

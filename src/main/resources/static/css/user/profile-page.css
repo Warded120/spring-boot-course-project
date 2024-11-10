@@ -36,6 +36,12 @@ body {
     margin-top: 20px; /* Add some spacing above the buttons */
 }
 
+.query-list {
+    overflow-y: auto;
+    height: 400px;
+    margin-bottom: 10px;
+}
+
 .profile-card {
     background-color: #222; /* Slightly lighter dark background for the card */
     padding: 20px;

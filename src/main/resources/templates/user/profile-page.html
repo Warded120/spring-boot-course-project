@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org"
+<html lang="uk" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>Профіль</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/user/profile-page.css}">
 </head>
@@ -19,25 +19,25 @@
     <!-- Student Information -->
     <div sec:authorize="hasRole('ROLE_STUDENT')" class="profile-card">
         <div class="display-flex-row">
-            <img th:src="@{/images/default-profile-image.png}" alt="Student Profile Picture" class="profile-picture">
+            <img th:src="@{/images/default-profile-image.png}" alt="Зображення профілю студента" class="profile-picture">
             <div class="profile-info">
-                <h2>Profile Information</h2>
-                <strong>Username:</strong> <span th:text="${session.student.username}"></span><br>
-                <strong>First Name:</strong> <span th:text="${session.student.studentData.firstName}"></span><br>
-                <strong>Last Name:</strong> <span th:text="${session.student.studentData.lastName}"></span><br>
-                <strong>Birth Date:</strong> <span th:text="${session.student.studentData.birthDate}"></span><br>
-                <strong>Age:</strong> <span th:text="${session.student.studentData.getAge()}"></span><br>
-                <strong>Balance:</strong> <span th:text="'$' + ${session.student.studentData.balance}"></span><br>
+                <h2>Інформація профілю</h2>
+                <strong>Логін:</strong> <span th:text="${session.student.username}"></span><br>
+                <strong>Ім'я:</strong> <span th:text="${session.student.studentData.firstName}"></span><br>
+                <strong>Призвище:</strong> <span th:text="${session.student.studentData.lastName}"></span><br>
+                <strong>Дата народження:</strong> <span th:text="${session.student.studentData.birthDate}"></span><br>
+                <strong>Вік:</strong> <span th:text="${session.student.studentData.getAge()}"></span><br>
+                <strong>Баланс:</strong> <span th:text="'$' + ${session.student.studentData.balance}"></span><br>
             </div>
         </div>
         <div class="display-flex-col">
-            <a th:href="@{/student/profile/update}" class="btn btn-primary">Update profile</a>
-            <a th:href="@{/student/courses}" class="btn btn-primary">View my courses</a>
-            <a th:href="@{/student/balance}" class="btn btn-primary">Manage Balance</a>
-            <a th:href="@{/student/payments}" class="btn btn-primary">Course payments</a>
-            <a th:href="@{/student/certificates}" class="btn btn-primary">My Certificates</a>
+            <a th:href="@{/student/profile/update}" class="btn btn-primary">Оновити профіль</a>
+            <a th:href="@{/student/courses}" class="btn btn-primary">Переглянути мої курси</a>
+            <a th:href="@{/student/balance}" class="btn btn-primary">Управління балансом</a>
+            <a th:href="@{/student/payments}" class="btn btn-primary">Платежі за курси</a>
+            <a th:href="@{/student/certificates}" class="btn btn-primary">Мої сертифікати</a>
             <form action="#" th:action="@{/logout}" method="post">
-                <input class="btn btn-danger " type="submit" value="Logout">
+                <input class="btn btn-danger " type="submit" value="Вийти">
             </form>
         </div>
     </div>
@@ -45,22 +45,22 @@
     <!-- Teacher Information -->
     <div sec:authorize="hasRole('ROLE_TEACHER')" class="profile-card">
         <div class="display-flex-row">
-            <img th:src="@{/images/default-profile-image.png}" alt="Teacher Profile Picture" class="profile-picture">
+            <img th:src="@{/images/default-profile-image.png}" alt="Зображення профілю вчителя" class="profile-picture">
             <div class="profile-info">
-                <h2>Profile Information</h2>
-                <strong>Username:</strong> <span th:text="${session.teacher.username}"></span><br>
-                <strong>First Name:</strong> <span th:text="${session.teacher.teacherData.firstName}"></span><br>
-                <strong>Last Name:</strong> <span th:text="${session.teacher.teacherData.lastName}"></span><br>
-                <strong>Birth Date:</strong> <span th:text="${session.teacher.teacherData.birthDate}"></span><br>
-                <strong>Age:</strong> <span th:text="${session.teacher.teacherData.getAge()}"></span><br>
+                <h2>Інформація профілю</h2>
+                <strong>Логін:</strong> <span th:text="${session.teacher.username}"></span><br>
+                <strong>Ім'я:</strong> <span th:text="${session.teacher.teacherData.firstName}"></span><br>
+                <strong>Призвище:</strong> <span th:text="${session.teacher.teacherData.lastName}"></span><br>
+                <strong>Дата народження:</strong> <span th:text="${session.teacher.teacherData.birthDate}"></span><br>
+                <strong>Вік:</strong> <span th:text="${session.teacher.teacherData.getAge()}"></span><br>
             </div>
         </div>
         <div class="display-flex-col">
-            <a th:href="@{/teacher/profile/update}" class="btn btn-primary">Update profile</a>
-            <a th:href="@{/course/add}" class="btn btn-primary">Create a new course</a>
-            <a th:href="@{/teacher/courses}" class="btn btn-primary">View my courses</a>
+            <a th:href="@{/teacher/profile/update}" class="btn btn-primary">Оновити профіль</a>
+            <a th:href="@{/course/add}" class="btn btn-primary">Створити новий курс</a>
+            <a th:href="@{/teacher/courses}" class="btn btn-primary">Переглянути мої курси</a>
             <form action="#" th:action="@{/logout}" method="post">
-                <input class="btn btn-danger " type="submit" value="Logout">
+                <input class="btn btn-danger " type="submit" value="Вийти">
             </form>
         </div>
     </div>
@@ -68,31 +68,35 @@
     <!-- Operator Information -->
     <div sec:authorize="hasRole('ROLE_OPERATOR')" class="profile-card">
         <div class="display-flex-row">
-            <img th:src="@{/images/default-profile-image.png}" alt="Student Profile Picture" class="profile-picture">
+            <img th:src="@{/images/default-profile-image.png}" alt="Зображення профілю студента" class="profile-picture">
             <div class="profile-info">
-                <h2>Profile Information</h2>
-                <strong>Username:</strong> <span th:text="${session.superUser.username}"></span><br>
-                <strong>First Name:</strong> <span th:text="${session.superUser.superUserData.firstName}"></span><br>
-                <strong>Last Name:</strong> <span th:text="${session.superUser.superUserData.lastName}"></span><br>
-                <strong>Birth Date:</strong> <span th:text="${session.superUser.superUserData.birthDate}"></span><br>
-                <strong>Age:</strong> <span th:text="${session.superUser.superUserData.getAge()}"></span><br>
+                <h2>Інформація профілю</h2>
+                <strong>Логін:</strong> <span th:text="${superUser.username}"></span><br>
+                <strong>Ім'я:</strong> <span th:text="${superUser.superUserData.firstName}"></span><br>
+                <strong>Прізвище:</strong> <span th:text="${superUser.superUserData.lastName}"></span><br>
+                <strong>Дата народження:</strong> <span th:text="${superUser.superUserData.birthDate}"></span><br>
+                <strong>Вік:</strong> <span th:text="${superUser.superUserData.getAge()}"></span><br>
             </div>
         </div>
         <div class="display-flex-col">
-            <a th:href="@{/operator/profile/update}" class="btn btn-primary">Update profile</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/operator/create-operator}" class="btn btn-primary">Create Operator User</a>
-            <a th:href="@{/queries/groupsByLanguageAndTeacher}" class="btn btn-primary">Get Student Groups By Language and Teacher</a>
-            <a th:href="@{/queries/courseFullPriceByLevel}" class="btn btn-primary">Calculate Course Price by Language Levels</a>
-            <a th:href="@{/queries/failedStudents}" class="btn btn-primary">Find Failed Students</a>
-            <a th:href="@{/queries/teachersLanguages}" class="btn btn-primary">Find Teachers Who teach 1-3 languages</a>
-            <a th:href="@{/queries/studentsCoursePayments}" class="btn btn-primary">Find Students With Course Payments</a>
-            <a th:href="@{/queries/studentsCourseLevels}" class="btn btn-primary">Find Students With 3 Or More Course Levels</a>
-            <a th:href="@{/queries/germanStudents}" class="btn btn-primary">Find Students With 2 Or More Languages Or German</a>
-            <a th:href="@{/queries/getSmallGroups}" class="btn btn-primary">Find Groups where Not Enough Students</a>
-            <a th:href="@{/queries/getFullGroups}" class="btn btn-primary">Find Full Groups</a>
-            <a th:href="@{/queries/courseSchedule}" class="btn btn-primary">Get Course Schedule</a>
+
+            <div class="query-list">
+                <a th:href="@{/operator/profile/update}" class="btn btn-primary">Оновити профіль</a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/operator/create-operator}" class="btn btn-primary">Створити користувача оператора</a>
+                <a th:href="@{/queries/groupsByLanguageAndTeacher}" class="btn btn-primary">Отримати групи студентів за мовою та викладачем</a>
+                <a th:href="@{/queries/courseFullPriceByLevel}" class="btn btn-primary">Обчислити ціну курсу за рівнями мов</a>
+                <a th:href="@{/queries/failedStudents}" class="btn btn-primary">Знайти студентів, які не склали</a>
+                <a th:href="@{/queries/teachersLanguages}" class="btn btn-primary">Знайти вчителів, які викладають 1-3 мови</a>
+                <a th:href="@{/queries/studentsCoursePayments}" class="btn btn-primary">Знайти студентів з оплатами за курси</a>
+                <a th:href="@{/queries/studentsCourseLevels}" class="btn btn-primary">Знайти студентів з 3 або більше рівнями курсів</a>
+                <a th:href="@{/queries/germanStudents}" class="btn btn-primary">Знайти студентів з 2 або більше мовами або німецькою</a>
+                <a th:href="@{/queries/getSmallGroups}" class="btn btn-primary">Знайти групи, де недостатньо студентів</a>
+                <a th:href="@{/queries/getFullGroups}" class="btn btn-primary">Знайти заповнені групи</a>
+                <a th:href="@{/queries/courseSchedule}" class="btn btn-primary">Отримати розклад курсу</a>
+            </div>
+
             <form action="#" th:action="@{/logout}" method="post">
-                <input class="btn btn-danger " type="submit" value="Logout">
+                <input class="btn btn-danger " type="submit" value="Вийти">
             </form>
         </div>
     </div>

@@ -24,19 +24,21 @@ body {
     font-size: 16px;
     margin-bottom: 20px;
 }
-.btn-custom {
-    background-color: #FFD700; /* Yellow button */
-    color: #000; /* Black text on button */
+.btn-danger {
+    background-color: #CC2222;
     border: none;
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
+    color: #FFF;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
 }
-.btn-custom:hover {
-    background-color: #FFC107; /* Lighter yellow on hover */
-    color: #000;
+.btn-danger:hover {
+    background-color: #AA2222 !important;
+}
+.btn-danger:active {
+    background-color: #772222 !important;
 }
 .access-denied-image {
     max-width: 100%;

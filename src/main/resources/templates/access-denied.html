@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Access Denied</title>
+    <title>Доступ заборонено</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{css/access-denied.css}">
+    <link rel="stylesheet" th:href="@{/css/access-denied.css}">
 </head>
 <body>
 
 <div class="access-denied-container">
-    <img src="https://cdn-icons-png.flaticon.com/128/719/719197.png" alt="Access Denied" class="access-denied-image">
-    <h2>Access Denied</h2>
-    <p>You do not have permission to access this page.</p>
-    <a th:href="@{/discover}" class="btn btn-custom">Back to Home</a>
+    <img src="https://cdn-icons-png.flaticon.com/128/719/719197.png" alt="Доступ заборонено" class="access-denied-image">
+    <h2>Доступ заборонено</h2>
+    <p>У вас немає прав для доступу до цієї сторінки.</p>
+    <a onclick="window.history.back()" class="btn btn-danger">Назад</a>
 </div>
 
 </body>

@@ -64,20 +64,17 @@ public class StudentController {
                          HttpSession session) {
 
         if(thereAreErrorsIn(theBindingResult, List.of("username", "password", "confirmPassword"))) {
-            System.out.println("errors exist");
             return "user/update-student-form";
         }
-        System.out.println("no errors exist");
 
-        System.out.println("studentDto = " + studentDto);
-        Student updatedStudent = new Student(studentDto);
-        System.out.println("updated student: " + updatedStudent);
+        Student dbStudent = studentService.findByUserId(studentDto.getId());
 
+        dbStudent.getStudentData().update(studentDto.getFirstName(), studentDto.getLastName(), studentDto.getBirthDate());
 
         //student.save(updatedStudent, false);
-        studentDataService.save(updatedStudent.getStudentData());
+        studentDataService.save(dbStudent.getStudentData());
 
-        session.setAttribute("student", updatedStudent);
+        session.setAttribute("student", dbStudent);
         currentStudentDto = studentDto;
 
         return "redirect:/student/profile/success";

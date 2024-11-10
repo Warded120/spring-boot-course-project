@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Balance Updated</title>
+  <title>Баланс Оновлено</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/student/balance-confirm-page.css}">
 </head>
 <body>
 <div class="card">
   <div class="card-header">
-    <h2>Deposit Successful!</h2>
+    <h2>Депозит успішно зараховано!</h2>
   </div>
   <div class="card-body">
     <!-- Confirmation Message -->
-    <p class="form-label text-center">Your new balance is $<span th:text="${session.student.studentData.balance}">0.00</span>.</p>
+    <p class="form-label text-center">Ваш новий баланс становить $<span th:text="${session.student.studentData.balance}">0.00</span>.</p>
 
     <!-- Go Back Button -->
-    <a th:href="@{/student/profile}" class="btn btn-primary mt-3">Go Back to Profile</a>
+    <a th:href="@{/student/profile}" class="btn btn-primary mt-3">Повернутися до профілю</a>
   </div>
 </div>
 

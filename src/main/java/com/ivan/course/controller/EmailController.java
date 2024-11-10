@@ -90,64 +90,64 @@ public class EmailController {
     private static String htmlTemplate =
             """
             <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Verification Code</title>
-                <style>
-                    body {
-                        background-color: #FFD700; /* Saturated yellow background */
-                        height: 100vh;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        margin: 0;
-                        font-family: Arial, sans-serif;
-                    }
-                    .email-container {
-                        background-color: #000; /* Black background for the email */
-                        padding: 40px;
-                        border-radius: 8px;
-                        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px 20px rgba(255, 215, 0, 0.5); /* Glowing effect */
-                        color: #FFD700; /* Yellow text */
-                        text-align: center;
-                        width: 80%;
-                        margin: auto;
-                    }
-                    .email-container h2 {
-                        color: #FFD700; /* Yellow text for heading */
-                        margin-bottom: 30px;
-                        font-weight: bold;
-                    }
-                    .verification-code {
-                        font-size: 24px;
-                        font-weight: bold;
-                        color: #FFD700; /* Yellow verification code */
-                        background-color: #333; /* Dark gray background for the code */
-                        padding: 10px;
-                        border-radius: 4px;
-                        display: inline-block;
-                        margin: 20px 0;
-                    }
-                    .email-container p {
-                        color: #FFF; /* White text */
-                        font-size: 16px;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="email-container">
-                    <h2>Verification Code</h2>
-                    <p>Hello,</p>
-                    <p>To complete your account verification, please use the following code:</p>
-                    <div class="verification-code">
-                        ${verificationCode} <!-- Placeholder for the generated verification code -->
-                    </div>
-                    <p>If you did not request this, please ignore this email.</p>
-                </div>
-            </body>
-            </html>
+                   <html lang="uk">
+                   <head>
+                       <meta charset="UTF-8">
+                       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                       <title>Код підтвердження</title>
+                       <style>
+                           body {
+                               background-color: #FFD700; /* Saturated yellow background */
+                               height: 100vh;
+                               display: flex;
+                               justify-content: center;
+                               align-items: center;
+                               margin: 0;
+                               font-family: Arial, sans-serif;
+                           }
+                           .email-container {
+                               background-color: #000; /* Black background for the email */
+                               padding: 40px;
+                               border-radius: 8px;
+                               box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px 20px rgba(255, 215, 0, 0.5); /* Glowing effect */
+                               color: #FFD700; /* Yellow text */
+                               text-align: center;
+                               width: 80%;
+                               margin: auto;
+                           }
+                           .email-container h2 {
+                               color: #FFD700; /* Yellow text for heading */
+                               margin-bottom: 30px;
+                               font-weight: bold;
+                           }
+                           .verification-code {
+                               font-size: 24px;
+                               font-weight: bold;
+                               color: #FFD700; /* Yellow verification code */
+                               background-color: #333; /* Dark gray background for the code */
+                               padding: 10px;
+                               border-radius: 4px;
+                               display: inline-block;
+                               margin: 20px 0;
+                           }
+                           .email-container p {
+                               color: #FFF; /* White text */
+                               font-size: 16px;
+                           }
+                       </style>
+                   </head>
+                   <body>
+                       <div class="email-container">
+                           <h2>Код підтвердження</h2>
+                           <p>Привіт,</p>
+                           <p>Щоб завершити перевірку вашого акаунта, будь ласка, використайте наступний код:</p>
+                           <div class="verification-code">
+                               ${verificationCode} <!-- Placeholder for the generated verification code -->
+                           </div>
+                           <p>Якщо ви не запитували цей код, будь ласка, ігноруйте цей лист.</p>
+                       </div>
+                   </body>
+                   </html>
             """;
 
 }

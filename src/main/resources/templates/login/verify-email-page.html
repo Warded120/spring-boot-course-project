@@ -1,14 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification</title>
+    <title>Перевірка</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link rel="stylesheet" th:href="@{/css/login/verify-email-page.css}">-->
+    <link rel="stylesheet" th:href="@{/css/login/verify-email-page.css}">
+</head>
+<body>
+
+<div class="verification-container">
+    <h2>Перевірка</h2>
+    <form th:action="@{/verify}" th:object="${emailVerification}" method="post">
+
+        <!-- Місце для повідомлень: помилки, оповіщення тощо -->
+        <div class="form-group">
+            <div class="col-xs-15">
+                <div>
+                    <!-- Перевірка помилки входу -->
+                    <div th:if="${error}">
+                        <div class="red alert alert-danger col-xs-offset-1 col-xs-10">
+                            Код підтвердження невірний. Спробуйте ще раз
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="notification">Лист з кодом підтвердження було надіслано на: <span th:text="*{email}"/></p>
+
+        <!-- Поле для вводу коду підтвердження -->
+        <div class="form-group">
+            <input type="text" id="verificationCode" name="verificationCode" th:field="*{verificatoinCode}" class="form-control" placeholder="Введіть 6-значний код" maxlength="6" required>
+        </div>
+
+        <!-- Сховані поля -->
+        <input type="hidden" th:field="*{email}">
+        <input type="hidden" th:field="*{actualVerificatoinCode}">
+
+        <!-- Кнопка підтвердження -->
+        <button type="submit" class="btn btn-custom">Підтвердити</button>
+    </form>
+</div>
+
+</body>
+</html>
+<!--
     <style>
         body {
-            background-color: #FFD700; /* Saturated yellow background */
+            background-color: #FFD700; /* Насичений жовтий фон */
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -16,36 +56,36 @@
             margin: 0;
         }
         .verification-container {
-            background-color: #000; /* Black background for the form */
+            background-color: #000; /* Чорний фон для форми */
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px 20px rgba(255, 215, 0, 0.5); /* Glowing effect */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px 20px rgba(255, 215, 0, 0.5); /* Ефект світіння */
             text-align: center;
             width: 35%;
         }
         .verification-container h2 {
-            color: #FFD700; /* Yellow text for heading */
+            color: #FFD700; /* Жовтий колір тексту заголовка */
             margin-bottom: 30px;
             font-weight: bold;
         }
         .form-control {
-            background-color: #333; /* Dark gray for input fields */
+            background-color: #333; /* Темно-сірий колір для полів вводу */
             border: none;
-            color: #FFF; /* White text in input fields */
+            color: #FFF; /* Білий текст в полях вводу */
             border-radius: 4px;
             margin-bottom: 15px;
             padding: 10px;
         }
         .form-control::placeholder {
-            color: #B0B0B0; /* Light gray placeholder text */
+            color: #B0B0B0; /* Світло-сірий текст підказки */
         }
         .form-control:focus {
-            border-color: #FFD700; /* Yellow border on focus */
-            box-shadow: 0px 0px 5px rgba(255, 215, 0, 0.8); /* Yellow glow on focus */
+            border-color: #FFD700; /* Жовта рамка при фокусуванні */
+            box-shadow: 0px 0px 5px rgba(255, 215, 0, 0.8); /* Жовте світіння при фокусуванні */
         }
         .btn-custom {
-            background-color: #FFD700; /* Yellow button */
-            color: #000; /* Black text on button */
+            background-color: #FFD700; /* Жовта кнопка */
+            color: #000; /* Чорний текст на кнопці */
             border: none;
             width: 100%;
             padding: 10px;
@@ -54,51 +94,13 @@
             transition: background-color 0.3s ease;
         }
         .btn-custom:hover {
-            background-color: #FFC107; /* Lighter yellow on hover */
+            background-color: #FFC107; /* Світліший жовтий при наведенні */
             color: #000;
         }
         .notification {
-            color: #FFD700; /* Saturated yellow for the text */
+            color: #FFD700; /* Насичений жовтий колір тексту */
             margin-bottom: 20px;
         }
 
     </style>
-</head>
-<body>
-
-<div class="verification-container">
-    <h2>Verification</h2>
-    <form th:action="@{/verify}" th:object="${emailVerification}" method="post">
-
-        <!-- Place for messages: error, alert etc ... -->
-        <div class="form-group">
-            <div class="col-xs-15">
-                <div>
-                    <!-- Check for login error -->
-                    <div th:if="${error}">
-                        <div class="red alert alert-danger col-xs-offset-1 col-xs-10">
-                            Verification code is incorrect. Try again
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <p class="notification">An email with the verification code was sent to: <span th:text="*{email}"/></p>
-
-        <!-- Verification Code Input -->
-        <div class="form-group">
-            <input type="text" id="verificationCode" name="verificationCode" th:field="*{verificatoinCode}" class="form-control" placeholder="Enter 6-digit code" maxlength="6" required>
-        </div>
-
-        <!-- Hidden fields -->
-        <input type="hidden" th:field="*{email}">
-        <input type="hidden" th:field="*{actualVerificatoinCode}">
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-custom">Verify</button>
-    </form>
-</div>
-
-</body>
-</html>
+-->

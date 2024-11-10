@@ -33,7 +33,12 @@ public class SuperUserController {
     }
 
     @GetMapping("/profile")
-    public String profile() {
+    public String profile(HttpSession session, Model theModel) {
+
+        SuperUser superUser = (SuperUser) session.getAttribute("superUser");
+
+        theModel.addAttribute("superUser", superUser);
+
         return "/user/profile-page";
     }
 
@@ -60,12 +65,14 @@ public class SuperUserController {
         }
         System.out.println("no errors exist");
 
-        SuperUser updatedUser = new SuperUser(superUserDto);
+        SuperUser dbUser = superUserService.findById(superUserDto.getId());
 
-        superUserService.save(updatedUser, false, true);
+        dbUser.getSuperUserData().update(superUserDto.getFirstName(), superUserDto.getLastName(), superUserDto.getBirthDate());
+
+        superUserDataService.save(dbUser.getSuperUserData());
         currentSuperUserDto = superUserDto;
 
-        session.setAttribute("superUser", updatedUser);
+        session.setAttribute("superUser", dbUser);
 
         return "redirect:/operator/profile/success";
     }
@@ -93,7 +100,7 @@ public class SuperUserController {
         }
 
         SuperUser superUser = new SuperUser(superUserDto);
-        superUserService.save(superUser);
+        superUserService.save(superUser, true, false);
 
         return "redirect:/operator/create-operator/success";
     }

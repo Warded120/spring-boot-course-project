@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owned Courses</title>
+    <title>Мої курси</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/teacher/courses-list-page.css}">
 </head>
@@ -16,7 +16,7 @@
             <img th:src="@{/images/G-logo-black.webp}" alt="G-courses" class="logo">
         </a>
     </div>
-    <h2 class="text-center">My Owned Courses</h2>
+    <h2 class="text-center">Мої курси</h2>
 
     <!-- List Courses -->
     <div class="row">
@@ -24,35 +24,35 @@
         <div class="col-md-4" th:each="course : ${courses}">
             <div class="course-card">
                 <!-- Display course information -->
-                <h3 th:text="${course.name}">Course Name</h3>
-                <p th:text="${course.description}">Course Description</p>
-                <p><strong>Language:</strong> <span th:text="${course.language}">English</span></p>
-                <p><strong>Level:</strong> <span th:text="${course.languageLevel}">Beginner</span></p>
-                <p><strong>Price:</strong> $<span th:text="${course.price}">0.00</span></p>
+                <h3 th:text="${course.name}">Назва курсу</h3>
+                <p th:text="${course.description}">Опис курсу</p>
+                <p><strong>Мова:</strong> <span th:text="${course.language}">Англійська</span></p>
+                <p><strong>Рівень:</strong> <span th:text="${course.languageLevel}">Початковий</span></p>
+                <p><strong>Ціна:</strong> $<span th:text="${course.price}">0.00</span></p>
 
                 <!-- View Course button -->
-                <a th:href="@{/course/{id}(id=${course.id})}" class="btn btn-primary">View Course</a>
+                <a th:href="@{/course/{id}(id=${course.id})}" class="btn btn-primary">Переглянути курс</a>
 
                 <div th:if="${course.isStarted()}">
                     <!-- place for start examination button -->
-                    <a th:href="@{/course/examination/{id}(id=${course.id})}" class="btn btn-success">Start Examination</a>
-                    <p class="text-center m-3 mb-2">Course is started</p>
+                    <a th:href="@{/course/examination/{id}(id=${course.id})}" class="btn btn-success">Почати іспит</a>
+                    <p class="text-center m-3 mb-2">Курс розпочато</p>
                 </div>
                 <div th:unless="${course.isStarted()}">
 
                     <form th:if="${course.canBeStarted()}" th:action="@{/course/start/{id}(id=${course.id})}" method="post">
-                        <button type="submit" class="btn btn-success">Start Course</button>
+                        <button type="submit" class="btn btn-success">Розпочати курс</button>
                     </form>
 
                     <div th:if="${course.isFinished()}">
                         <!-- button to view examination results -->
-                        <a th:href="@{/course/exam-result/{courseId}(courseId=${course.id})}" class="btn btn-success">View Examination Result</a>
+                        <a th:href="@{/course/exam-result/{courseId}(courseId=${course.id})}" class="btn btn-success">Переглянути результати іспиту</a>
 
-                        <p class="text-center m-3 mb-2">Course is finished</p>
+                        <p class="text-center m-3 mb-2">Курс завершено</p>
                     </div>
 
                     <div class="text-center m-3 mb-2" th:if="${!course.canBeStarted() && !course.isFinished()}">
-                        Must be 5 students or more to start a course
+                        Потрібно 5 студентів або більше, щоб розпочати курс
                     </div>
                 </div>
             </div>

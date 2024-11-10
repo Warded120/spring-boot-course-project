@@ -26,9 +26,10 @@ public class TeacherData extends UserData {
     @OneToOne(mappedBy = "teacherData", orphanRemoval = true)
     private Teacher teacher;
 
-    public TeacherData(int id, String firstName, String lastName, LocalDate birthDate) {
+    public TeacherData(int id, String firstName, String lastName, LocalDate birthDate, Teacher teacher) {
         super(id, firstName, lastName, birthDate);
         courses = new ArrayList<>();
+        this.teacher = teacher;
     }
 
     public void addCourse(Course course) {

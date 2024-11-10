@@ -63,8 +63,8 @@ public class TeacherController {
         Teacher updatedTeacher = new Teacher(teacherDto);
 
         //set courses to updated teacher
-        Teacher teacherWithCourses = teacherService.findByUserId(updatedTeacher.getId());
-        List<Course> coursesOfTeacher = teacherWithCourses.getTeacherData().getCourses();
+        Teacher dbTeacher = teacherService.findByUserId(updatedTeacher.getId());
+        List<Course> coursesOfTeacher = dbTeacher.getTeacherData().getCourses();
         updatedTeacher.getTeacherData().setCourses(coursesOfTeacher);
 
         //teacherService.save(updatedTeacher, false);

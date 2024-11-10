@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enrollment Successful</title>
+    <title>Успішне Записування</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/course/course-enroll-confirmation.css}">
 </head>
@@ -12,27 +12,27 @@
 <div class="course-container">
     <div class="course-card">
         <div class="course-info">
-            <!-- Main Confirmation Text -->
+            <!-- Основний текст підтвердження -->
             <div class="text-center">
                 <h2 th:if="${status == 'SUCCESS'}" class="main-text">
-                    You successfully enrolled to this course
+                    Ви успішно записалися на цей курс
                 </h2>
                 <h2 th:if="${status == 'GROUP_FULL'}" class="main-text">
-                    You have not been enrolled. Course group is full
+                    Ви не записані. Група курсу повна
                 </h2>
                 <h2 th:if="${status == 'NOT_ENOUGH_BALANCE'}" class="main-text">
-                    You have not been enrolled. Not enough balance
+                    Ви не записані. Недостатньо коштів на балансі
                 </h2>
                 <h2 th:if="${status == 'LANGUAGE_IS_LEARNED'}" class="main-text">
-                    You have not been enrolled. You already learn this language
+                    Ви не записані. Ви вже вивчаєте цю мову
                 </h2>
                 <h2 th:if="${status == 'CANNOT_ENROLL'}" class="main-text">
-                    You have not been enrolled. Something went wrong
+                    Ви не записані. Сталася помилка
                 </h2>
             </div>
         </div>
 
-        <a th:href="@{/home}" class="btn btn-primary">Go Home</a>
+        <a th:href="@{/home}" class="btn btn-primary">На головну</a>
     </div>
 </div>
 

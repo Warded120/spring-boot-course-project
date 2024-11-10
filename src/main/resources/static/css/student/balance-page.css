@@ -69,3 +69,11 @@ body {
 .btn-danger:active {
     background-color: #772222 !important;
 }
+.left-top-corner {
+    position: absolute;
+    top: 15px;
+    left: 22px;
+}
+.logo {
+    width: 50px;
+}
