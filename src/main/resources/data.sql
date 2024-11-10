@@ -1,4 +1,4 @@
--- Step 1: Check if the user with the specified email exists
+/*-- Step 1: Check if the user with the specified email exists
 DO
 $$
     DECLARE
@@ -59,3 +59,36 @@ $$
         END IF;
     END;
 $$ LANGUAGE plpgsql;
+*/
+
+TRUNCATE TABLE users_roles CASCADE;
+TRUNCATE TABLE role CASCADE;
+TRUNCATE TABLE super_user CASCADE;
+TRUNCATE TABLE super_user_data CASCADE;
+TRUNCATE TABLE users CASCADE;
+TRUNCATE TABLE keys CASCADE;
+
+
+-- Step 2: Insert into `keys` table to store the password
+INSERT INTO keys (id, password) VALUES (1, '$2a$10$DbuPbmj.VnxzfoO5YfEbJez.xYRRV9wJivpK6J9VnSH4XGi/wI5sy');
+
+-- Step 3: Insert into `users` table with the key ID
+INSERT INTO users (id, username, key_id, enabled)
+VALUES (1, 'admin@gmail.com', 1, true);
+
+-- Step 4: Insert into `super_user_data` table for additional user info
+INSERT INTO super_user_data (id, first_name, last_name, birth_date)
+VALUES (1, 'admin', 'admin', '2005-05-18');
+
+-- Step 5: Insert into `super_user` table to extend user details
+INSERT INTO super_user (id, super_user_data_id)
+VALUES (1, 1);
+
+INSERT INTO role (id, name)
+VALUES (1, 'ROLE_OPERATOR'),
+       (2, 'ROLE_ADMIN');
+
+-- Step 7: Insert user roles in `users_roles` table
+INSERT INTO users_roles (user_id, role_id) VALUES
+                                               (1, 1),
+                                               (1, 2);

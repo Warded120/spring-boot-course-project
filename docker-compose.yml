@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: psql-course-project-compose
+    environment:
+      POSTGRES_DB: course_project
+      POSTGRES_USER: course_project_owner
+      POSTGRES_PASSWORD: course_project_owner_password
+    ports:
+      - "5432:5432"
+    restart: always
