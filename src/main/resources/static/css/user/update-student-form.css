@@ -56,3 +56,11 @@ body {
 .btn-primary:active {
     background-color: #FFB300 !important;
 }
+.left-top-corner {
+    position: absolute;
+    top: 15px;
+    left: 22px;
+}
+.logo {
+    width: 50px;
+}

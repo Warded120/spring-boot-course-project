@@ -33,7 +33,7 @@
     </nav>
 
     <!-- General -->
-    <div th:if="${courses.isEmpty()}" class="container">
+    <div th:if="${!courses.isEmpty()}" class="container">
         <h2 class="card-header mt-2 mb-4 text-center">Доступні курси</h2>
         <div class="row">
             <div class="col-md-4" th:each="course : ${courses}">
@@ -58,3 +58,90 @@
 
 </body>
 </html>
+
+<style>
+    body {
+        background-color: #FFD700; /* Saturated yellow background */
+        color: #000; /* Black text color */
+        font-family: Arial, sans-serif;
+    }
+    .navbar {
+        background-color: #000; /* Black navbar background */
+        padding: 10px;
+    }
+    .navbar a, .navbar button {
+        color: #FFD700; /* Yellow text/buttons in navbar */
+    }
+    .navbar a:hover, .navbar button:hover {
+        color: #FFC107; /* Lighter yellow on hover */
+    }
+    .course-card {
+        background-color: #000; /* Black background for course cards */
+        color: #FFD700; /* Yellow text for course titles */
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(255, 215, 0, 0.5); /* Glowing effect */
+        margin-bottom: 20px;
+        padding: 15px;
+        height: 200px;
+    }
+    .course-card h5 {
+        margin-bottom: 15px;
+        text-align: center; /* Center align course title */
+    }
+    .wrap-excess {
+        white-space: nowrap; /* Prevents the text from wrapping to the next line */
+        overflow: hidden; /* Hides the text that overflows */
+        text-overflow: ellipsis; /* Adds "..." at the end of the truncated text */
+        display: block; /* Ensure it behaves like a block element */
+        width: 100%; /* Optional: Set the width to make sure the text truncates within its container */
+    }
+
+    .course-card p {
+        margin-bottom: 10px; /* Consistent margin for paragraphs */
+    }
+    .btn-primary {
+        background-color: #FFD700; /* Yellow button background */
+        color: #000; /* Black text on button */
+        border: none;
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+        background-color: #FFC107; /* Lighter yellow on hover */
+        color: #000;
+    }
+    .btn-container {
+        display: flex;  /* Using Flexbox */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        height: 100%;  /* Fill the parent container's height */
+    }
+
+    .btn-primary-inverted {
+        color: #000; /* Black button background */
+        background-color: #FFD700; /* Yellow text on button */
+        border: none;
+        width: 80%; /* Full width for button */
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        text-align: center; /* Center text in button */
+    }
+    .btn-primary-inverted:hover {
+        background-color: #333; /* Darker black on hover */
+        color: #FFD700;
+    }
+    .footer {
+        background-color: #000; /* Black footer background */
+        color: #FFD700; /* Yellow text in footer */
+        padding: 20px;
+        text-align: center;
+    }
+    .logo {
+        width: 50px;
+    }
+</style>

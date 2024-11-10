@@ -8,6 +8,12 @@
     <link rel="stylesheet" th:href="@{/css/user/update-student-form.css}">
 </head>
 <body>
+<!-- Header -->
+<div class="left-top-corner">
+    <a class="navbar-brand" th:href="@{/student/profile}">
+        <img th:src="@{/images/G-logo-black.webp}" alt="G-courses" class="logo">
+    </a>
+</div>
 <form th:action="@{/student/profile/update}" th:object="${student}" method="post">
     <div class="card mt-2 mb-2">
         <div class="card-header">
