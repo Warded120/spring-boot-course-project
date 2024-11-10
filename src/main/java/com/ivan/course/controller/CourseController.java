@@ -1,5 +1,6 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.constants.ConstantsCollection;
 import com.ivan.course.constants.CourseState;
 import com.ivan.course.constants.EnrollStatus;
 import com.ivan.course.dto.CourseDto;
@@ -59,11 +60,9 @@ public class CourseController {
         this.teacherService = teacherService;
     }
 
-    @Value("${course.languages}")
-    List<String> languages;
+    List<String> languages = ConstantsCollection.getLanguages();
 
-    @Value("${course.language-levels}")
-    List<String> languageLevels;
+    List<String> languageLevels = ConstantsCollection.getLanguageLevels();
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -85,6 +84,8 @@ public class CourseController {
         theModel.addAttribute("course", course);
         theModel.addAttribute("languages", languages);
         theModel.addAttribute("languageLevels", languageLevels);
+
+        System.out.println("languages: " + languages);
 
         return "course/course-form";
     }

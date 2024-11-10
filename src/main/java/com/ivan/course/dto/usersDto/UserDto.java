@@ -21,13 +21,13 @@ public class UserDto implements Dto {
 
     String username;
 
-    @NotBlank(message = "required")
-    @Size(max = 255, message = "cannot be longer than 255")
+    @NotBlank(message = "обов'язково")
+    @Size(max = 255, message = "к-сть символів повинна бути менша 255")
     @Password
     String password;
 
-    @NotBlank(message = "required")
-    @Size(max = 255, message = "cannot be longer than 255")
+    @NotBlank(message = "обов'язково")
+    @Size(max = 255, message = "к-сть символів повинна бути менша 255")
     String confirmPassword;
 
     public UserDto(User user) {

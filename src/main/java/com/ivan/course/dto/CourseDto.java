@@ -20,22 +20,22 @@ public class CourseDto {
 
     int id;
 
-    @NotBlank(message = "required")
-    @Size(max = 255, message = "cannot be longer than 255")
+    @NotBlank(message = "обов'язково")
+    @Size(max = 255, message = "к-сть символів повинна бути менша 255")
     String name;
 
-    @NotBlank(message = "required")
+    @NotBlank(message = "обов'язково")
     String description;
 
-    @NotNull(message = "required")
+    @NotNull(message = "обов'язково")
     @InList
     String language;
 
-    @NotNull(message = "required")
-    @InList(list = ListType.LANGUAGE_LEVELS, message = "not a language level")
+    @NotNull(message = "обов'язково")
+    @InList(list = ListType.LANGUAGE_LEVELS, message = "не є рівнем мови")
     String languageLevel;
 
-    @NotNull(message = "required")
+    @NotNull(message = "обов'язково")
     @Price
     float price;
 

@@ -31,24 +31,6 @@ public class Student extends User {
     }
 
     private List<Role> getRolesFromTemplate(String topRole) {
-        List<Role> tempAuthorities = new ArrayList<>();
-
-        System.out.println(topRole);
-
-        switch (topRole) {
-            case "student":
-                tempAuthorities.add(new Role("ROLE_STUDENT"));
-                break;
-            case "operator":
-                tempAuthorities.add(new Role("ROLE_STUDENT"));
-                tempAuthorities.add(new Role("ROLE_OPERATOR"));
-                break;
-            case "admin":
-                tempAuthorities.add(new Role("ROLE_STUDENT"));
-                tempAuthorities.add(new Role("ROLE_OPERATOR"));
-                tempAuthorities.add(new Role("ROLE_ADMIN"));
-                break;
-        }
-        return tempAuthorities;
+        return new ArrayList<>(List.of(new Role("ROLE_STUDENT")));
     }
 }

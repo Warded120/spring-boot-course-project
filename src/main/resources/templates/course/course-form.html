@@ -8,6 +8,12 @@
     <link rel="stylesheet" th:href="@{/css/course/course-form.css}">
 </head>
 <body>
+<!-- Header -->
+<div class="left-top-corner">
+    <a class="navbar-brand" th:href="@{/teacher/profile}">
+        <img th:src="@{/images/G-logo-black.webp}" alt="G-courses" class="logo">
+    </a>
+</div>
 <form th:action="@{/course/add}" th:object="${course}" method="post">
     <div class="card mt-2 mb-2">
         <div class="card-header">

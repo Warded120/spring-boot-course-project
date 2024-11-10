@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
-    String message() default "must contain capital letters and numbers";
+    String message() default "має містити великі літери та цифри";
 
     Class<?>[] groups() default {};
 

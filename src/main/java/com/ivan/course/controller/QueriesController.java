@@ -1,5 +1,6 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.constants.ConstantsCollection;
 import com.ivan.course.constants.CourseState;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.Schedule;
@@ -31,11 +32,9 @@ public class QueriesController {
     StudentDataService studentDataService;
     CourseService courseService;
 
-    @Value("${course.languages}")
-    List<String> languages;
+    List<String> languages = ConstantsCollection.getLanguages();
 
-    @Value("${course.language-levels}")
-    List<String> languageLevels;
+    List<String> languageLevels = ConstantsCollection.getLanguageLevels();
 
     @Autowired
     public QueriesController(StudentGroupService studentGroupService,
@@ -47,8 +46,6 @@ public class QueriesController {
         this.courseService = courseService;
         this.studentDataService = studentDataService;
     }
-
-    // TODO: implement all queries
 
     // query 1
     // output course information, because student_group table doesn't have enough data in it

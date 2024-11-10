@@ -1,5 +1,6 @@
 package com.ivan.course.controller;
 
+import com.ivan.course.constants.ConstantsCollection;
 import com.ivan.course.dto.usersDto.StudentDto;
 import com.ivan.course.dto.usersDto.TeacherDto;
 import com.ivan.course.entity.student.Student;
@@ -31,11 +32,9 @@ public class RegisterController {
     UserService userService;
     RoleService roleService;
 
-    @Value("${user.student.roles}")
-    List<String> studentRoles;
+    List<String> studentRoles = ConstantsCollection.getStudentRoles();
 
-    @Value("${user.teacher.roles}")
-    List<String> teacherRoles;
+    List<String> teacherRoles = ConstantsCollection.getTeacherRoles();
 
     @Autowired
     public RegisterController(StudentService studentService, TeacherService teacherService, UserService userService,

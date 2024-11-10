@@ -25,35 +25,35 @@ import java.util.List;
 public class SuperUserDto implements Dto {
     int id = 0;
 
-    @NotBlank(message = "required")
-    @Size(max = 255, message = "cannot be longer than 255")
-    @Email(message = "not an email")
+    @NotBlank(message = "обов'язково")
+    @Size(max = 255, message = "к-сть символів повинна бути менша 255")
+    @Email(message = "неправильний формат пошти")
     @Nonexistent
     String username;
 
-    @NotBlank(message = "required")
-    @Size(max = 255, message = "cannot be longer than 255")
+    @NotBlank(message = "обов'язково")
+    @Size(max = 255, message = "к-сть символів повинна бути менша 255")
     @Password
     String password;
 
-    @NotBlank(message = "required")
-    @Size(max = 255, message = "cannot be longer than 255")
+    @NotBlank(message = "обов'язково")
+    @Size(max = 255, message = "к-сть символів повинна бути менша 255")
     String confirmPassword;
 
     boolean enabled = true;
 
     String topRole = "operator";
 
-    @NotBlank(message = "required")
-    @Size(max = 255, message = "cannot be longer than 255")
+    @NotBlank(message = "обов'язково")
+    @Size(max = 255, message = "к-сть символів повинна бути менша 255")
     String firstName;
 
-    @NotBlank(message = "required")
-    @Size(max = 255, message = "cannot be longer than 255")
+    @NotBlank(message = "обов'язково")
+    @Size(max = 255, message = "к-сть символів повинна бути менша 255")
     String lastName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "required")
+    @NotNull(message = "обов'язково")
     @Age
     LocalDate birthDate;
 

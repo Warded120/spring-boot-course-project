@@ -21,6 +21,14 @@ body {
     font-size: 24px;
     font-weight: bold;
 }
+.left-top-corner {
+    position: absolute;
+    top: 15px;
+    left: 22px;
+}
+.logo {
+    width: 50px;
+}
 .form-label {
     color: #FFD700; /* Yellow label color */
 }

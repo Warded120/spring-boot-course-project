@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Age {
     int min() default 10;
-    String message() default "you must be 10 years or older";
+    String message() default "вам має бути 10 років або більше";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface InList {
     ListType list() default ListType.LANGUAGES;
-    String message() default "not a language";
+    String message() default "не є мовою";
 
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

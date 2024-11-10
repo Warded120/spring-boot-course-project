@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Nonexistent {
-    String message() default "username already exists";
+    String message() default "ім'я користувача вже зайняте";
 
     Class<?>[] groups() default {};
 

@@ -1,19 +1,15 @@
 package com.ivan.course.validation.inList;
 
+import com.ivan.course.constants.ConstantsCollection;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.springframework.beans.factory.annotation.Value;
-
-import java.time.LocalDate;
 import java.util.List;
 
 public class InListConstraintValidator implements ConstraintValidator<InList, String> {
 
-    @Value("${course.languages}")
-    private List<String> languages;
+    private List<String> languages = ConstantsCollection.getLanguages();
 
-    @Value("${course.language-levels}")
-    private List<String> languageLevels;
+    private List<String> languageLevels = ConstantsCollection.getLanguageLevels();
 
     private List<String> list;
 

@@ -37,7 +37,6 @@ public class MainController {
         return "main/discover-page";
     }
 
-    // TODO: rewrite...
     @GetMapping("/about")
     public String about(Model theModel) {
         return "main/about-us-page";

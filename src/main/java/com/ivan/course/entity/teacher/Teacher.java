@@ -32,22 +32,6 @@ public class Teacher extends User {
     }
 
     private List<Role> getRolesFromTemplate(String topRole) {
-        List<Role> tempAuthorities = new ArrayList<>();
-
-        switch (topRole) {
-            case "teacher":
-                tempAuthorities.add(new Role("ROLE_TEACHER"));
-                break;
-            case "operator":
-                tempAuthorities.add(new Role("ROLE_TEACHER"));
-                tempAuthorities.add(new Role("ROLE_OPERATOR"));
-                break;
-            case "admin":
-                tempAuthorities.add(new Role("ROLE_TEACHER"));
-                tempAuthorities.add(new Role("ROLE_OPERATOR"));
-                tempAuthorities.add(new Role("ROLE_ADMIN"));
-                break;
-        }
-        return tempAuthorities;
+        return new ArrayList<>(List.of(new Role("ROLE_TEACHER")));
     }
 }

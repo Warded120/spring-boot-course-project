@@ -173,7 +173,7 @@ public class StudentController {
             }
 
             coursePaymentService.save(coursePayment);
-            String message = "Your payment is now $" + coursePayment.getPayment();
+            String message = "Вам залишилось оплатити $" + coursePayment.getPayment();
 
             return "redirect:/student/payments/pay-off/success?payOffAmount=" + payOffAmount + "&message=" + encodeURIComponent(message);
 
@@ -183,7 +183,7 @@ public class StudentController {
             studentService.save(student, false);
             coursePaymentService.deleteById(coursePayment.getId());
 
-            return "redirect:/student/payments/pay-off/success?payOffAmount=" + payOffAmount + "&message=you have paid for the course in full";
+            return "redirect:/student/payments/pay-off/success?payOffAmount=" + payOffAmount + "&message=" + encodeURIComponent("Ви повністю оплатили за курс");
         }
 
         return "redirect:/student/payments?error";

@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 public @interface Price {
     float min() default (float)0.0;
     float max() default Float.MAX_VALUE;
-    String message() default "minimum price is 0";
+    String message() default "мінімальна ціна: $0";
 
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
