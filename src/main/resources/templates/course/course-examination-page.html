@@ -12,11 +12,11 @@
 <div class="exam-container">
     <div class="exam-card">
         <!-- Exam Title and Course Name -->
-        <h2 class="text-center" th:text="${examination.course.name} + ' - Результати екзамену'">Назва курсу - Результати екзамену</h2>
+        <h2 class="text-center" th:text="${course.name} + ' - Результати екзамену'">Назва курсу - Результати екзамену</h2>
 
         <!-- Single-column student marks list -->
         <div class="student-marks-column mt-4">
-            <div class="student-mark-entry" th:each="entry : ${examination.studentMarks}">
+            <div class="student-mark-entry" th:each="entry : ${course.examination.studentMarks}">
                 <h4 th:text="${entry.getKey().studentData.getFullName()}">Ім'я студента</h4>
                 <p><strong>Оцінка:</strong> <span th:text="${entry.value}">100</span></p>
             </div>

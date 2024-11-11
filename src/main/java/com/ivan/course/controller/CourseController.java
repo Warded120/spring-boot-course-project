@@ -257,9 +257,7 @@ public class CourseController {
     public String courseExaminationResult(@PathVariable int courseId, Model theModel) {
         Course course = courseService.findById(courseId);
 
-        Examination examination = course.getExamination();
-
-        theModel.addAttribute("examination", examination);
+        theModel.addAttribute("course", course);
 
         return "course/course-examination-page";
     }

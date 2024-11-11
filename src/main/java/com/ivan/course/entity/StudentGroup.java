@@ -3,16 +3,14 @@ package com.ivan.course.entity;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.student.StudentData;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "student_group")
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter

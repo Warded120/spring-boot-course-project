@@ -21,8 +21,4 @@ public class SuperUserData extends UserData {
     public SuperUserData(int id, String firstName, String lastName, LocalDate birthDate) {
         super(id, firstName, lastName, birthDate);
     }
-
-    public SuperUserData(String firstName, String lastName, LocalDate birthDate) {
-        super(firstName, lastName, birthDate);
-    }
 }

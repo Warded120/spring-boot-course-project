@@ -3,10 +3,7 @@ package com.ivan.course.entity.teacher;
 import com.ivan.course.entity.Course;
 import com.ivan.course.entity.user.UserData;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(callSuper = true, exclude = "courses")
+@AllArgsConstructor
 @NoArgsConstructor
 public class TeacherData extends UserData {
 

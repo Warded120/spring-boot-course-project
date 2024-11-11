@@ -7,10 +7,7 @@ import com.ivan.course.entity.CoursePayment;
 import com.ivan.course.entity.StudentGroup;
 import com.ivan.course.entity.user.UserData;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,6 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(callSuper = true)
+@AllArgsConstructor
 @NoArgsConstructor
 public class StudentData extends UserData {
     @ManyToMany(mappedBy = "students", fetch = FetchType.EAGER)
@@ -41,7 +39,7 @@ public class StudentData extends UserData {
     private List<CoursePayment> coursePayments;
 
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "student")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "student")
     private List<Certificate> certificates;
 
 

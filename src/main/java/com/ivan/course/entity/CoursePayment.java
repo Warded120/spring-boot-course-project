@@ -2,13 +2,11 @@ package com.ivan.course.entity;
 
 import com.ivan.course.entity.student.StudentData;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "payment")
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter

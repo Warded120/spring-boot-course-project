@@ -2,10 +2,7 @@ package com.ivan.course.entity.user;
 import com.ivan.course.entity.Keys;
 import com.ivan.course.entity.Role;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Collection;
 
@@ -15,6 +12,7 @@ import java.util.Collection;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
@@ -43,5 +41,12 @@ public class User {
         this.username = username;
         this.password = new Keys(password);
         this.enabled = enabled;
+    }
+
+    public User(String username, Keys password, boolean enabled, Collection<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.roles = roles;
     }
 }

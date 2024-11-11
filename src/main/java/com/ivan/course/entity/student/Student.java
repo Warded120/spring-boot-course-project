@@ -4,16 +4,14 @@ import com.ivan.course.dto.usersDto.StudentDto;
 import com.ivan.course.entity.Role;
 import com.ivan.course.entity.user.User;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "student")
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
