@@ -52,7 +52,6 @@ public class EmailController {
     public String sendEmail(@ModelAttribute("emailVerification") EmailVerification emailVerification,
                               Model theModel) {
 
-        System.out.println("in GetMapping /verify: " + emailVerification);
         theModel.addAttribute("emailVerification", emailVerification);
 
         return "login/verify-email-page";
@@ -62,7 +61,6 @@ public class EmailController {
     public String verifyEmail(@ModelAttribute("emailVerification") EmailVerification emailVerification,
                               Model theModel,
                               RedirectAttributes redirectAttributes) throws UserNotFoundException {
-        System.out.println("in PostMapping /verify: " + emailVerification);
 
         if (emailVerification.getActualVerificatoinCode().equals(emailVerification.getVerificatoinCode())) {
             User changePasswordUser = userService.findByUsername(emailVerification.getEmail());
@@ -76,13 +74,12 @@ public class EmailController {
             return "redirect:/change-password"; // in LoginController
         }
         theModel.addAttribute("emailVerification", emailVerification);
-        theModel.addAttribute("error", "Verification code is not correct");
+        theModel.addAttribute("error", "Код верифікації неправильний");
         return "login/verify-email-page";
     }
 
     private String generateVerificationCode() {
         int verificationCode = (int) (Math.random() * 900000) + 100000;
-        System.out.println("generated verification code: " + verificationCode);
         return String.valueOf(verificationCode);
     }
 

@@ -57,7 +57,7 @@ public class QueriesController {
         theModel.addAttribute("languages", languages);
         theModel.addAttribute("teachers", teacherDataService.findAll());
 
-        theModel.addAttribute("selectedLanguage", "English");
+        theModel.addAttribute("selectedLanguage", "??????????");
         theModel.addAttribute("selectedTeacher", teacherDataService.findAll().getFirst());
 
         return "queries/groups-by-language-and-teacher";
@@ -130,7 +130,6 @@ public class QueriesController {
     // query 5
     @GetMapping("/studentsCoursePayments")
     public String findStudentsWithCoursePayments(Model theModel) {
-        System.out.println("in get");
         theModel.addAttribute("cpType", "full"); // full or 50percent
         theModel.addAttribute("students", new ArrayList<>());
 
@@ -139,7 +138,6 @@ public class QueriesController {
 
     @PostMapping("/studentsCoursePayments")
     public String findStudentsWithCoursePayments(@RequestParam("cpType") String cpType, Model theModel) {
-        System.out.println("in post: " + cpType);
         theModel.addAttribute("cpType", cpType);
         switch (cpType) {
             case "full":

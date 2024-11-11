@@ -52,7 +52,6 @@ public class CourseServiceImpl implements CourseService {
         List<Course> studentCourses = studentService.getCoursesByStudent(dbStudent);
 
         List<Course> courses = findAll().stream().filter(course -> !studentCourses.contains(course)).toList();
-        System.out.println("Not enrolled courses: " + courses);
 
         return courses;
     }
@@ -76,7 +75,6 @@ public class CourseServiceImpl implements CourseService {
         StudentGroup studentGroup = course.getStudentGroup();
         Student dbStudent = studentService.getStudentBySessionStudent(sessionStudent);
         isEnrolled = studentGroup.getStudents().contains(dbStudent.getStudentData());
-        System.out.println("isEnrolled: " + isEnrolled);
 
         return isEnrolled;
     }

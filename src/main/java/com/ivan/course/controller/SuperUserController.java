@@ -60,10 +60,8 @@ public class SuperUserController {
                          HttpSession session) {
 
         if(thereAreErrorsIn(theBindingResult, List.of("username", "password", "confirmPassword"))) {
-            System.out.println("errors exist");
             return "user/update-superUser-form";
         }
-        System.out.println("no errors exist");
 
         SuperUser dbUser = superUserService.findById(superUserDto.getId());
 

@@ -16,7 +16,7 @@ public class PasswordMatchConstraintValidator implements ConstraintValidator<Pas
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Passwords do not match")
+            context.buildConstraintViolationWithTemplate("Паролі не збігаються")
                     .addPropertyNode("confirmPassword")
                     .addConstraintViolation();
         }

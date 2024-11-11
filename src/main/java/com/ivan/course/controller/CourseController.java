@@ -85,7 +85,6 @@ public class CourseController {
         theModel.addAttribute("languages", languages);
         theModel.addAttribute("languageLevels", languageLevels);
 
-        System.out.println("languages: " + languages);
 
         return "course/course-form";
     }
@@ -148,21 +147,17 @@ public class CourseController {
 
         EnrollStatus enrollStatus = EnrollStatus.CANNOT_ENROLL;
         if (theStudent != null) {
-            System.out.println("student exists");
             StudentData studentData = theStudent.getStudentData();
 
             // if student is not already enrolled...
             if (!course.getStudentGroup().getStudents().contains(studentData)) {
-                System.out.println("enrolling");
                 enrollStatus = course.enroll(theStudent);
             } else {
-                System.out.println("not enrolling");
             }
         }
 
         courseService.save(course);
 
-        System.out.println("enroll status: " + enrollStatus.name());
         return "redirect:/course/confirm/enroll/" + enrollStatus.ordinal();
     }
 
@@ -179,7 +174,6 @@ public class CourseController {
     public String partialPaymentToEnroll(@PathVariable("courseId") int courseId, Model theModel) {
         Course course = courseService.findById(courseId);
 
-        System.out.println("get /enroll/partial/{courseId}: " + course);
         theModel.addAttribute("coursePayment", new CoursePaymentDto(studentService.getSessionStudent().getStudentData().getId(), course.getId(), course.getPrice()));
 
         return "course/course-partial-payment-form";
@@ -187,11 +181,9 @@ public class CourseController {
 
     @PostMapping("/enroll/partial/{courseId}")
     public String postPartialPaymentToEnroll(@PathVariable("courseId") int courseId, @ModelAttribute("debt") CoursePaymentDto theCoursePayment) {
-        System.out.println("in postPartialPaymentToEnroll()");
         Student student = studentService.getSessionStudent();
         Course course = courseService.findById(theCoursePayment.getCourseId());
 
-        System.out.println("post /enroll/partial/{courseId}: " + course);
 
         CoursePayment coursePayment = new CoursePayment(student.getStudentData(), course, theCoursePayment.getPayment());
 

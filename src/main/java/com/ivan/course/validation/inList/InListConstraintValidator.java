@@ -20,6 +20,6 @@ public class InListConstraintValidator implements ConstraintValidator<InList, St
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
-        return list.contains(value) || value == null;
+        return value == null || list.contains(value);
     }
 }

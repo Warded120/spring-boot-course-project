@@ -55,22 +55,17 @@ public class TeacherController {
                          HttpSession session) {
 
         if(thereAreErrorsIn(theBindingResult, List.of("username", "password", "confirmPassword"))) {
-            System.out.println("errors exist");
             return "user/update-teacher-form";
         }
-        System.out.println("no errors exist");
-
-        Teacher updatedTeacher = new Teacher(teacherDto);
 
         //set courses to updated teacher
-        Teacher dbTeacher = teacherService.findByUserId(updatedTeacher.getId());
-        List<Course> coursesOfTeacher = dbTeacher.getTeacherData().getCourses();
-        updatedTeacher.getTeacherData().setCourses(coursesOfTeacher);
+        Teacher dbTeacher = teacherService.findByUserId(teacherDto.getId());
+        dbTeacher.getTeacherData().update(teacherDto.getFirstName(), teacherDto.getLastName(), teacherDto.getBirthDate());
 
         //teacherService.save(updatedTeacher, false);
-        teacherDataService.save(updatedTeacher.getTeacherData());
+        teacherDataService.save(dbTeacher.getTeacherData());
 
-        session.setAttribute("teacher", updatedTeacher);
+        session.setAttribute("teacher", dbTeacher);
         currentTeacherDto = teacherDto;
 
         return "redirect:/teacher/profile/success";

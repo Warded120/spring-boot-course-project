@@ -4,7 +4,7 @@ INSERT INTO users (id, username, key_id, enabled)
 VALUES (1, 'admin@gmail.com', 1, true);
 
 INSERT INTO super_user_data (id, first_name, last_name, birth_date)
-VALUES (1, 'admin', 'admin', '2005-05-18');
+VALUES (1, 'adminnnn', 'admin', '2005-05-18');
 
 INSERT INTO super_user (id, super_user_data_id)
 VALUES (1, 1);

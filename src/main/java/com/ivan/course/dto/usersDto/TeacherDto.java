@@ -53,7 +53,7 @@ public class TeacherDto implements Dto{
     String lastName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "required")
+    @NotNull(message = "обов'язково")
     @Age(min = 18, message = "Вам має бути 18 років або більше")
     LocalDate birthDate;
 

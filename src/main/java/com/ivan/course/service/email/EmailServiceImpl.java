@@ -27,6 +27,5 @@ public class EmailServiceImpl implements EmailService {
         helper.setFrom("your-email@gmail.com");
 
         mailSender.send(mimeMessage);
-        System.out.println("HTML Email Sent Successfully...");
     }
 }

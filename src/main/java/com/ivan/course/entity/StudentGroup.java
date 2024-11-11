@@ -42,16 +42,12 @@ public class StudentGroup {
     }
 
     public void addStudent(Student theStudent) {
-        System.out.println("adding student: " + theStudent);
         StudentData studentData = theStudent.getStudentData();
 
         // Ensure that the studentData is merged into the current session
         if (!students.contains(studentData)) {
-            System.out.println("adding student");
             students.add(studentData);
 
-        } else {
-            System.out.println("student already exists");
         }
     }
 
@@ -66,7 +62,6 @@ public class StudentGroup {
             }
         }
 
-        System.out.println(thisCoursePayments);
 
         return thisCoursePayments;
     }

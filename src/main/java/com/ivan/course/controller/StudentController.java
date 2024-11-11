@@ -92,7 +92,6 @@ public class StudentController {
     public String myCourses(Model theModel, HttpSession theSession) {
 
         List<Course> studentCourses = studentService.getCoursesByStudent((Student) theSession.getAttribute("student"));
-        System.out.println("studentCourses = " + studentCourses);
 
         theModel.addAttribute("courses", studentCourses);
 
@@ -158,7 +157,6 @@ public class StudentController {
         CoursePayment coursePayment = coursePaymentService.getById(paymentId);
         Student student = studentService.getSessionStudent();
 
-        System.out.println("Pay-off amount: " + payOffAmount);
 
         if (coursePayment.getPayment() < payOffAmount) {
             return "redirect:/student/payments/pay-off/" + coursePayment.getId() + "?payOffAmountError"; // return to previous mapping
@@ -195,7 +193,6 @@ public class StudentController {
                                 Model theModel) {
 
         if (payOffAmount == null || message == null) {
-            System.out.println("no attributes found");
         }
 
         theModel.addAttribute("payOffAmount", payOffAmount);

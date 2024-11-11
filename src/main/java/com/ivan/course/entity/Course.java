@@ -144,20 +144,16 @@ public class Course {
 
     private EnrollStatus validateTheStudent(Student theStudent) {
         if(studentGroup.getStudents().size() >= StudentGroup.MAX_STUDENTS) {
-            System.out.println("course already have 20 students:" + this);
             return EnrollStatus.GROUP_FULL;
         }
 
         if(studentAlreadyLearnsThisLanguage(theStudent)) {
-            System.out.println("Cannot enroll. Student already learns this language:" + this.language);
             return EnrollStatus.LANGUAGE_IS_LEARNED;
         }
         return EnrollStatus.SUCCESS;
     }
 
     private boolean studentAlreadyLearnsThisLanguage(Student theStudent) {
-
-        System.out.println(this);
 
         List<Course> studentCourses = theStudent.getStudentData().getGroups()
                 .stream()

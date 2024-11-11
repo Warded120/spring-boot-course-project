@@ -108,13 +108,11 @@ public class RegisterController {
         User existing = userService.findByUsername(username);
 
         if(existing != null) {
-            System.out.println("existing is not null");
 
-            theModel.addAttribute("registerError", "Username is already taken");
+            theModel.addAttribute("registerError", "Ім'я користувача вже зайняте");
 
             return "register/teacher-form";
         }
-        System.out.println("existing is null: " + teacherDto);
 
         Teacher newTeacher = new Teacher(teacherDto);
 

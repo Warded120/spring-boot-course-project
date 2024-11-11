@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     public String userNotFoundExceptionHandler(UserNotFoundException ex, Model theModel) {
         System.out.println("in userNotFoundExceptionHandler");
 
-        theModel.addAttribute("errorTitle", "User Not Found");
+        theModel.addAttribute("errorTitle", "Користувач не знайдений");
         theModel.addAttribute("message", ex.what());
 
         return "redirect:/error?UserNotFound";
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     public String mailConnectExceptionHandler(MailConnectException ex, Model theModel) {
         System.out.println("in mailConnectExceptionHandler");
 
-        theModel.addAttribute("errorTitle", "Mail Connect Error");
+        theModel.addAttribute("errorTitle", "Помилка відправки листа");
         theModel.addAttribute("message", ex.getMessage());
 
         // FIXME: fix redirect. pass cannotMail param
