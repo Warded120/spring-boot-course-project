@@ -6,8 +6,11 @@ import com.ivan.course.dto.CourseDto;
 import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.student.StudentData;
 import com.ivan.course.entity.teacher.TeacherData;
+import com.ivan.course.service.course.CourseService;
+import com.ivan.course.service.student.StudentService;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.List;
 @Setter
 @ToString
 public class Course {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
@@ -109,13 +113,24 @@ public class Course {
         return validationStatus;
     }
 
-    public EnrollStatus enrollDebtStudent(Student theStudent) {
+    public EnrollStatus debtEnroll(Student theStudent) {
         EnrollStatus validationStatus = validateTheStudent(theStudent);
         if (validationStatus == EnrollStatus.SUCCESS) {
+            CoursePayment coursePayment = new CoursePayment(theStudent.getStudentData(), this);
+
+            theStudent.getStudentData().addCoursePayment(coursePayment);
             studentGroup.addStudent(theStudent);
             return EnrollStatus.SUCCESS;
         }
         return validationStatus;
+    }
+
+    public void smartEnroll(Student theStudent) {
+        if(theStudent.getStudentData().getBalance() >= this.price) {
+            enroll(theStudent);
+        } else {
+            debtEnroll(theStudent);
+        }
     }
 
     public boolean canBeStarted() {
@@ -204,14 +219,11 @@ public class Course {
     }
 
     public String getStateMessage() {
-        switch (state.name()) {
-            case "STARTED":
-                return "Course started";
-            case "FINISHED":
-                return "Course finished";
-            default:
-                return "Course not started yet";
-        }
+        return switch (state.name()) {
+            case "STARTED" -> "Курс Почався";
+            case "FINISHED" -> "Курс Завершений";
+            default -> "Курс ще не почався";
+        };
     }
 
     public Schedule getSchedule() {

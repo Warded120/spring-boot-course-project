@@ -28,7 +28,7 @@ public class StudentGroup {
 
     //remove CascadeType.MERGE to avoid detached studentData exception
     @ToString.Exclude
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "groups_students",
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id"))
@@ -45,7 +45,6 @@ public class StudentGroup {
         // Ensure that the studentData is merged into the current session
         if (!students.contains(studentData)) {
             students.add(studentData);
-
         }
     }
 

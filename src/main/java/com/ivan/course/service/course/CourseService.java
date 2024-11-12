@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface CourseService {
     Course save(Course course);
+    void saveAll(List<Course> courses);
     List<Course> findAll();
     List<Course> findByCourseStateNotEqual(CourseState state);
     Course findById(int id);

@@ -44,21 +44,21 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="student : ${students}">
-            <td th:text="${student.id}"></td>
-            <td th:text="${student.getFullName()}"></td>
-            <td th:text="${student.balance}"></td>
-            <td>
-              <ul>
-                <li th:each="coursePayment : ${student.coursePayments}" th:text="${coursePayment.course.name + ': $' + coursePayment.course.price}"></li>
-              </ul>
-            </td>
-            <td>
-              <ul>
-                <li th:each="coursePayment : ${student.coursePayments}" th:text="${coursePayment.payment}"></li>
-              </ul>
-            </td>
-          </tr>
+            <tr th:each="student : ${students}">
+              <td th:text="${student.id}"></td>
+              <td th:text="${student.getFullName()}"></td>
+              <td th:text="${student.balance}"></td>
+              <td>
+                <ul>
+                  <li th:each="coursePayment : ${student.coursePayments}" th:text="${coursePayment.course.name + ': $' + coursePayment.course.price}"></li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li th:each="coursePayment : ${student.coursePayments}" th:text="${coursePayment.payment}"></li>
+                </ul>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

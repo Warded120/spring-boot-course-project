@@ -52,6 +52,8 @@ public class StudentDto implements Dto {
     @Size(max = 255, message = "к-сть символів повинна бути менша 255")
     String lastName;
 
+    float balance;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "обов'язково")
     @Age
@@ -66,5 +68,16 @@ public class StudentDto implements Dto {
         this.firstName = student.getStudentData().getFirstName();
         this.lastName = student.getStudentData().getLastName();
         this.birthDate = student.getStudentData().getBirthDate();
+    }
+
+    public StudentDto(String username, String password, String firstName, String lastName, float balance, LocalDate birthDate) {
+        this.id = 0;
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.balance = balance;
+        this.birthDate = birthDate;
     }
 }

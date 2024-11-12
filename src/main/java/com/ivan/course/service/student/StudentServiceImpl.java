@@ -53,6 +53,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void saveAll(List<Student> students) {
+        students.forEach(student -> save(student, true, false));
+    }
+
+    @Override
     public boolean existsByUserId(int id) {
         return studentRepository.existsById(id);
     }

@@ -67,4 +67,12 @@ public class TeacherDto implements Dto{
         this.lastName = teacher.getTeacherData().getLastName();
         this.birthDate = teacher.getTeacherData().getBirthDate();
     }
+
+    public TeacherDto(String username, String password, String firstName, String lastName, LocalDate birthDate) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+    }
 }

@@ -29,6 +29,13 @@ public class CoursePayment {
     @Column(name = "payment")
     private float payment;
 
+    public CoursePayment(StudentData student, Course course) {
+        this.id = 0;
+        this.student = student;
+        this.course = course;
+        this.payment = Math.round(course.getPrice() * 1.05f * 100.0f) / 100.0f;// 5% more
+    }
+
     public CoursePayment(StudentData student, Course course, float payment) {
         this.id = 0;
         this.student = student;

@@ -23,12 +23,13 @@
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="course" class="form-label"></label>
-            <select id="course" name="selectedCourseId" class="form-control">
+            <select th:if="${!courses.isEmpty()}" id="course" name="selectedCourseId" class="form-control">
               <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.name + ': ' + course.languageLevel}" th:selected="${course == selectedCourse}"></option>
             </select>
+            <div th:unless="${!courses.isEmpty()}">Ні один курс ще не розпочато</div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Отримати розклад</button>
+        <button th:if="${!courses.isEmpty()}" type="submit" class="btn btn-primary">Отримати розклад</button>
       </form>
 
       <!-- Table displaying course data -->
@@ -36,7 +37,7 @@
         <div class="course-schedule mt-4">
           <h4>Розклад курсу</h4>
           <!-- Scrollable list of lesson dates -->
-          <ul class="list-group scrollable-lesson-dates">
+          <ul class="list-group scroll-box">
             <li class="list-group-item" th:each="lessonDate: ${schedule}">
               <span class="lesson-item" th:text="${lessonDate}">
                 Дата заняття буде тут

@@ -25,7 +25,6 @@ import com.ivan.course.service.teacher.TeacherService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,7 +70,7 @@ public class CourseController {
     }
 
     @GetMapping("/add")
-    public String addCourse(Model theModel, HttpSession session) {
+    public String addCourse(Model theModel) {
 
         CourseDto course = new CourseDto();
 
@@ -92,7 +91,6 @@ public class CourseController {
     @PostMapping("/add")
     public String postAddCourse(@Valid @ModelAttribute("course") CourseDto theCourse,
                                 BindingResult theBindingResult,
-                                Model theModel,
                                 HttpSession theSession) {
         if(theBindingResult.hasErrors()) {
             return "course/course-form";
@@ -152,7 +150,6 @@ public class CourseController {
             // if student is not already enrolled...
             if (!course.getStudentGroup().getStudents().contains(studentData)) {
                 enrollStatus = course.enroll(theStudent);
-            } else {
             }
         }
 
@@ -184,11 +181,13 @@ public class CourseController {
         Student student = studentService.getSessionStudent();
         Course course = courseService.findById(theCoursePayment.getCourseId());
 
-
+        /* moved this functionality to debtEnroll() function
         CoursePayment coursePayment = new CoursePayment(student.getStudentData(), course, theCoursePayment.getPayment());
 
         student.getStudentData().addCoursePayment(coursePayment);
-        EnrollStatus enrollStatus = course.enrollDebtStudent(student);
+        */
+
+        EnrollStatus enrollStatus = course.debtEnroll(student);
 
         studentService.save(student, false);
 

@@ -69,6 +69,17 @@ public class SuperUserDto implements Dto {
         this.birthDate = superUser.getSuperUserData().getBirthDate();
     }
 
+    public SuperUserDto(String username, String password, String topRole, String firstName, String lastName, LocalDate birthDate) {
+        this.id = 0;
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = password;
+        this.topRole = topRole;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+    }
+
     private String getTopRoleFromRoles(SuperUser superUser) {
         List<Role> roles = (List<Role>) superUser.getRoles();
 

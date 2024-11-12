@@ -10,6 +10,7 @@ import java.util.List;
 public interface TeacherService {
     Teacher save(Teacher teacher);
     Teacher save(Teacher teacher, boolean encryptPassword);
+    void saveAll(List<Teacher> teachers);
     boolean existsByUserId(int id);
     Teacher findByUserId(int id);
     Teacher getTeacherBySessionTeacher(Teacher sessionTeacher);

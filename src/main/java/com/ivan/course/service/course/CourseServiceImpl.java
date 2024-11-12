@@ -8,6 +8,8 @@ import com.ivan.course.repo.CourseRepository;
 import com.ivan.course.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -23,11 +25,18 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public Course save(Course course) {
         // to solve problem with detached studentData when enrolling a student
         //return entityManager.merge(course);
 
         return courseRepository.save(course);
+    }
+
+    @Override
+    @Transactional
+    public void saveAll(List<Course> courses) {
+        courses.forEach(course -> courseRepository.save(course));
     }
 
     @Override

@@ -1,3 +1,4 @@
+/*
 -- Drop all tables if they exist
 DROP TABLE IF EXISTS public.users_roles;
 DROP TABLE IF EXISTS public.teacher;
@@ -17,6 +18,7 @@ DROP TABLE IF EXISTS public.student_group;
 DROP TABLE IF EXISTS public.student_data;
 DROP TABLE IF EXISTS public.role;
 DROP TABLE IF EXISTS public.keys;
+*/
 
 -- Recreate all tables
 CREATE TABLE IF NOT EXISTS public.keys (

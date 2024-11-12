@@ -18,14 +18,14 @@ import java.util.List;
 @ToString
 public class Student extends User {
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name = "student_data_id", referencedColumnName = "id")
     StudentData studentData;
 
     public Student(StudentDto studentDto) {
         super(studentDto.getId(), studentDto.getUsername(), studentDto.getPassword(), studentDto.isEnabled());
         this.roles = getRolesFromTemplate(studentDto.getTopRole());
-        studentData = new StudentData(studentDto.getId(), studentDto.getFirstName(), studentDto.getLastName(), studentDto.getBirthDate());
+        studentData = new StudentData(studentDto.getId(), studentDto.getFirstName(), studentDto.getLastName(), studentDto.getBirthDate(), studentDto.getBalance());
     }
 
     private List<Role> getRolesFromTemplate(String topRole) {

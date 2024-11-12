@@ -28,7 +28,7 @@ public class ConstantsCollection {
     private static final List<String> TEACHER_ROLES = List.of("teacher");
 
     public static List<String> getLanguages() {
-        return LANGUAGES;
+        return LANGUAGES.stream().sorted().toList();
     }
 
     public static List<String> getLanguageLevels() {

@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfigu
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SuperUserServiceImpl implements SuperUserService {
 
@@ -47,6 +49,11 @@ public class SuperUserServiceImpl implements SuperUserService {
         }
 
         return superUserRepository.save(superUser);
+    }
+
+    @Override
+    public void saveAll(List<SuperUser> superUserList) {
+        superUserList.forEach(user -> save(user, true, false));
     }
 
     @Override

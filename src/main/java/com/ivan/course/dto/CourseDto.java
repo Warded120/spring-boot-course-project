@@ -42,4 +42,13 @@ public class CourseDto {
     private CourseState state = CourseState.CREATED;
 
     TeacherData teacher;
+
+    public CourseDto(String name, String description, String language, String languageLevel, float price, CourseState state, TeacherData teacher) {
+        this.name = name;
+        this.description = description;
+        this.language = language;
+        this.languageLevel = languageLevel;
+        this.price = price;
+        this.teacher = teacher;
+    }
 }

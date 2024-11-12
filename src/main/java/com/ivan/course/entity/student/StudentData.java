@@ -32,7 +32,7 @@ public class StudentData extends UserData {
     private float balance;
 
     @ToString.Exclude
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinTable(name = "students_payments",
             joinColumns = @JoinColumn(name = "student_data_id"),
             inverseJoinColumns = @JoinColumn(name = "debt_id"))
@@ -43,8 +43,9 @@ public class StudentData extends UserData {
     private List<Certificate> certificates;
 
 
-    public StudentData(int id, String firstName, String lastName, LocalDate birthDate) {
+    public StudentData(int id, String firstName, String lastName, LocalDate birthDate, float balance) {
         super(id, firstName, lastName, birthDate);
+        this.balance = balance;
         groups = new ArrayList<>();
     }
     

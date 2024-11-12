@@ -44,6 +44,12 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    @Transactional
+    public void saveAll(List<Teacher> teachers) {
+        teachers.forEach(teacher -> save(teacher, true));
+    }
+
+    @Override
     public boolean existsByUserId(int id) {
         return teacherRepository.existsById(id);
     }

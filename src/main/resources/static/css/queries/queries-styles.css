@@ -56,6 +56,8 @@ body {
 
 .table-responsive {
     margin-top: 20px;
+    max-height: 400px; /* Max height for scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .table {
@@ -128,7 +130,7 @@ body {
 .logo {
     width: 50px;
 }
-.scrollable-lesson-dates {
+.scroll-box {
     max-height: 200px; /* Adjust height as needed */
     overflow-y: auto;
 }

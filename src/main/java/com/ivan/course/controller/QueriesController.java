@@ -206,8 +206,9 @@ public class QueriesController {
     public String getCourseSchedule(Model theModel) {
 
         List<Course> startedCourses = courseService.findByCourseStateNotEqual(CourseState.CREATED);
+
         theModel.addAttribute("courses", startedCourses);
-        theModel.addAttribute("selectedCourse", startedCourses.getFirst());
+        theModel.addAttribute("selectedCourse", startedCourses.isEmpty() ? null : startedCourses.getFirst());
 
         theModel.addAttribute("schedule", new ArrayList<Schedule>());
 
