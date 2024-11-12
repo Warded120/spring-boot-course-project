@@ -13,6 +13,7 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<Course, Integer> {
     List<Course> findAllBy();
     List<Course> findAllByStateNot(CourseState state);
+    Course findByName(String name);
 
     @Query(value = """
                    SELECT c.*

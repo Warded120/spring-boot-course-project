@@ -10,6 +10,7 @@ import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.superuser.SuperUser;
 import com.ivan.course.entity.teacher.Teacher;
 import com.ivan.course.service.course.CourseService;
+import com.ivan.course.service.coursePayment.CoursePaymentService;
 import com.ivan.course.service.student.StudentService;
 import com.ivan.course.service.superUser.SuperUserService;
 import com.ivan.course.service.teacher.TeacherService;
@@ -34,7 +35,8 @@ public class SpringBootCourseProjectApplication {
                                        SuperUserService superUserService,
                                        StudentService studentService,
                                        TeacherService teacherService,
-                                       CourseService courseService) {
+                                       CourseService courseService,
+                                       CoursePaymentService coursePaymentService) {
         return args -> {
             if(userService.findAll().isEmpty()) {
                 SuperUser superUser1 = new SuperUser(new SuperUserDto("admin@gmail.com", "Test123", "адмін", "адмін", "адмін", LocalDate.now().minusYears(20)));
@@ -83,78 +85,70 @@ public class SpringBootCourseProjectApplication {
                 Course course7 = new Course(new CourseDto("Італійська для середнього рівня", "Італійська для подорожей та спілкування", "Італійська", "B1", 45, CourseState.CREATED, teacher3.getTeacherData()));
                 Course course8 = new Course(new CourseDto("Португальська для подорожей", "Основи португальської для туристів", "Португальська", "A2", 30, CourseState.CREATED, teacher3.getTeacherData()));
                 Course course9 = new Course(new CourseDto("Китайська для бізнесу", "Ділова китайська для професіоналів", "Китайська", "B2", 60, CourseState.CREATED, teacher3.getTeacherData()));
+                courseService.saveAll(List.of(course1, course2, course3, course4, course5, course6, course7, course8, course9));
 
-                course1.smartEnroll(student1);  
-                course1.smartEnroll(student2);
-                course1.smartEnroll(student3);  
-                course1.smartEnroll(student4);  
-                course1.smartEnroll(student5);
-                course1.smartEnroll(student6);  
-                course1.smartEnroll(student7);
-                course1.smartEnroll(student8);  
-                course1.smartEnroll(student9);
-                course1.smartEnroll(student10); 
-                course1.smartEnroll(student11);
-                course1.smartEnroll(student12); 
-                course1.smartEnroll(student13);
-                course1.smartEnroll(student14); 
-                course1.smartEnroll(student15);
-                course1.smartEnroll(student16); 
-                course1.smartEnroll(student17);
-                course1.smartEnroll(student18); 
-                course1.smartEnroll(student19);
-                course1.smartEnroll(student20); 
-                courseService.save(course1);
+                coursePaymentService.create(student1, course1);
+                coursePaymentService.create(student2, course1);
+                coursePaymentService.create(student3, course1);
+                coursePaymentService.create(student4, course1);
+                coursePaymentService.create(student5, course1);
+                coursePaymentService.create(student6, course1);
+                coursePaymentService.create(student7, course1);
+                coursePaymentService.create(student8, course1);
+                coursePaymentService.create(student9, course1);
+                coursePaymentService.create(student10, course1);
+                coursePaymentService.create(student11, course1);
+                coursePaymentService.create(student12, course1);
+                coursePaymentService.create(student13, course1);
+                coursePaymentService.create(student14, course1);
+                coursePaymentService.create(student15, course1);
+                coursePaymentService.create(student16, course1);
+                coursePaymentService.create(student17, course1);
+                coursePaymentService.create(student18, course1);
+                coursePaymentService.create(student19, course1);
+                coursePaymentService.create(student20, course1);
 
-                course2.smartEnroll(student21); 
-                course2.smartEnroll(student22);
-                courseService.save(course2);
+                coursePaymentService.create(student21, course2);
+                coursePaymentService.create(student22, course2);
 
-                course3.smartEnroll(student1);  
-                course3.smartEnroll(student2);
-                course3.smartEnroll(student3);  
-                course3.smartEnroll(student4);
-                courseService.save(course3);
+                coursePaymentService.create(student1, course3);
+                coursePaymentService.create(student2, course3);
+                coursePaymentService.create(student3, course3);
+                coursePaymentService.create(student4, course3);
 
-                course4.smartEnroll(student5);  
-                course4.smartEnroll(student6);
-                course4.smartEnroll(student7);  
-                course4.smartEnroll(student8);
-                course4.smartEnroll(student9);  
-                courseService.save(course4);
+                coursePaymentService.create(student5, course4);
+                coursePaymentService.create(student6, course4);
+                coursePaymentService.create(student7, course4);
+                coursePaymentService.create(student8, course4);
+                coursePaymentService.create(student9, course4);
 
-                course5.smartEnroll(student10); 
-                course5.smartEnroll(student11);
-                course5.smartEnroll(student12); 
-                course5.smartEnroll(student13);
-                course5.smartEnroll(student14); 
-                courseService.save(course5);
+                coursePaymentService.create(student10, course5);
+                coursePaymentService.create(student11, course5);
+                coursePaymentService.create(student12, course5);
+                coursePaymentService.create(student13, course5);
+                coursePaymentService.create(student14, course5);
 
-                course6.smartEnroll(student15);
-                course6.smartEnroll(student16); 
-                course6.smartEnroll(student17); 
-                course6.smartEnroll(student18);
-                course6.smartEnroll(student19); 
-                courseService.save(course6);
+                coursePaymentService.create(student15, course6);
+                coursePaymentService.create(student16, course6);
+                coursePaymentService.create(student17, course6);
+                coursePaymentService.create(student18, course6);
+                coursePaymentService.create(student19, course6);
 
-                course7.smartEnroll(student20); 
-                course7.smartEnroll(student21);
-                course7.smartEnroll(student22); 
-                courseService.save(course7);
+                coursePaymentService.create(student20, course7);
+                coursePaymentService.create(student21, course7);
+                coursePaymentService.create(student22, course7);
 
-                course8.smartEnroll(student1);
-                course8.smartEnroll(student2);  
-                course8.smartEnroll(student3);  
-                course8.smartEnroll(student4);
-                course8.smartEnroll(student5);  
-                courseService.save(course8);
+                coursePaymentService.create(student1, course8);
+                coursePaymentService.create(student2, course8);
+                coursePaymentService.create(student3, course8);
+                coursePaymentService.create(student4, course8);
+                coursePaymentService.create(student5, course8);
 
-                course9.smartEnroll(student6);
-                course9.smartEnroll(student7);  
-                course9.smartEnroll(student8);  
-                course9.smartEnroll(student9);
-                course9.smartEnroll(student10); 
-                courseService.save(course9);
+                coursePaymentService.create(student6, course9);
+                coursePaymentService.create(student7, course9);
+                coursePaymentService.create(student8, course9);
+                coursePaymentService.create(student9, course9);
+                coursePaymentService.create(student10, course9);
             }
         };
     }
