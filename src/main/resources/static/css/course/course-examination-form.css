@@ -61,3 +61,12 @@ body {
 .table td.student-name {
     color: #FFF; /* White text for student names */
 }
+
+.ovrflow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 500px; /* Set the max height for the scroll box */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 15px;
+}
