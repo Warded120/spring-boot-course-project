@@ -72,7 +72,7 @@ public class CourseController {
     @GetMapping("/add")
     public String addCourse(Model theModel) {
 
-        CourseDto course = new CourseDto();
+        CourseDto theCourse = new CourseDto();
 
         Teacher teacher = teacherService.getSessionTeacher();
 
@@ -80,7 +80,7 @@ public class CourseController {
             throw new NoTeacherFoundException("teacher not found");
         }
 
-        theModel.addAttribute("course", course);
+        theModel.addAttribute("course", theCourse);
         theModel.addAttribute("languages", languages);
         theModel.addAttribute("languageLevels", languageLevels);
 
@@ -91,8 +91,14 @@ public class CourseController {
     @PostMapping("/add")
     public String postAddCourse(@Valid @ModelAttribute("course") CourseDto theCourse,
                                 BindingResult theBindingResult,
+                                Model theModel,
                                 HttpSession theSession) {
         if(theBindingResult.hasErrors()) {
+
+            theModel.addAttribute("course", theCourse);
+            theModel.addAttribute("languages", languages);
+            theModel.addAttribute("languageLevels", languageLevels);
+
             return "course/course-form";
         }
 

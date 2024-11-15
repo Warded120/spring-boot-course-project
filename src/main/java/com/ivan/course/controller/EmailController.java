@@ -2,7 +2,7 @@ package com.ivan.course.controller;
 
 import com.ivan.course.entity.EmailVerification;
 import com.ivan.course.entity.user.User;
-import com.ivan.course.exceptionHandling.exception.UserNotFoundException;
+import com.ivan.course.exceptionHandling.exception.NoUserFoundException;
 import com.ivan.course.service.email.EmailService;
 import com.ivan.course.service.user.UserService;
 import jakarta.mail.MessagingException;
@@ -60,13 +60,13 @@ public class EmailController {
     @PostMapping("/verify")
     public String verifyEmail(@ModelAttribute("emailVerification") EmailVerification emailVerification,
                               Model theModel,
-                              RedirectAttributes redirectAttributes) throws UserNotFoundException {
+                              RedirectAttributes redirectAttributes) throws NoUserFoundException {
 
         if (emailVerification.getActualVerificatoinCode().equals(emailVerification.getVerificatoinCode())) {
             User changePasswordUser = userService.findByUsername(emailVerification.getEmail());
 
             if (changePasswordUser == null) {
-                throw new UserNotFoundException("Email doesn't exist", emailVerification.getEmail());
+                throw new NoUserFoundException("Email doesn't exist", emailVerification.getEmail());
             }
 
             redirectAttributes.addFlashAttribute("user", changePasswordUser);

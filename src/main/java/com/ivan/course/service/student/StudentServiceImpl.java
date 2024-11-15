@@ -73,6 +73,19 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student getSessionStudent() {
+        Student student = (Student) theSession.getAttribute("student");
+
+        return getStudentBySessionStudent(student);
+    }
+
+    @Override
+    public void updateSessionStudent() {
+        theSession.setAttribute("student", getSessionStudent());
+    }
+
+
+    @Override
     public List<Course> getCoursesByStudent(Student student) {
 
         Student sessionStudent = (Student) theSession.getAttribute("student");
@@ -80,12 +93,5 @@ public class StudentServiceImpl implements StudentService {
         Student dbStudent = getStudentBySessionStudent(sessionStudent);
 
         return dbStudent.getStudentData().getGroups().stream().map(StudentGroup::getCourse).toList();
-    }
-
-    @Override
-    public Student getSessionStudent() {
-        Student student = (Student) theSession.getAttribute("student");
-
-        return getStudentBySessionStudent(student);
     }
 }

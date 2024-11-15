@@ -2,7 +2,7 @@ package com.ivan.course.exceptionHandling.controllerAdvice;
 
 import com.ivan.course.exceptionHandling.exception.NoStudentFoundException;
 import com.ivan.course.exceptionHandling.exception.NoTeacherFoundException;
-import com.ivan.course.exceptionHandling.exception.UserNotFoundException;
+import com.ivan.course.exceptionHandling.exception.NoUserFoundException;
 import org.eclipse.angus.mail.util.MailConnectException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = UserNotFoundException.class)
+    @ExceptionHandler(value = NoUserFoundException.class)
     @GetMapping("/error/UserNotFoundException")
-    public String userNotFoundExceptionHandler(UserNotFoundException ex, Model theModel) {
+    public String userNotFoundExceptionHandler(NoUserFoundException ex, Model theModel) {
         System.out.println("in userNotFoundExceptionHandler");
 
         theModel.addAttribute("errorTitle", "Користувач не знайдений");

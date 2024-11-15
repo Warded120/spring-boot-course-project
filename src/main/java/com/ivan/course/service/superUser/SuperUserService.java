@@ -1,6 +1,5 @@
 package com.ivan.course.service.superUser;
 
-import com.ivan.course.entity.student.Student;
 import com.ivan.course.entity.superuser.SuperUser;
 
 import java.util.List;

@@ -14,6 +14,7 @@ public interface StudentService {
     boolean existsByUserId(int id);
     Student findByUserId(int id);
     Student getStudentBySessionStudent(Student sessionStudent);
-    List<Course> getCoursesByStudent(Student student);
     Student getSessionStudent();
+    void updateSessionStudent();
+    List<Course> getCoursesByStudent(Student student);
 }

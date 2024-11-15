@@ -52,7 +52,6 @@ public class CoursePaymentServiceImpl implements CoursePaymentService {
 
         dbCourse.smartEnroll(dbStudent);
 
-        System.out.println(dbStudent.getStudentData().getCoursePayments());
         courseRepository.save(dbCourse);
         studentRepository.save(dbStudent);
     }

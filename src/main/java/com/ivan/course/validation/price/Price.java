@@ -1,6 +1,5 @@
 package com.ivan.course.validation.price;
 
-import com.ivan.course.validation.age.AgeConstraintValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

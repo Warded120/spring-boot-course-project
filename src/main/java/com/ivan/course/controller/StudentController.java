@@ -43,6 +43,7 @@ public class StudentController {
 
     @GetMapping("/profile")
     public String profile() {
+        studentService.updateSessionStudent();
         return "user/profile-page";
     }
 

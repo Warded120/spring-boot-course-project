@@ -1,11 +1,9 @@
 package com.ivan.course.controller;
 
-import com.ivan.course.dto.usersDto.SuperUserDto;
 import com.ivan.course.dto.usersDto.UserDto;
 import com.ivan.course.entity.Keys;
-import com.ivan.course.entity.superuser.SuperUser;
 import com.ivan.course.entity.user.User;
-import com.ivan.course.exceptionHandling.exception.UserNotFoundException;
+import com.ivan.course.exceptionHandling.exception.NoUserFoundException;
 import com.ivan.course.service.superUser.SuperUserService;
 import com.ivan.course.service.user.UserService;
 import jakarta.validation.Valid;
@@ -17,9 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.time.LocalDate;
-import java.time.Month;
 
 @Controller
 public class LoginController {
@@ -64,7 +59,7 @@ public class LoginController {
     @PostMapping("/change-password")
     public String confirmChangePassword(@Valid @ModelAttribute("user") UserDto userDto,
                                         BindingResult theBindingResult,
-                                        Model theModel) throws UserNotFoundException {
+                                        Model theModel) throws NoUserFoundException {
         if (theBindingResult.hasErrors()) {
             theModel.addAttribute("user", userDto);
             return "user/change-password-form";
@@ -73,7 +68,7 @@ public class LoginController {
         User changePasswordUser = userService.findByUsername(userDto.getUsername());
 
         if (changePasswordUser == null) {
-            throw new UserNotFoundException("user doesn't exist", userDto.getUsername());
+            throw new NoUserFoundException("user doesn't exist", userDto.getUsername());
         }
 
         changePasswordUser.setPassword(new Keys(bCryptPasswordEncoder.encode(userDto.getPassword())));
